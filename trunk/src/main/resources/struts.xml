@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<action name="home" class="homeAction" method="afficher">
+			<result name="success">home.jsp</result>
+		</action>
+		
+		<action name="connexion" class="utilisateurAction" method="connexion">
+			<result name="success">connexion.jsp</result>
+		</action>
+		
+		<action name="inscription" class="utilisateurAction" method="inscription">
+			<result name="success">inscription.jsp</result>
+		</action>
+		
+		<action name="apropos" class="pageAction" method="apropos">
+			<result name="success">apropos.jsp</result>
+		</action>
+		
+		<action name="contact" class="pageAction" method="contact">
+			<result name="success">contact.jsp</result>
+		</action>
+		
+		<action name="projet" class="projetAction" method="detailProjet">
+			<result name="success">projet.jsp</result>
+		</action>
+		
+		<action name="lesProjets" class="projetAction" method="listeProjets">
+			<result name="success">lesProjets.jsp</result>
+		</action>
+		
+		<!-- 	
+		<action name="saveCustomerAction" class="editCustomerAction"
+			method="saveCustomer">
+			<result name="success" type="redirect">listCustomerAction</result>
+		</action>
+		 -->
+
+	</package>
+
+</struts>
