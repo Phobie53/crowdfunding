@@ -9,6 +9,7 @@ body{
 .header {
     position: absolute;
     width: 100%;
+	top: 0;
     z-index: 1000;
 }
 .header .navbar-default{
@@ -882,6 +883,138 @@ body{
     padding: 10px 30px;
     border-radius: 25px;
     bottom: 30px;
+}
+.connexionDropDown{
+	margin-left: 10px;
+}
+.connexionDropDown > button{
+	font-weight: bold;
+	color: #FFF;
+	background: transparent;
+}
+.connexionDropDown > button > span.caret{
+	margin-left: 5px;
+}
+.header .menu-default .menu-container .connexionDropDown .dropdown-menu a{
+	color: #000;
+}
+.header .menu-default .menu-container .connexionDropDown .dropdown-menu i{
+	margin-right: 10px;
+}
+
+.boxSettingUser{
+	margin-top: 150px;
+	margin-bottom: 50px;
+	background: #3AB7A9;
+}
+.boxSettingUser .menu{
+	padding-left: 0px;
+    padding-right: 0px;
+}
+.boxSettingUser .menu ul{
+	margin: 20px 0;
+	padding: 0;
+	list-style: none;
+}
+.boxSettingUser .menu li a{
+	margin: 5px 0;
+	width: 100%;
+	padding: 15px;
+	display: block;
+}
+.boxSettingUser .menu li a, .boxSettingUser .menu li a:hover, .boxSettingUser .menu li a:link{
+	color: #FFF;
+	text-decoration: none;
+}
+.boxSettingUser .menu li.selected a, .boxSettingUser .menu li:hover a{
+	background: #FFF;
+	color: #777;
+}
+.boxSettingUser .box{
+	background: #FFF;
+	padding-left: 0px;
+    padding-right: 30px;	
+}
+.boxSettingUser .box > form{
+	padding: 30px; 
+	overflow: hidden;
+}
+.boxSettingUser .box > form .listeImage{
+	margin:0;
+	padding: 0;
+	list-style: none;
+	overflow: hidden;
+	text-align: center;
+}
+.boxSettingUser .box > form .listeImage li{
+	display: inline-block;
+	cursor: pointer;
+}
+.boxSettingUser .box > form .listeImage li.selected{
+	background: #DADADA;
+}
+.boxSettingUser .box > form .listeImage li img{
+	margin: 15%;
+    width: 70%;
+}
+.boxSettingUser .box.projetPopulaireTitre .boxItems{
+	padding: 30px; 
+	margin: 0;
+}
+.modifierProjet, .modifierProjet:hover, .modifierProjet:link{
+	background: #3ab7a9 none repeat scroll 0 0;
+    color: #fff !important;
+    display: block;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+.boxSettingUser .box.projetPopulaireTitre .boxItems .item{
+	margin: 0;
+}
+.boxSettingUser .box form textarea{
+	border: 1px solid #DADADA;
+	width: 100%;
+	min-width: 100%;
+	max-width: 100%;
+}
+.boxSettingUser .box form{
+	color: #777;
+}
+.boxSettingUser .box form .titre{
+	font-size: 25px;
+	font-family: 'Source Sans Pro';
+	color: #3AB7A9;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.boxSettingUser .addRecompense{
+	border: 1px solid #DADADA;
+	padding: 10px;
+	cursor: pointer;
+}
+.boxSettingUser .listeRecompense{
+	list-style: none;
+	margin:0;
+	padding: 0;
+}
+.boxSettingUser .listeRecompense li{
+	border: 1px solid #DADADA;
+	padding: 15px;
+	position: relative;
+	margin-bottom: 10px;
+	border-left: 2px solid #3AB7A9;
+}
+.boxSettingUser .listeRecompense li > i{
+	position: absolute;
+	top: 5px;
+	cursor: pointer;
+	right: 5px;
+}
+.boxSettingUser .listeRecompense li > i:hover{
+	color: #EE161F;
 }
 
 @media (max-width:992px){
