@@ -16,8 +16,16 @@
 			<result name="success">connexion.jsp</result>
 		</action>
 		
+		<action name="deconnexion" class="utilisateurAction" method="deconnexion">
+			<result name="success" type="redirect">home</result>
+		</action>
+		
 		<action name="inscription" class="utilisateurAction" method="inscription">
 			<result name="success">inscription.jsp</result>
+		</action>
+		
+		<action name="monCompte" class="utilisateurAction" method="monCompte">
+			<result name="success">monCompte.jsp</result>
 		</action>
 		
 		<action name="apropos" class="pageAction" method="apropos">
@@ -35,6 +43,19 @@
 		<action name="lesProjets" class="projetAction" method="listeProjets">
 			<result name="success">lesProjets.jsp</result>
 		</action>
+		
+		<action name="mesProjets" class="projetAction" method="mesProjets">
+			<result name="success">mesProjets.jsp</result>
+		</action>
+		
+		<action name="creationProjet" class="projetAction" method="afficherFormCreation">
+			<result name="success">creationProjet.jsp</result>
+		</action>
+		
+		<action name="modifierProjet" class="projetAction" method="afficherFormModification">
+			<result name="success">modificationProjet.jsp</result>
+		</action>
+		
 		
 		<!-- 	
 		<action name="saveCustomerAction" class="editCustomerAction"

@@ -18,8 +18,18 @@ public class UtilisateurAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String deconnexion() {
+		logger.info("CHARGEMENT PAGE DECONNEXION");
+		return SUCCESS;
+	}
+	
 	public String inscription() {
 		logger.info("CHARGEMENT PAGE INSCRIPTION");
+		return SUCCESS;
+	}
+	
+	public String monCompte() {
+		logger.info("CHARGEMENT PAGE MON COMPTE");
 		return SUCCESS;
 	}
 }

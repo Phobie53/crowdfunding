@@ -34,6 +34,23 @@
 	
 								<s:if test="%{#pageCurrent == 'connexion' || #pageCurrent == 'inscription'}"><li class="selected"></s:if><s:else><li></s:else>
 								<a class="connexionInscription" href="connexion"><strong>Connexion / Inscription</strong></a></li>
+							
+								<!-- 
+								//MENU SI LA PERSONNE EST MEMBRE, si membre alors il ne faut
+								// pas afficher la partie button_donate
+								<li>
+								 <div class="btn-group connexionDropDown">
+									  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Adrien cass <span class="caret"></span>
+									  </button>
+									  <ul class="dropdown-menu">
+										<li><a href="#"><i class="icon-settings"></i>Mon Compte</a></li>
+										<li><a href="#"><i class="icon-bag"></i>Mes Projets</a></li>
+										<li><a href="#"><i class="icon-logout"></i>Deconnexion</a></li>
+									  </ul>
+									</div>
+								 </li>
+								 -->
 							</ul>
 						</div>
 					</div>
