@@ -27,8 +27,8 @@ private static final long serialVersionUID = 160659994617526L;
 	@Column(name = "montant")
 	private Integer montant;
 	
-//	@OneToOne(mappedBy = "recompense")
-//	private Projet projet;
+	@OneToOne
+	private Projet projet;
 	
 	public Long getRecompenseId() {
 		return recompenseId;
