@@ -1,18 +1,36 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Recompense")
 public class Recompense implements Serializable{
 	
-public Long getRecompenseId() {
+
+private static final long serialVersionUID = 160659994617526L;
+	@Id
+	@GeneratedValue
+	@Column(name = "recompenseId")
+	private Long recompenseId;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "montant")
+	private Integer montant;
+	
+//	@OneToOne(mappedBy = "recompense")
+//	private Projet projet;
+	
+	public Long getRecompenseId() {
 		return recompenseId;
 	}
 
@@ -40,19 +58,4 @@ public Long getRecompenseId() {
 		return serialVersionUID;
 	}
 
-private static final long serialVersionUID = 1710234886606599946L;
-	
-	@Id
-	@GeneratedValue
-	@Column(name = "recompenseId")
-	private Long recompenseId;
-	
-	@Column(name = "description")
-	private String description;
-	
-	@Column(name = "montant")
-	private Integer montant;
-	
-	
-	
 }

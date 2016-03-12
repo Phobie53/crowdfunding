@@ -2,18 +2,22 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Projet")
 public class Projet implements Serializable{
 	
-	private static final long serialVersionUID = 1710234886606599946L;
+	private static final long serialVersionUID = 16065999462014L;
 	
 	@Id
 	@GeneratedValue
@@ -41,6 +45,66 @@ public class Projet implements Serializable{
 	@Column(name = "Datecréation")
 	private Date dateCreation;
 
+	@ManyToOne
+	@JoinColumn(name="utilisateurId")	 
+	private Utilisateur utilisateur;
+	
+	@ManyToOne
+	@JoinColumn(name="categorieId")	 
+	private Categorie categorie;
+
+	@OneToMany(mappedBy="projet")
+    private Set<Commentaire> commentaires;
+	
+//	@OneToMany(mappedBy="projet")
+//    private Set<Recompense> recompense;
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Set<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(Set<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public Set<Commentaire> getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(Set<Commentaire> commentaire) {
+		this.commentaire = commentaire;
+	}
+
+	public Set<Don> getDon() {
+		return don;
+	}
+
+	public void setDon(Set<Don> don) {
+		this.don = don;
+	}
+
+	@OneToMany(mappedBy="projet")
+    private Set<Commentaire> commentaire;
+	
+	@OneToMany(mappedBy="projet")
+    private Set<Don> don;
+	
 	public Long getProjetId() {
 		return projetId;
 	}

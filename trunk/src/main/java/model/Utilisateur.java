@@ -2,24 +2,28 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 
 @Entity
 @Table(name = "Utilisateur")
 public class Utilisateur implements Serializable {
 
-	private static final long serialVersionUID = 1710234886606599946L;
+	private static final long serialVersionUID = 160659994621016L;
 	
 	@Id
 	@GeneratedValue
 	@Column(name = "UtilisateurId")
-	private Long UtilisateurId;
+	private Long utilisateurId;
 	
 	@Column(name = "nom")
 	private String nom;
@@ -41,13 +45,48 @@ public class Utilisateur implements Serializable {
 	
 	@Column(name = "derniereconnecxion")
 	private Date derniereconnexion;
+	
+
+
+	 @OneToMany(mappedBy="utilisateur")
+	    private Set<Projet> projet;
+	 
+	 @OneToMany(mappedBy="utilisateur")
+	    private Set<Don> don;
+	 
+	 @OneToMany(mappedBy="utilisateur")
+	    private Set<Commentaire> commentaire;
+	 
+	public Set<Projet> getProjet() {
+		return projet;
+	}
+
+	public void setProjet(Set<Projet> projet) {
+		this.projet = projet;
+	}
+
+	public Set<Don> getDon() {
+		return don;
+	}
+
+	public void setDon(Set<Don> don) {
+		this.don = don;
+	}
+
+	public Set<Commentaire> getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(Set<Commentaire> commentaire) {
+		this.commentaire = commentaire;
+	}
 
 	public Long getUtilisateurId() {
-		return UtilisateurId;
+		return utilisateurId;
 	}
 
 	public void setUtilisateurId(Long utilisateurId) {
-		UtilisateurId = utilisateurId;
+		utilisateurId = utilisateurId;
 	}
 
 	public String getNom() {

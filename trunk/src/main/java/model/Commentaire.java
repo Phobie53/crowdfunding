@@ -6,13 +6,49 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Commentaire")
 public class Commentaire implements Serializable {
 	
-public Long getComId() {
+	private static final long serialVersionUID = 1606595499946L;
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "ComId")
+	private Long comId;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="utilisateurId")	 
+	private Utilisateur utilisateur;
+	
+	@ManyToOne
+	@JoinColumn(name="projetId")	 
+	private Projet projet;
+	
+	public Projet getProjet() {
+		return projet;
+	}
+
+	public void setProjet(Projet projet) {
+		this.projet = projet;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Long getComId() {
 		return comId;
 	}
 
@@ -32,15 +68,6 @@ public Long getComId() {
 		return serialVersionUID;
 	}
 
-private static final long serialVersionUID = 1710234886606599946L;
-	
-	@Id
-	@GeneratedValue
-	@Column(name = "ComId")
-	private Long comId;
-	
-	@Column(name = "description")
-	private String description;
 
 
 }
