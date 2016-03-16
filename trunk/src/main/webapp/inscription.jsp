@@ -23,28 +23,23 @@
                                 <h3>Inscription</h3>
                             </div>
                             <div class="account-form">
-                                <form class="ng-pristine ng-valid" id="formConnexion">
+	                            <s:form theme="simple" action="validerInscription" cssClass="ng-pristine ng-valid" id="formConnexion" method="post">
                                     <div class="row">
                                         <div class="feild col-md-12 col-xs-12 col-sm-12">
-                                            <input type="text" placeholder="Nom" class="nameConnexion">
+											<s:textfield name="utilisateur.nom" label="Nom" placeholder="Nom" cssClass="nameConnexion" />
                                         </div>
                                         <div class="feild col-md-12 col-xs-12 col-sm-12">
-                                            <input type="text" placeholder="Prenom" class="nameConnexion">
+											<s:textfield name="utilisateur.prenom" label="Prenom" placeholder="Prénom" cssClass="nameConnexion" />
                                         </div>
                                         <div class="feild col-md-12 col-xs-12 col-sm-12">
-                                            <input type="text" placeholder="Lieu" class="nameConnexion">
+											<s:textfield name="utilisateur.email" label="Email" placeholder="Mail" cssClass="nameConnexion" />
                                         </div>
                                         <div class="feild col-md-12 col-xs-12 col-sm-12">
-                                            <input type="text" placeholder="Mail" class="nameConnexion">
-                                        </div>
-                                        <div class="feild col-md-12 col-xs-12 col-sm-12">
-                                            <input type="password" placeholder="Mot de passe">
-                                        </div>
-                                        <div class="feild col-md-12 col-xs-12 col-sm-12 center">
-                                            <input type="submit" value="Inscription" class="connexionButton">
+											<s:textfield type="password" name="utilisateur.password" label="Password" placeholder="Password" cssClass="nameConnexion" />
                                         </div>
                                     </div>
-                                </form>
+									<s:submit value="Inscription" cssClass="connexionButton" />
+								</s:form>
                             </div>
                         </div>				
                     </div>

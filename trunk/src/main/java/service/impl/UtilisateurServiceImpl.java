@@ -1,12 +1,16 @@
 package service.impl;
 
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
-
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dao.UtilisateurDAO;
+import model.Utilisateur;
 import service.UtilisateurService;
 
 
@@ -14,6 +18,15 @@ import service.UtilisateurService;
 @Transactional
 public class UtilisateurServiceImpl implements UtilisateurService {
 
+	@Autowired
+	private UtilisateurDAO utilisateurDAO;
 
+	public void sauvegarderUtilisateur(Utilisateur utilisateur) {
+		if (utilisateur != null) {
+			utilisateur.setDatecreation(new Date());
+			utilisateur.setPassword(DigestUtils.sha1Hex(utilisateur.getPassword()));
+			utilisateurDAO.save(utilisateur);
+		}
+	}
 
 }

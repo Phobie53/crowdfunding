@@ -23,6 +23,9 @@
 		<action name="inscription" class="utilisateurAction" method="inscription">
 			<result name="success">inscription.jsp</result>
 		</action>
+		<action name="validerInscription" class="utilisateurAction" method="validerInscription">
+			<result name="success">inscription.jsp</result>
+		</action>
 		
 		<action name="monCompte" class="utilisateurAction" method="monCompte">
 			<result name="success">monCompte.jsp</result>

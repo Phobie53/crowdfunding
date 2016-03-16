@@ -43,9 +43,6 @@ public class Utilisateur implements Serializable {
 	@Column(name = "datecreation")
 	private Date datecreation;
 	
-	@Column(name = "derniereconnecxion")
-	private Date derniereconnexion;
-	
 
 
 	 @OneToMany(mappedBy="utilisateur")
@@ -136,15 +133,7 @@ public class Utilisateur implements Serializable {
 	public void setDatecreation(Date datecreation) {
 		this.datecreation = datecreation;
 	}
-
-	public Date getDerniereconnexion() {
-		return derniereconnexion;
-	}
-
-	public void setDerniereconnexion(Date derniereconnexion) {
-		this.derniereconnexion = derniereconnexion;
-	}
-
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
