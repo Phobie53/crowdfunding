@@ -1,13 +1,23 @@
 package action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
+import model.Categorie;
+import model.Projet;
+import service.CategorieService;
+import service.ProjetService;
+
 
 @Controller
 public class ProjetAction extends ActionSupport {
@@ -17,11 +27,19 @@ public class ProjetAction extends ActionSupport {
 	private static final String SUCCESS = "success";
 
 	private static final Logger logger = Logger.getLogger(ProjetAction.class);
+	
+	private Projet projet;
+	private ProjetService projetService;
+	private List<Categorie> categorieTypes = new ArrayList<Categorie>();
  
+	@Autowired
+	private CategorieService categorieService;
+	
 	public String detailProjet() {
 		logger.info("CHARGEMENT PAGE DETAIL PROJET");
 		return SUCCESS;
 	}
+	
 	
 	public String mesProjets() {
 		logger.info("CHARGEMENT PAGE MES PROJETS");
@@ -30,6 +48,7 @@ public class ProjetAction extends ActionSupport {
 	
 	public String afficherFormCreation() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE CREATION");
+		this.setCategorieTypes(categorieService.listeCategorie());
 		return SUCCESS;
 	}
 	
@@ -53,4 +72,24 @@ public class ProjetAction extends ActionSupport {
 		logger.info("CHARGEMENT PAGE LISTE PROJET");
 		return SUCCESS;
 	}
+	
+	public String saveProjet(){
+		
+		if(projet==null) { logger.info("ko"); }
+		else{
+		logger.info(projet.getNom());projetService.saveProjet(projet);}
+		
+		return SUCCESS;
+	}
+	
+	
+	public List<Categorie> getCategorieTypes() {
+		return categorieTypes;
+	}
+
+	public void setCategorieTypes(List<Categorie> categorieTypes) {
+		this.categorieTypes = categorieTypes;
+	}
+
+	
 }

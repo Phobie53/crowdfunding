@@ -56,6 +56,9 @@
 			<result name="success">modificationProjet.jsp</result>
 		</action>
 		
+		<action name="saveProjet" class="projetAction" method="saveProjet">
+			<result name="success" type="redirect">mesProjets</result>
+		</action>
 		
 		<!-- 	
 		<action name="saveCustomerAction" class="editCustomerAction"

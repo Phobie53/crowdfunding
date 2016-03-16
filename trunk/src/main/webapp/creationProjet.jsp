@@ -29,34 +29,40 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box  account-form">
-				<form class="">
+				<s:form method="post" action="saveProjet" cssClass="" theme="simple">
 					<p class="titre">1 - Information sur le projet</p>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Nom du projet</label> <input
-							type="text" class="form-control" id="exampleInputEmail1">
+						<label for="inputNom">Nom du projet</label> 
+						<s:textfield name="projet.nom" cssClass="form-control" id="inputNom" label="Nom"/>
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Date fin de la campagne</label> <input
-							type="text" class="form-control"
-							id="datepicker">
+						<label for="inpuDateFinCompagne">Date fin de la campagne</label> 
+						<s:textfield name="projet.dateFinCompagne" cssClass="form-control" id="inpuDateFinCompagne" label="DateFinCompagne" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Objectif (en euro)</label> <input
-							type="text" class="form-control datepicker"
-							id="exampleInputEmail1">
+						<label for="exampleObjectif">Objectif (en euro)</label> 
+						<s:textfield name="projet.objectif" cssClass="form-control datepicker" id="inpuObjectif" label="Objectif" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Description</label>
-						<textarea></textarea>
+						<label for="parojetPresentation">Description</label>
+						<s:textarea name="projet.presentation" label="Presentation" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Image</label> <input type="file">
+						<label for="exampleInputEmail1">Image</label> 
+						<s:file name="projet.image" label="Image"/>
 					</div>
-
+					
+					<div class="form-group">
+						<label for="projetCategorie">Catégorie</label> 
+						<s:select label="Categorie" list="categorieTypes" cssClass="form-control" listKey="categorieId" listValue="type"
+				           	name="projet.categorie" />
+					</div>
+					
+					
 					<p class="titre">2 - Ajouter des récompenses</p>
 					<p class="addRecompense">
 						<i class="icon-plus"></i> Ajouter une récompenses
@@ -64,9 +70,9 @@
 					<ul class="listeRecompense">
 					</ul>
 					<div class="feild center">
-						<input type="submit" value="Créer projet" class="connexionButton">
+						<s:submit value="Créer projet" cssClass="connexionButton" />
 					</div>
-				</form>
+				</s:form>
 			</div>
 		</div>
 	</div>
