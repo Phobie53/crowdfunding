@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -43,42 +44,42 @@ public class Utilisateur implements Serializable {
 	@Column(name = "dateCreation")
 	private Date dateCreation;
 	
-	@Column(name = "derniereConnecxion")
+	@Column(name = "derniereConnexion")
 	private Date derniereConnexion;
 	
 
 
 	 @OneToMany(mappedBy="utilisateur")
-	    private Set<Projet> projet;
+	    private List<Projet> projet;
 	 
 	 @OneToMany(mappedBy="utilisateur")
-	    private Set<Don> don;
+	    private List<Don> don;
 	 
 	 @OneToMany(mappedBy="utilisateur")
-	    private Set<Commentaire> commentaire;
+	    private List<Commentaire> commentaires;
 	 
-	public Set<Projet> getProjet() {
+	public List<Projet> getProjet() {
 		return projet;
 	}
 
-	public void setProjet(Set<Projet> projet) {
+	public void setProjet(List<Projet> projet) {
 		this.projet = projet;
 	}
 
-	public Set<Don> getDon() {
+	public List<Don> getDon() {
 		return don;
 	}
 
-	public void setDon(Set<Don> don) {
+	public void setDon(List<Don> don) {
 		this.don = don;
 	}
 
-	public Set<Commentaire> getCommentaire() {
-		return commentaire;
+	public List<Commentaire> getCommentaire() {
+		return commentaires;
 	}
 
-	public void setCommentaire(Set<Commentaire> commentaire) {
-		this.commentaire = commentaire;
+	public void setCommentaire(List<Commentaire> commentaires) {
+		this.commentaires = commentaires;
 	}
 
 	public Long getUtilisateurId() {

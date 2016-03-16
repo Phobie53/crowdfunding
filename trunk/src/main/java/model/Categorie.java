@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -28,14 +29,14 @@ private static final long serialVersionUID = 1606599946L;
 	
 
 	@OneToMany(mappedBy="categorie")
-    private Set<Projet> projet;
+    private List<Projet> projet;
 
-	public Set<Projet> getProjet() {
+	public List<Projet> getProjet() {
 		return projet;
 	}
 
 
-	public void setProjet(Set<Projet> projet) {
+	public void setProjet(List<Projet> projet) {
 		this.projet = projet;
 	}
 
