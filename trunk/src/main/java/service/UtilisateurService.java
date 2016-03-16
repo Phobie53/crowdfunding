@@ -8,6 +8,6 @@ import model.Utilisateur;
 
 public interface UtilisateurService {
 
-	void sauvegarderUtilisateur(Utilisateur utilisateur);
+	boolean sauvegarderUtilisateur(Utilisateur utilisateur);
 	
 }

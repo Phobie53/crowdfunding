@@ -1,10 +1,15 @@
 package action;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.components.Form;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.serviceloader.ServiceFactoryBean;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -45,10 +50,54 @@ public class UtilisateurAction extends ActionSupport {
 	
 	public String validerInscription() {
 		logger.info("VALIDATION INSCRIPTION");
+		boolean isInscriptionReussie = false;
 		
-		utilisateurService.sauvegarderUtilisateur(utilisateur);
+		if (verificationFormulaire() == null) {
+			isInscriptionReussie = utilisateurService.sauvegarderUtilisateur(utilisateur);
+		} else {
+			if (verificationFormulaire() == "nom") {
+				logger.info("Nom incorrect");
+			} else if (verificationFormulaire() == "prenom") {
+				logger.info("Nom incorrect");
+			} else if (verificationFormulaire() == "mail") {
+				logger.info("Nom incorrect");
+			} else if (verificationFormulaire() == "password") {
+				logger.info("Nom incorrect");
+			}
+		}
 		
-		return SUCCESS;
+		if (isInscriptionReussie)
+			return SUCCESS;
+		else
+			return SUCCESS;
+	}
+	
+	public String verificationFormulaire() {
+		logger.info("VERIFICATION FORMULAIRE");
+		Pattern pNom = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+		Pattern pMail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+		
+		// ---------------------- NOM ---------------------- //
+		if (utilisateur.getNom().length() < 3) return "nom";
+		if (utilisateur.getNom().length() > 15) return "nom";
+		Matcher m = pNom.matcher(utilisateur.getNom());
+		if (!m.find()) return "nom"; // Il y a un caractère spécial
+		
+		// ---------------------- PRENOM ---------------------- //
+		if (utilisateur.getPrenom().length() < 3) return "prenom";
+		if (utilisateur.getPrenom().length() > 15) return "prenom";
+		m = pNom.matcher(utilisateur.getPrenom());
+		if (!m.find()) return "prenom"; // Il y a un caractère spécial
+		
+		// ---------------------- MAIL ---------------------- //
+		m = pMail.matcher(utilisateur.getEmail());
+		if (!m.find()) return "mail"; // Il y a un caractère spécial
+		
+		// ---------------------- PASSWORD ---------------------- //
+		if (utilisateur.getPrenom().length() < 8) return "password";
+		if (utilisateur.getPrenom().length() > 20) return "password";
+		
+		return null;
 	}
 	
 	public String monCompte() {

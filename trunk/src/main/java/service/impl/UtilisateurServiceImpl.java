@@ -21,12 +21,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
 
-	public void sauvegarderUtilisateur(Utilisateur utilisateur) {
+	public boolean sauvegarderUtilisateur(Utilisateur utilisateur) {
+		boolean res = false;
+		
 		if (utilisateur != null) {
 			utilisateur.setDatecreation(new Date());
 			utilisateur.setPassword(DigestUtils.sha1Hex(utilisateur.getPassword()));
-			utilisateurDAO.save(utilisateur);
+			res = utilisateurDAO.save(utilisateur);
 		}
+		
+		return res;
 	}
 
 }
