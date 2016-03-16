@@ -22,7 +22,7 @@ public class Utilisateur implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "UtilisateurId")
+	@Column(name = "utilisateurId")
 	private Long utilisateurId;
 	
 	@Column(name = "nom")
@@ -40,11 +40,11 @@ public class Utilisateur implements Serializable {
 	@Column(name = "image")
 	private String image;
 	
-	@Column(name = "datecreation")
-	private Date datecreation;
+	@Column(name = "dateCreation")
+	private Date dateCreation;
 	
-	@Column(name = "derniereconnecxion")
-	private Date derniereconnexion;
+	@Column(name = "derniereConnecxion")
+	private Date derniereConnexion;
 	
 
 
@@ -130,19 +130,19 @@ public class Utilisateur implements Serializable {
 	}
 
 	public Date getDatecreation() {
-		return datecreation;
+		return dateCreation;
 	}
 
 	public void setDatecreation(Date datecreation) {
-		this.datecreation = datecreation;
+		this.dateCreation = datecreation;
 	}
 
 	public Date getDerniereconnexion() {
-		return derniereconnexion;
+		return derniereConnexion;
 	}
 
 	public void setDerniereconnexion(Date derniereconnexion) {
-		this.derniereconnexion = derniereconnexion;
+		this.derniereConnexion = derniereconnexion;
 	}
 
 	public static long getSerialversionuid() {

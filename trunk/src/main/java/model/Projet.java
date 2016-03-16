@@ -22,7 +22,7 @@ public class Projet implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "ProjetId")
+	@Column(name = "projetId")
 	private Long projetId;
 	
 	@Column(name = "nom")
@@ -34,8 +34,8 @@ public class Projet implements Serializable{
 	@Column(name = "presentation")
 	private String presentation;
 	
-	@Column(name = "DateFindeCompagne")
-	private Date finCompagne;
+	@Column(name = "dateFindeCompagne")
+	private Date dateFinCompagne;
 	
 	@Column(name = "objectif")
 	private Integer objectif;
@@ -43,7 +43,7 @@ public class Projet implements Serializable{
 	@Column(name = "statut")
 	private String statut;
 	
-	@Column(name = "Datecréation")
+	@Column(name = "dateCreation")
 	private Date dateCreation;
 
 	@ManyToOne
@@ -139,11 +139,11 @@ public class Projet implements Serializable{
 	}
 
 	public Date getFinCompagne() {
-		return finCompagne;
+		return dateFinCompagne;
 	}
 
 	public void setFinCompagne(Date finCompagne) {
-		this.finCompagne = finCompagne;
+		this.dateFinCompagne = finCompagne;
 	}
 
 	public Integer getObjectif() {
