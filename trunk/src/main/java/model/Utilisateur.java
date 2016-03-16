@@ -22,7 +22,7 @@ public class Utilisateur implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "UtilisateurId")
+	@Column(name = "utilisateurId")
 	private Long utilisateurId;
 	
 	@Column(name = "nom")
@@ -40,8 +40,8 @@ public class Utilisateur implements Serializable {
 	@Column(name = "image")
 	private String image;
 	
-	@Column(name = "datecreation")
-	private Date datecreation;
+	@Column(name = "dateCreation")
+	private Date dateCreation;
 	
 
 
@@ -127,11 +127,11 @@ public class Utilisateur implements Serializable {
 	}
 
 	public Date getDatecreation() {
-		return datecreation;
+		return dateCreation;
 	}
 
 	public void setDatecreation(Date datecreation) {
-		this.datecreation = datecreation;
+		this.dateCreation = datecreation;
 	}
 	
 	public static long getSerialversionuid() {
