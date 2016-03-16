@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -34,8 +35,8 @@ public class Projet implements Serializable{
 	@Column(name = "presentation")
 	private String presentation;
 	
-	@Column(name = "dateFindeCompagne")
-	private Date dateFinCompagne;
+	@Column(name = "dateFindeCampagne")
+	private Date dateFinCampagne;
 	
 	@Column(name = "objectif")
 	private Integer objectif;
@@ -55,7 +56,7 @@ public class Projet implements Serializable{
 	private Categorie categorie;
 
 	@OneToMany(mappedBy="projet")
-    private Set<Commentaire> commentaires;
+    private List<Commentaire> commentaires;
 	
 	@OneToOne(mappedBy = "projet")
 	private Recompense recompense;
@@ -68,11 +69,11 @@ public class Projet implements Serializable{
 		this.utilisateur = utilisateur;
 	}
 
-	public Set<Commentaire> getCommentaires() {
+	public List<Commentaire> getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(Set<Commentaire> commentaires) {
+	public void setCommentaires(List<Commentaire> commentaires) {
 		this.commentaires = commentaires;
 	}
 
@@ -84,11 +85,11 @@ public class Projet implements Serializable{
 		this.categorie = categorie;
 	}
 
-	public Set<Commentaire> getCommentaire() {
+	public List<Commentaire> getCommentaire() {
 		return commentaire;
 	}
 
-	public void setCommentaire(Set<Commentaire> commentaire) {
+	public void setCommentaire(List<Commentaire> commentaire) {
 		this.commentaire = commentaire;
 	}
 
@@ -101,7 +102,7 @@ public class Projet implements Serializable{
 	}
 
 	@OneToMany(mappedBy="projet")
-    private Set<Commentaire> commentaire;
+    private List<Commentaire> commentaire;
 	
 	@OneToMany(mappedBy="projet")
     private Set<Don> don;
@@ -139,11 +140,11 @@ public class Projet implements Serializable{
 	}
 
 	public Date getFinCompagne() {
-		return dateFinCompagne;
+		return dateFinCampagne;
 	}
 
 	public void setFinCompagne(Date finCompagne) {
-		this.dateFinCompagne = finCompagne;
+		this.dateFinCampagne = finCompagne;
 	}
 
 	public Integer getObjectif() {
