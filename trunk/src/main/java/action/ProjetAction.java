@@ -52,9 +52,12 @@ public class ProjetAction extends ActionSupport {
 		String id = request.getParameter("id");
 		if (id != null) {
 			projet = projetService.findById(Integer.parseInt(id));
-			return SUCCESS;
-		}else{
+		}
+		
+		if(projet == null){
 			return ERROR;
+		}else{
+			return SUCCESS;
 		}
 
 	}

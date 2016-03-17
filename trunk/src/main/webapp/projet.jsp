@@ -15,12 +15,19 @@
     </head>
     <body class="projetBodyFiche">
     	
+    	<!-- GESTION DE LA PARTIE COUNT DON  -->
 		<s:set var="total" value="0" />
 		<s:iterator  var="don" value="projet.dons">
 		  <s:set var="total" value="%{#total+#don.montant}" />         
 		</s:iterator>
-		<s:set var="pourcentage" value="%{(#total/projet.objectif)*100}" />
-    	
+		<s:set var="pourcentage" value="%{#total * 100 / projet.objectif  }" />
+		<s:if test="#pourcentage > 100">
+			<s:set var="pourcentagePixel" value="100" />
+		</s:if>
+		<s:else>
+			<s:set var="pourcentagePixel" value="#pourcentage" />
+		</s:else>
+
     	<s:include value="/menu.jsp"></s:include>
        
         <div class="boxHeaderProjet">        
@@ -50,7 +57,7 @@
                             <span class="jourRestant"><i class="icon-clock"></i> 13 <span class="luna">Jours<br>Restants</span></span>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <s:property value="%{#pourcentage}" />%">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <s:property value="%{#pourcentagePixel}" />%">
                                 <s:property value="%{#pourcentage}" /> %
                             </div>
                         </div>
@@ -169,15 +176,14 @@
                             <p class="sub-title">Objectif souhaité</p>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 green topChiffre" >
-                            <p class="chiffre">73 %</p>
+                            <p class="chiffre"><s:property value="#pourcentage" /> %</p>
                             <p class="sub-title">Objectif atteint</p>
                         </div>
-
                         <ul class="recompense">
-                        	<s:iterator  var="recompense" value="#projet.recompenses">
+                        	<s:iterator  var="recompense" value="projet.recompenses">
                         		<li class="color1">
-	                                <p class="euro"> <s:property value="#recompenses.montant" /></p>
-	                                <p class="description"> <s:property value="#recompenses.description" /></p>
+	                                <p class="euro"> <s:property value="#recompense.montant" /></p>
+	                                <p class="description"> <s:property value="#recompense.description" /></p>
 	                            </li>
                         	</s:iterator>
                         </ul>

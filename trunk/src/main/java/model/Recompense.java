@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,9 +29,10 @@ private static final long serialVersionUID = 160659994617526L;
 	@Column(name = "montant")
 	private Integer montant;
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name="projetId")
 	private Projet projet;
-	
+
 	public Long getRecompenseId() {
 		return recompenseId;
 	}
@@ -56,6 +59,14 @@ private static final long serialVersionUID = 160659994617526L;
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public Projet getProjet() {
+		return projet;
+	}
+
+	public void setProjet(Projet projet) {
+		this.projet = projet;
 	}
 
 }

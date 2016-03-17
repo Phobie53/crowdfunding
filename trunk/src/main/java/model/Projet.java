@@ -59,12 +59,21 @@ public class Projet implements Serializable{
 	@OneToMany(mappedBy="projet")
     private List<Commentaire> commentaires;
 	
-	@OneToMany(mappedBy="projet")
+	@OneToMany(mappedBy="projet", fetch = FetchType.EAGER)
 	private List<Recompense> recompenses;
 	
+
 	@OneToMany(mappedBy="projet", fetch = FetchType.EAGER)
     private List<Don> dons;
 	
+
+	public Date getDateFinCampagne() {
+		return dateFinCampagne;
+	}
+
+	public void setDateFinCampagne(Date dateFinCampagne) {
+		this.dateFinCampagne = dateFinCampagne;
+	}
 	
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
