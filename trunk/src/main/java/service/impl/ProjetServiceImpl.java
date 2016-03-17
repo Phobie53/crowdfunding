@@ -40,5 +40,9 @@ public class ProjetServiceImpl implements ProjetService {
 		Categorie cat = categorieDAO.find((long) categorie);
 		return projetDAO.recherche(recherche, cat);
 	}
+	
+	public Projet findById(int id){
+		return projetDAO.find((long) id);
+	}
 
 }

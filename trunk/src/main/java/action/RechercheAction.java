@@ -42,8 +42,6 @@ public class RechercheAction extends ActionSupport {
 		//Objet request
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		
-		//Initialisation des variable pour la recherche
-		
 		//On recupere les valeurs GET
 		String idCategorie = request.getParameter("categorie");
 		if (idCategorie != null) {

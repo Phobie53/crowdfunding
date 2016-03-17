@@ -29,4 +29,10 @@ public interface ProjetService {
 	 */
 	public List<Projet> recherche(String recherche, int categorie);
 	
+	/**
+	 * Retourne un projet par rapport a son id
+	 * @param id
+	 * @return Projet (objet)
+	 */
+	public Projet findById(int id);
 }

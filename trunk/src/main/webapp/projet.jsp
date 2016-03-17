@@ -16,17 +16,16 @@
     <body class="projetBodyFiche">
     	<s:include value="/menu.jsp"></s:include>
        
-        <div class="boxHeaderProjet">
+        <div class="boxHeaderProjet">        
             <div class="row">
                 <div class="container">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="boxTitre">
-                            <h1>Name project</h1>
+                            <h1><s:property value="projet.nom" /></h1>
                             <div class="icons">
                                 <span class="entry">
                                     <i class="fa fa-tags"></i>
-                                    <a href="#">afrique</a>,
-                                    <a href="#">ecole</a>
+                                    <a href="lesProjets?categorie=<s:property value="projet.categorie.categorieId" />"><s:property value="#projet.categorie.type" /></a>
                                 </span>
                             </div>
                         </div>
@@ -57,33 +56,8 @@
             <div class="row">
                 <div class="container">
                     <div class="col-md-8 col-sm-8 col-xs-12 description">
-                        <img src="image/image2.jpg" />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris.Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore 
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                            ullamco laboris.Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.Lorem ipsum 
-                            dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                            quis nostrud exercitation ullamco laboris.Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.Lorem ipsum dolor
-                            sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris.Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                            quis nostrud exercitation ullamco laboris.</p>
+                        <img src="<s:property value="projet.image" />" />
+                        <p><s:property value="projet.presentation" /></p>
                         <div class="tabs">
                             <ul>
                                 <li role="presentation" data-value="commentaire" class="active"><a href="javascript:void(0);" >Commentaire</a></li>

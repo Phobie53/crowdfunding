@@ -41,9 +41,10 @@
 		
 		<action name="projet" class="projetAction" method="detailProjet">
 			<result name="success">projet.jsp</result>
+			<result name="error">error404.jsp</result>
 		</action>
 		
-		<action name="lesProjets" class="projetAction" method="listeProjets">
+		<action name="lesProjets" class="rechercheAction" method="recherche">
 			<result name="success">lesProjets.jsp</result>
 		</action>
 		
