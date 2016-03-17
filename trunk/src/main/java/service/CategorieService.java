@@ -7,5 +7,7 @@ import model.Categorie;
 
 
 public interface CategorieService {
+	
 	public List<Categorie> listeCategorie();
+	
 }

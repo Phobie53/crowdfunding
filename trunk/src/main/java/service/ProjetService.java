@@ -21,4 +21,12 @@ public interface ProjetService {
 	 */
 	public List<Projet> getDerniereProjet(int nombre);
 	
+	/**
+	 * Cette methode realise une recherche sur les différents projets de la BDD
+	 * @param recherche
+	 * @param categorie
+	 * @return
+	 */
+	public List<Projet> recherche(String recherche, int categorie);
+	
 }

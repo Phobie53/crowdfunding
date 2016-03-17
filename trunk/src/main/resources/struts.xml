@@ -43,7 +43,7 @@
 			<result name="success">projet.jsp</result>
 		</action>
 		
-		<action name="lesProjets" class="projetAction" method="listeProjets">
+		<action name="lesProjets" class="rechercheAction" method="recherche">
 			<result name="success">lesProjets.jsp</result>
 		</action>
 		

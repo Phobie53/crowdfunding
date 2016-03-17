@@ -29,11 +29,13 @@ public class ProjetAction extends ActionSupport {
 	private static final Logger logger = Logger.getLogger(ProjetAction.class);
 	
 	private Projet projet;
-	private ProjetService projetService;
 	private List<Categorie> categorieTypes = new ArrayList<Categorie>();
  
 	@Autowired
 	private CategorieService categorieService;
+
+	@Autowired
+	private ProjetService projetService;
 	
 	public String detailProjet() {
 		logger.info("CHARGEMENT PAGE DETAIL PROJET");
@@ -65,11 +67,6 @@ public class ProjetAction extends ActionSupport {
 				logger.info("id : " + idProjet );
 			}
 		}
-		return SUCCESS;
-	}
-	
-	public String listeProjets() {
-		logger.info("CHARGEMENT PAGE LISTE PROJET");
 		return SUCCESS;
 	}
 	
