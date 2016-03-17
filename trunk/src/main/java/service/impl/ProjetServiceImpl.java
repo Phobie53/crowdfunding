@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import dao.CategorieDAO;
 import dao.ProjetDAO;
 import model.Projet;
+import java.util.List;
 import service.ProjetService;
 
 
@@ -18,12 +19,16 @@ import service.ProjetService;
 public class ProjetServiceImpl implements ProjetService {
 	
 	@Autowired
-	private ProjetDAO projetDao;
+	private ProjetDAO projetDAO;
 	
 	public void saveProjet(Projet projet) {
 		if (projet != null) {
-			projetDao.save();
+			projetDAO.save();
 		}
+	}
+	
+	public List<Projet> getDerniereProjet(int nombre){
+		return projetDAO.getDerniereProjet(nombre);
 	}
 
 }

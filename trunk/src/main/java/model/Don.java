@@ -25,7 +25,7 @@ private static final long serialVersionUID = 16065999461991L;
 	private Long donId;
 	
 	@Column(name = "montant")
-	private String montant;
+	private int montant;
 
 	@Column(name = "date")
 	private Date date;
@@ -62,11 +62,11 @@ private static final long serialVersionUID = 16065999461991L;
 		this.donId = donId;
 	}
 
-	public String getMontant() {
+	public int getMontant() {
 		return montant;
 	}
 
-	public void setMontant(String montant) {
+	public void setMontant(int montant) {
 		this.montant = montant;
 	}
 

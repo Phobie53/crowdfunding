@@ -23,7 +23,7 @@ public class Projet implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "ProjetId")
+	@Column(name = "projetId")
 	private Long projetId;
 	
 	@Column(name = "nom")
@@ -58,8 +58,12 @@ public class Projet implements Serializable{
 	@OneToMany(mappedBy="projet")
     private List<Commentaire> commentaires;
 	
-	@OneToOne(mappedBy = "projet")
-	private Recompense recompense;
+	@OneToMany(mappedBy="projet")
+	private List<Recompense> recompenses;
+	
+	@OneToMany(mappedBy="projet")
+    private List<Don> dons;
+	
 	
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -85,27 +89,13 @@ public class Projet implements Serializable{
 		this.categorie = categorie;
 	}
 
-	public List<Commentaire> getCommentaire() {
-		return commentaire;
+	public void setDons(List<Don> dons) {
+		this.dons = dons;
 	}
 
-	public void setCommentaire(List<Commentaire> commentaire) {
-		this.commentaire = commentaire;
+	public List<Don> getDons() {
+		return dons;
 	}
-
-	public Set<Don> getDon() {
-		return don;
-	}
-
-	public void setDon(Set<Don> don) {
-		this.don = don;
-	}
-
-	@OneToMany(mappedBy="projet")
-    private List<Commentaire> commentaire;
-	
-	@OneToMany(mappedBy="projet")
-    private Set<Don> don;
 	
 	public Long getProjetId() {
 		return projetId;
@@ -173,6 +163,14 @@ public class Projet implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public Recompense getRecompenses() {
+		return recompenses;
+	}
+
+	public void setRecompenses(Recompense recompenses) {
+		this.recompenses = recompenses;
 	}
 
 }

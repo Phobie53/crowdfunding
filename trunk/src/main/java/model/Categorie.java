@@ -29,15 +29,15 @@ private static final long serialVersionUID = 1606599946L;
 	
 
 	@OneToMany(mappedBy="categorie")
-    private List<Projet> projet;
+    private List<Projet> projets;
 
-	public List<Projet> getProjet() {
-		return projet;
+	public List<Projet> getProjets() {
+		return projets;
 	}
 
 
-	public void setProjet(List<Projet> projet) {
-		this.projet = projet;
+	public void setProjets(List<Projet> projets) {
+		this.projets = projets;
 	}
 
 

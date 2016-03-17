@@ -90,95 +90,39 @@
                             <h2>Projets Populaires</h2>
                             <div>
                                 <div class="boxItems">
-                                    <div class="col-md-4 item">
-                                        <div class="image">
-                                            <a href="projet">
-                                                <div>
-                                                    <div class="monImage" style="background-image: url('image/image1.jpg')"></div> 
-                                                    <div class="hover">
-                                                        <p>100%</p>
-                                                        <p class="sub-title">Objectif</p>
-                                                    </div>
-                                                </div>    
-                                            </a>
-                                        </div>
-                                        <div class="detail">
-                                            <h3><a href="projet">Name project</a></h3>
-                                            <div class="icons">
-                                                <span class="entry">
-                                                    <i class="fa fa-tags"></i>
-                                                    <a href="#">afrique</a>,
-                                                    <a href="#">ecole</a>
-                                                </span>
-                                                <span class="entry">
-                                                    <i class="fa fa-money"></i>
-                                                    Objectif:
-                                                    <strong>$15000</strong>
-                                                </span>
-                                            </div>
-                                            <p class="descriptioProjet">Altero a de incidisset Fannio sermo exposui cum Eius hoc in atque videretur incidisset incidisset ne et meo saepius sententias Scaevola exposuit illo et ipsam....</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4 item">
-                                        <div class="image">
-                                            <a href="projet">
-                                                <div>
-                                                    <div class="monImage" style="background-image: url('image/image2.jpg')"></div> 
-                                                    <div class="hover">
-                                                        <p>100%</p>
-                                                        <p class="sub-title">Objectif</p>
-                                                    </div>
-                                                </div>    
-                                            </a>
-                                        </div>
-                                        <div class="detail">
-                                            <h3><a href="projet">Name project</a></h3>
-                                            <div class="icons">
-                                                <span class="entry">
-                                                    <i class="fa fa-tags"></i>
-                                                    <a href="#">afrique</a>,
-                                                    <a href="#">ecole</a>
-                                                </span>
-                                                <span class="entry">
-                                                    <i class="fa fa-money"></i>
-                                                    Objectif:
-                                                    <strong>$15000</strong>
-                                                </span>
-                                            </div>
-                                            <p class="descriptioProjet">Altero a de incidisset Fannio sermo exposui cum Eius hoc in atque videretur incidisset incidisset ne et meo saepius sententias Scaevola exposuit illo et ipsam....</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4 item">
-                                        <div class="image">
-                                            <a href="projet">
-                                                <div>
-                                                    <div class="monImage" style="background-image: url('image/image1.jpg')"></div> 
-                                                    <div class="hover">
-                                                        <p>100%</p>
-                                                        <p class="sub-title">Objectif</p>
-                                                    </div>
-                                                </div>    
-                                            </a>
-                                        </div>
-                                        <div class="detail">
-                                            <h3><a href="projet">Name project</a></h3>
-                                            <div class="icons">
-                                                <span class="entry">
-                                                    <i class="fa fa-tags"></i>
-                                                    <a href="#">afrique</a>,
-                                                    <a href="#">ecole</a>
-                                                </span>
-                                                <span class="entry">
-                                                    <i class="fa fa-money"></i>
-                                                    Objectif:
-                                                    <strong>$15000</strong>
-                                                </span>
-                                            </div>
-                                            <p class="descriptioProjet">Altero a de incidisset Fannio sermo exposui cum Eius hoc in atque videretur incidisset incidisset ne et meo saepius sententias Scaevola exposuit illo et ipsam....</p>
-                                        </div>
-                                    </div>
+                                    <s:iterator value="lesProjets" var="projet">
+										<div class="col-md-4 item">
+											<div class="image">
+												<a href="projet?id=<s:property value="#projet.projetId" />">
+													<div>
+														<div class="monImage"
+															style="background-image: url('<s:property value="#projet.image" />')"></div>
+														<div class="hover">
+															<s:set var="total" value="0" />
+															<s:iterator  var="don" value="#projet.dons">
+															  <s:set var="total" value="%{#total+#don.montant}" />         
+															</s:iterator>
+															<p><s:property value="%{(#total/#objectif)*100}" />%</p>
+															<p class="sub-title">Objectif</p>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="detail">
+												<h3>
+													<a href="projet?id=<s:property value="#projet.projetId" />"><s:property value="#projet.nom" /></a>
+												</h3>
+												<div class="icons">
+													<span class="entry"> <i class="fa fa-tags"></i> <a
+														href="lesProjets?categorie=<s:property value="#projet.categorie.categorieId" />"><s:property value="#projet.categorie.type" /></a>
+													</span> <span class="entry"> <i class="fa fa-money"></i>
+														Objectif: <strong><s:property value="#projet.objectif" /> €</strong>
+													</span>
+												</div>
+												<p class="descriptioProjet"><s:property value="#projet.presentation.substring(0,150)" /> ...</p>
+											</div>
+										</div>
+									</s:iterator>
                                 </div>
                             </div>
                         </div>
