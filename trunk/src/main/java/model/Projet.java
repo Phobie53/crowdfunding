@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -61,7 +62,7 @@ public class Projet implements Serializable{
 	@OneToMany(mappedBy="projet")
 	private List<Recompense> recompenses;
 	
-	@OneToMany(mappedBy="projet")
+	@OneToMany(mappedBy="projet", fetch = FetchType.EAGER)
     private List<Don> dons;
 	
 	
@@ -165,11 +166,11 @@ public class Projet implements Serializable{
 		return serialVersionUID;
 	}
 	
-	public Recompense getRecompenses() {
+	public List<Recompense> getRecompenses() {
 		return recompenses;
 	}
 
-	public void setRecompenses(Recompense recompenses) {
+	public void setRecompenses(List<Recompense> recompenses) {
 		this.recompenses = recompenses;
 	}
 

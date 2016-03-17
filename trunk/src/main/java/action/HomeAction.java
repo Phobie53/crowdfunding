@@ -1,4 +1,3 @@
-@@ -1,9 +1,16 @@
 package action;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import service.ProjetService;
 @Controller
 public class HomeAction extends ActionSupport {
 
-	public class HomeAction extends ActionSupport {
 	private static final String SUCCESS = "success";
 
 	private static final Logger logger = Logger.getLogger(HomeAction.class);
