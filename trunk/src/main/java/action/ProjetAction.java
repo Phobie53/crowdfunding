@@ -17,6 +17,7 @@ import model.Categorie;
 import model.Projet;
 import service.CategorieService;
 import service.ProjetService;
+import service.UtilisateurService;
 
 @Controller
 public class ProjetAction extends ActionSupport {
@@ -37,6 +38,9 @@ public class ProjetAction extends ActionSupport {
 
 	@Autowired
 	private ProjetService projetService;
+	
+	@Autowired
+	private UtilisateurService utilisateurService;
 
 	public String detailProjet() {
 		logger.info("CHARGEMENT PAGE DETAIL PROJET");
@@ -62,7 +66,8 @@ public class ProjetAction extends ActionSupport {
 
 	public String afficherFormCreation() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE CREATION");
-		this.setCategorieTypes(categorieService.listeCategorie());
+		categorieTypes = categorieService.listeCategorie();
+		projet = new Projet();
 		return SUCCESS;
 	}
 
@@ -74,20 +79,15 @@ public class ProjetAction extends ActionSupport {
 
 		final String idProjetString = request.getParameter("idProjet");
 		if (idProjetString != null) {
-			final Long idProjet = Long.parseLong(idProjetString);
-			if (idProjet != null) {
-				logger.info("id : " + idProjet);
-			}
+			logger.info("id : " + idProjetString);
 		}
 		return SUCCESS;
 	}
 
 	public String saveProjet() {
 
-		if (projet == null) {
-			logger.info("ko");
-		} else {
-			logger.info(projet.getNom());
+		if (projet != null) {
+			projet.setUtilisateur(utilisateurService.findById(1));
 			projetService.saveProjet(projet);
 		}
 

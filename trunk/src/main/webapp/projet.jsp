@@ -14,6 +14,13 @@
         <link href='https://fonts.googleapis.com/css?family=Raleway|Roboto|Source+Sans+Pro:200' rel='stylesheet' type='text/css'>
     </head>
     <body class="projetBodyFiche">
+    	
+		<s:set var="total" value="0" />
+		<s:iterator  var="don" value="projet.dons">
+		  <s:set var="total" value="%{#total+#don.montant}" />         
+		</s:iterator>
+		<s:set var="pourcentage" value="%{(#total/projet.objectif)*100}" />
+    	
     	<s:include value="/menu.jsp"></s:include>
        
         <div class="boxHeaderProjet">        
@@ -25,7 +32,7 @@
                             <div class="icons">
                                 <span class="entry">
                                     <i class="fa fa-tags"></i>
-                                    <a href="lesProjets?categorie=<s:property value="projet.categorie.categorieId" />"><s:property value="#projet.categorie.type" /></a>
+                                    <a href="lesProjets?categorie=<s:property value="projet.categorie.categorieId" />"><s:property value="projet.categorie.type" /></a>
                                 </span>
                             </div>
                         </div>
@@ -39,12 +46,12 @@
                 <div class="container">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="lesChiffreProjet">
-                            <span class="sommeActuelle">20 582 €</span>
+                            <span class="sommeActuelle"><s:property value="%{#total}" /> €</span>
                             <span class="jourRestant"><i class="icon-clock"></i> 13 <span class="luna">Jours<br>Restants</span></span>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                60%
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <s:property value="%{#pourcentage}" />%">
+                                <s:property value="%{#pourcentage}" /> %
                             </div>
                         </div>
                     </div>
@@ -154,11 +161,11 @@
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="col-md-12 col-sm-12 col-xs-12 red topChiffre" >
-                            <p class="chiffre">6</p>
+                            <p class="chiffre"><s:property value="projet.dons.size()" /></p>
                             <p class="sub-title">Nombre de donateur</p>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 blue topChiffre" >
-                            <p class="chiffre">25 000 €</p>
+                            <p class="chiffre"><s:property value="projet.objectif" /> €</p>
                             <p class="sub-title">Objectif souhaité</p>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 green topChiffre" >
@@ -167,22 +174,12 @@
                         </div>
 
                         <ul class="recompense">
-                            <li class="color1">
-                                <p class="euro">5€ - 10€</p>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            </li>
-                            <li class="color2">
-                                <p class="euro">10€ - 50€</p>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            </li>
-                            <li class="color3">
-                                <p class="euro">50€ - 100€</p>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            </li>
-                            <li class="color4">
-                                <p class="euro">+ 100€</p>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            </li>
+                        	<s:iterator  var="recompense" value="#projet.recompenses">
+                        		<li class="color1">
+	                                <p class="euro"> <s:property value="#recompenses.montant" /></p>
+	                                <p class="description"> <s:property value="#recompenses.description" /></p>
+	                            </li>
+                        	</s:iterator>
                         </ul>
                     </div>
                 </div>

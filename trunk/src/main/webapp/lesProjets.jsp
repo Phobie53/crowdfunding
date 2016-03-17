@@ -48,7 +48,7 @@
 													<s:iterator  var="don" value="#projet.dons">
 													  <s:set var="total" value="%{#total+#don.montant}" />         
 													</s:iterator>
-													<p><s:property value="%{(#total/#objectif)*100}" />%</p>
+													<p><s:property value="%{(#total/#projet.objectif)*100}" />%</p>
 													<p class="sub-title">Objectif</p>
 												</div>
 											</div>

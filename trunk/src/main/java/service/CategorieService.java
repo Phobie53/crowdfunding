@@ -10,4 +10,6 @@ public interface CategorieService {
 	
 	public List<Categorie> listeCategorie();
 	
+	public Categorie findById(int id);
+	
 }

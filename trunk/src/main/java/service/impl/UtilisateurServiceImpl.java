@@ -32,5 +32,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 		return res;
 	}
+	
+
+	public Utilisateur findById(int id){
+		return utilisateurDAO.find((long) id);
+	}
 
 }

@@ -8,6 +8,7 @@ import model.Utilisateur;
 
 public interface UtilisateurService {
 
-	boolean sauvegarderUtilisateur(Utilisateur utilisateur);
-	
+	public boolean sauvegarderUtilisateur(Utilisateur utilisateur);
+
+	public Utilisateur findById(int id);
 }

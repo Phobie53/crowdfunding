@@ -3,10 +3,11 @@ package service.impl;
 
 import javax.transaction.Transactional;
 
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import action.ProjetAction;
 import dao.CategorieDAO;
 import dao.ProjetDAO;
 import dao.impl.ProjetDAOImpl;
@@ -19,6 +20,8 @@ import service.ProjetService;
 @Service
 @Transactional
 public class ProjetServiceImpl implements ProjetService {
+
+	private static final Logger logger = Logger.getLogger(ProjetServiceImpl.class);
 	
 	@Autowired
 	private ProjetDAO projetDAO;
@@ -28,7 +31,7 @@ public class ProjetServiceImpl implements ProjetService {
 	
 	public void saveProjet(Projet projet) {
 		if (projet != null) {
-			projetDAO.save();
+			projetDAO.save(projet);
 		}
 	}
 	

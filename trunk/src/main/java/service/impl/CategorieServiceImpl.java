@@ -25,4 +25,8 @@ public class CategorieServiceImpl implements CategorieService {
 		return categorieDAO.findAll();
 	}
 
+	public Categorie findById(int id){
+		return categorieDAO.find((long) id);
+	}
+
 }

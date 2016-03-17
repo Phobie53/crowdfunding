@@ -29,7 +29,7 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box  account-form">
-				<s:form method="post" action="saveProjet" cssClass="" theme="simple">
+				<s:form method="post" action="saveProjet" cssClass="" theme="simple" enctype="multipart/form-data">
 					<p class="titre">1 - Information sur le projet</p>
 					<div class="form-group">
 						<label for="inputNom">Nom du projet</label> 
@@ -50,17 +50,17 @@
 						<label for="parojetPresentation">Description</label>
 						<s:textarea name="projet.presentation" label="Presentation" />
 					</div>
-
+				<!-- 
 					<div class="form-group">
 						<label for="exampleInputEmail1">Image</label> 
 						<s:file name="projet.image" label="Image"/>
 					</div>
-					
 					<div class="form-group">
 						<label for="projetCategorie">Catégorie</label> 
 						<s:select label="Categorie" list="categorieTypes" cssClass="form-control" listKey="categorieId" listValue="type"
 				           	name="projet.categorie" />
 					</div>
+				 -->	
 					
 					
 					<p class="titre">2 - Ajouter des récompenses</p>
