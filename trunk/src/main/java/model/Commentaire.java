@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,9 @@ public class Commentaire implements Serializable {
 	@Column(name = "description")
 	private String description;
 	
+	@Column(name = "date")
+	private Date date;
+
 	@ManyToOne
 	@JoinColumn(name="utilisateurId")	 
 	private Utilisateur utilisateur;
@@ -67,7 +71,13 @@ public class Commentaire implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	public Date getDate() {
+		return date;
+	}
 
-
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 }

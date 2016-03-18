@@ -14,23 +14,23 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Recompense")
-public class Recompense implements Serializable{
-	
+public class Recompense implements Serializable {
 
-private static final long serialVersionUID = 160659994617526L;
+	private static final long serialVersionUID = 160659994617526L;
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "recompenseId")
 	private Long recompenseId;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "montant")
 	private Integer montant;
-	
+
 	@ManyToOne
-	@JoinColumn(name="projetId")
+	@JoinColumn(name = "projetId")
 	private Projet projet;
 
 	public Long getRecompenseId() {
@@ -60,7 +60,7 @@ private static final long serialVersionUID = 160659994617526L;
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	public Projet getProjet() {
 		return projet;
 	}

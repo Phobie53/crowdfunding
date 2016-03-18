@@ -45,7 +45,7 @@ public class ProjetServiceImpl implements ProjetService {
 	}
 	
 	public Projet findById(int id){
-		return projetDAO.find((long) id);
+		return projetDAO.findById(id);
 	}
 
 }

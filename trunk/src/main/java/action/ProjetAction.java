@@ -1,7 +1,9 @@
 package action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,7 +54,7 @@ public class ProjetAction extends ActionSupport {
 		String id = request.getParameter("id");
 		if (id != null) {
 			projet = projetService.findById(Integer.parseInt(id));
-		}
+		} 
 		
 		if(projet == null){
 			return ERROR;
@@ -114,4 +116,14 @@ public class ProjetAction extends ActionSupport {
 		this.projet = projet;
 	}
 
+	public String getDateEcart(){
+		if(projet != null){
+			long diffInMillies = (new Date()).getTime() - projet.getDateFinCampagne().getTime();
+		    int nb = (int) (diffInMillies / (1000 * 60 * 60 * 24) ) + 1;
+		    if(nb > 0){
+		    	return String.valueOf(nb);
+		    }
+		}
+		return "Fini";
+	}
 }
