@@ -4,8 +4,9 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<constant name="struts.devMode" value="true" />
-
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.multipart.saveDir" value="/upload" />
+	
 	<package name="default" namespace="/" extends="struts-default">
 
 		<action name="home" class="homeAction" method="afficher">
@@ -62,6 +63,19 @@
 		
 		<action name="saveProjet" class="projetAction" method="saveProjet">
 			<result name="success" type="redirect">mesProjets</result>
+		</action>
+		
+		<action name="faireDon" class="projetAction" method="faireDon">
+			<result name="success">faireDon.jsp</result>
+		</action>
+		
+		<action name="saveDon" class="projetAction" method="saveDon">
+			<result name="success" type="redirect">${url}</result>
+			<result name="error">error404.jsp</result>
+		</action>
+		
+		<action name="saveCommentaire" class="projetAction" method="saveCommentaire">
+			<result name="success" type="redirect">${url}</result>
 		</action>
 		
 		<!-- 	

@@ -60,9 +60,8 @@
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="lesChiffreProjet">
 						<span class="sommeActuelle"><s:property value="%{#total}" />
-							€</span> <span class="jourRestant"><i class="icon-clock"></i> 
-						<s:property value="%{getDateEcart()}" />
-							<span class="luna">Jours<br>Restants
+							€</span> <span class="jourRestant"><i class="icon-clock"></i> <s:property
+								value="%{getDateEcart()}" /> <span class="luna">Jours<br>Restants
 						</span></span>
 					</div>
 					<div class="progress">
@@ -90,21 +89,28 @@
 						<ul>
 							<li role="presentation" data-value="commentaire" class="active"><a
 								href="javascript:void(0);">Commentaire</a></li>
-							<li role="presentation" data-value="faireDon"><a
-								href="javascript:void(0);">Faire un don</a></li>
+							<s:if test="getDateEcart() != 'Fini'">
+								<li role="presentation" data-value="faireDon"><a
+									href="javascript:void(0);">Faire un don</a></li>
+							</s:if>
 						</ul>
-						<div class="faireDon" style="display: none;">
-							<form class="form-horizontal">
-								<h2 class="center">Je souhaites faire un don</h2>
-								<div class="inputRange">
-									<input type="range" min="0" max="10000" data-rangeSlider>
-									<span class="valeurRange">0 €</span>
-								</div>
-								<div class="center">
-									<button type="submit" class="buttonDon">Faire un don</button>
-								</div>
-							</form>
-						</div>
+						<s:if test="getDateEcart() != 'Fini'">
+							<div class="faireDon" style="display: none;">
+								<s:form theme="simple" action="faireDon"
+									cssClass="form-horizontal" method="post">
+									<h2 class="center">Je souhaites faire un don</h2>
+									<div class="inputRange">
+										<s:textfield name="montant" label="montant" type="range"
+											min="0" max="10000" data-rangeSlider="true" />
+										<span class="valeurRange">0 €</span>
+									</div>
+									<div class="center">
+										<s:hidden name="idProjet" value="%{projet.projetId}" />
+										<s:submit value="Faire un don" cssClass="buttonDon" />
+									</div>
+								</s:form>
+							</div>
+						</s:if>
 						<div class="commentaire">
 							<div class="timeline">
 								<s:if
@@ -165,11 +171,14 @@
 						<p class="sub-title">Objectif atteint</p>
 					</div>
 					<ul class="recompense">
-						<s:if test="projet.recompenses != null && projet.recompenses.size() > 0">
+						<s:if
+							test="projet.recompenses != null && projet.recompenses.size() > 0">
 							<s:iterator var="recompense" value="projet.recompenses">
 								<li class="color1">
 									<p class="euro">
+										<
 										<s:property value="#recompense.montant" />
+										€
 									</p>
 									<p class="description">
 										<s:property value="#recompense.description" />
@@ -190,14 +199,19 @@
 						type="button"></button>
 					<h4 class="modal-title">Ajouter un commentaire</h4>
 				</div>
-				<div class="modal-body">
-					<textarea id="textareaCommentaire"></textarea>
-				</div>
-				<div class="modal-footer">
-					<button data-dismiss="modal" class="btn dark btn-outline"
-						type="button">Fermer</button>
-					<button class="btn green" type="button" id="ajouterCommentaire">Ajouter</button>
-				</div>
+				<s:form theme="simple" action="saveCommentaire"
+					cssClass="form-horizontal" method="post">
+					<div class="modal-body">
+						<s:textarea label="Commentaire" name="commentaire" id="textareaCommentaire" />
+					</div>
+					<div class="modal-footer">
+						<s:hidden name="idProjet" value="%{projet.projetId}" />
+						<button data-dismiss="modal" class="btn dark btn-outline" type="button">Fermer</button>
+						<s:submit value="Ajouter" cssClass="btn green"  id="ajouterCommentaire" />
+						
+					</div>
+				</s:form>
+
 			</div>
 		</div>
 	</div>

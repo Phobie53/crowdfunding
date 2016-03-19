@@ -65,6 +65,19 @@
 			<result name="success" type="redirect">mesProjets</result>
 		</action>
 		
+		<action name="faireDon" class="projetAction" method="faireDon">
+			<result name="success">faireDon.jsp</result>
+		</action>
+		
+		<action name="saveDon" class="projetAction" method="saveDon">
+			<result name="success" type="redirect">${url}</result>
+			<result name="error">error404.jsp</result>
+		</action>
+		
+		<action name="saveCommentaire" class="projetAction" method="saveCommentaire">
+			<result name="success" type="redirect">${url}</result>
+		</action>
+		
 		<!-- 	
 		<action name="saveCustomerAction" class="editCustomerAction"
 			method="saveCustomer">
