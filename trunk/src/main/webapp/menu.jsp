@@ -30,7 +30,12 @@
 								<a href="apropos"><strong>A propos</strong></a></li>
 								
 								<s:if test="%{#pageCurrent == 'contact'}"><li class="selected"></s:if><s:else><li></s:else>
-								<a href="contact"><strong>Contact</strong></a></li>
+								<a href="contact"><strong>Contact<s:property value="#session.username" />
+ 
+<s:property value="#request.username" />
+ 
+<s:property value="#attr.username" /></strong></a></li>
+								
 	
 								<s:if test="%{#pageCurrent == 'connexion' || #pageCurrent == 'inscription'}"><li class="selected"></s:if><s:else><li></s:else>
 								<a class="connexionInscription" href="connexion"><strong>Connexion / Inscription</strong></a></li>

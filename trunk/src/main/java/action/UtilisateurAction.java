@@ -65,6 +65,7 @@ public class UtilisateurAction extends ActionSupport implements RequestAware, Se
 			//On ajoute en session l'objet utilisateur
 			Map<String, Object> inMap = new HashMap<String, Object>();
 			inMap.put("user", utilisateur);
+			inMap.put("username", utilisateur.getNom());
 			ActionContext.getContext().setSession(inMap);
 			//Pour récupérer l'objet en session
 			//Map<String, Object> outMap = ActionContext.getContext().getSession();
@@ -81,10 +82,13 @@ public class UtilisateurAction extends ActionSupport implements RequestAware, Se
 			}
 		}
 		
-		if (isInscriptionReussie)
+		if (isInscriptionReussie) {
+			logger.info("INSCRIPTION REUSSIE");
 			return SUCCESS;
-		else
-			return SUCCESS;
+		} else {
+			logger.info("INSCRIPTION ERROR");
+			return ERROR;
+		}
 	}
 	
 	public String verificationFormulaire() {		
