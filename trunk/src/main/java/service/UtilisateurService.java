@@ -11,4 +11,6 @@ public interface UtilisateurService {
 	public boolean sauvegarderUtilisateur(Utilisateur utilisateur);
 
 	public Utilisateur findById(int id);
+	
+	public Utilisateur Connexion(String email, String password);
 }

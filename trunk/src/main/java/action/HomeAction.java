@@ -2,13 +2,19 @@ package action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.Projet;
+import model.Utilisateur;
 import service.ProjetService;
 
 @Controller
@@ -26,6 +32,10 @@ public class HomeAction extends ActionSupport {
 	
 	public String afficher() {
 		logger.info("CHARGEMENT PAGE HOME");
+
+        Map session = ActionContext.getContext().getSession();
+        logger.info("SESSION HOME : " + session);
+		
 		lesProjets = projetService.getDerniereProjet(3);
 		
 		return SUCCESS;

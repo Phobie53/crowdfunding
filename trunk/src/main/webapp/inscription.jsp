@@ -35,10 +35,15 @@
 											<s:textfield name="utilisateur.email" label="Email" placeholder="Mail" cssClass="nameConnexion" />
                                         </div>
                                         <div class="feild col-md-12 col-xs-12 col-sm-12">
-											<s:textfield type="password" name="utilisateur.password" label="Password" placeholder="Password" cssClass="nameConnexion" />
+											<s:textfield type="password" name="utilisateur.password" label="Password" placeholder="Password" cssClass="nameConnexion" required />
+                                        </div>
+                                        <div class="feild col-md-12 col-xs-12 col-sm-12">
+											<s:textfield type="hidden" name="utilisateur.image" label="Image" cssClass="nameConnexion" value="image/avatar/avatar2.png" />
                                         </div>
                                     </div>
-									<s:submit value="Inscription" cssClass="connexionButton" />
+                                    <div class="feild col-md-12">
+										<s:submit value="Inscription" cssClass="connexionButton" />
+									</div>
 								</s:form>
                             </div>
                         </div>				

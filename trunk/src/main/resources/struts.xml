@@ -6,84 +6,101 @@
 <struts>
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.multipart.saveDir" value="/upload" />
-
+	
 	<package name="default" namespace="/" extends="struts-default">
 
+    	<interceptors>	
+			<interceptor name="MyInterceptor" class="action.MyInterceptor"></interceptor>
+	        <interceptor-stack name="newStack">
+		     	<interceptor-ref name="MyInterceptor"/>
+				<interceptor-ref name="defaultStack" />
+	         </interceptor-stack>
+	    </interceptors>
+	    
 		<action name="home" class="homeAction" method="afficher">
+			<interceptor-ref name="newStack"/>
 			<result name="success">home.jsp</result>
 		</action>
-
+		
 		<action name="connexion" class="utilisateurAction" method="connexion">
 			<result name="success">connexion.jsp</result>
 		</action>
-
+		<action name="validerConnexion" class="utilisateurAction" method="validerConnexion">
+			<result name="success" type="redirect">home</result>
+			<result name="error">connexion.jsp</result>
+		</action>
+		
 		<action name="deconnexion" class="utilisateurAction" method="deconnexion">
 			<result name="success" type="redirect">home</result>
 		</action>
-
+		
 		<action name="inscription" class="utilisateurAction" method="inscription">
 			<result name="success">inscription.jsp</result>
 		</action>
-		<action name="validerInscription" class="utilisateurAction"
-			method="validerInscription">
-			<result name="success">inscription.jsp</result>
+		<action name="validerInscription" class="utilisateurAction" method="validerInscription">
+			<result name="success" type="redirect">home</result>
+			<result name="error">inscription.jsp</result>
 		</action>
-
+		
 		<action name="monCompte" class="utilisateurAction" method="monCompte">
 			<result name="success">monCompte.jsp</result>
 		</action>
-
+		<action name="modifierUtilisateur" class="utilisateurAction" method="modifierUtilisateur">
+			<result name="success" type="redirect">monCompte</result>
+		</action>
+		
 		<action name="apropos" class="pageAction" method="apropos">
 			<result name="success">apropos.jsp</result>
 		</action>
-
+		
 		<action name="contact" class="pageAction" method="contact">
 			<result name="success">contact.jsp</result>
 		</action>
-
+		
 		<action name="projet" class="projetAction" method="detailProjet">
 			<result name="success">projet.jsp</result>
 			<result name="error">error404.jsp</result>
 		</action>
-
+		
 		<action name="lesProjets" class="rechercheAction" method="recherche">
 			<result name="success">lesProjets.jsp</result>
 		</action>
-
+		
 		<action name="mesProjets" class="projetAction" method="mesProjets">
 			<result name="success">mesProjets.jsp</result>
 		</action>
-
+		
 		<action name="creationProjet" class="projetAction" method="afficherFormCreation">
 			<result name="success">creationProjet.jsp</result>
 		</action>
-
+		
 		<action name="modifierProjet" class="projetAction" method="afficherFormModification">
 			<result name="success">modificationProjet.jsp</result>
 		</action>
-
+		
 		<action name="saveProjet" class="projetAction" method="saveProjet">
 			<result name="success" type="redirect">mesProjets</result>
-			<result name="input">creationProjet.jsp</result>
-			<result name="error">creationProjet.jsp</result>
 		</action>
-
+		
 		<action name="faireDon" class="projetAction" method="faireDon">
 			<result name="success">faireDon.jsp</result>
 		</action>
-
+		
 		<action name="saveDon" class="projetAction" method="saveDon">
 			<result name="success" type="redirect">${url}</result>
 			<result name="error">error404.jsp</result>
 		</action>
-
+		
 		<action name="saveCommentaire" class="projetAction" method="saveCommentaire">
 			<result name="success" type="redirect">${url}</result>
 		</action>
-
-		<!-- <action name="saveCustomerAction" class="editCustomerAction" method="saveCustomer"> 
-			<result name="success" type="redirect">listCustomerAction</result> </action> -->
+		
+		<!-- 	
+		<action name="saveCustomerAction" class="editCustomerAction"
+			method="saveCustomer">
+			<result name="success" type="redirect">listCustomerAction</result>
+		</action>
+		 -->
 
 	</package>
-
 </struts>

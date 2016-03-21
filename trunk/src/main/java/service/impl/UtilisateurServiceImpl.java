@@ -37,5 +37,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public Utilisateur findById(int id){
 		return utilisateurDAO.find((long) id);
 	}
+	
+
+	public Utilisateur Connexion(String email, String password) {
+		password = DigestUtils.sha1Hex(password);
+		return utilisateurDAO.findByEmailPassword(email, password);
+	}
 
 }
