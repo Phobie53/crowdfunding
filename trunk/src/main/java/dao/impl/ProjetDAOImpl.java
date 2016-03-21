@@ -40,6 +40,15 @@ public class ProjetDAOImpl extends GenericDAOImpl<Projet, Long> implements Proje
 
 		return listeProjet;
 	}
+	
+	public List<Projet> getMesProjets(int utilisateurId){
+		
+		List<Projet> mesProjet = null;
+		Query query = this.getSession().createQuery("from Projet p where p.utilisateur.utilisateurId=:id")
+				.setLong("id", utilisateurId);
+		mesProjet = (List<Projet>) query.list();
+		return mesProjet;
+	}
 
 	public List<Projet> recherche(String recherche, Categorie categorie) {
 		List<Projet> listeProjet = null;

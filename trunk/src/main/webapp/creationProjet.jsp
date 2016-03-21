@@ -50,17 +50,17 @@
 						<label for="parojetPresentation">Description</label>
 						<s:textarea name="projet.presentation" label="Presentation" />
 					</div>
-				<!-- 
+				
 					<div class="form-group">
 						<label for="exampleInputEmail1">Image</label> 
-						<s:file name="projet.image" label="Image"/>
+						<s:file name="image" label="Image"/>
 					</div>
-					<div class="form-group">
-						<label for="projetCategorie">Catégorie</label> 
-						<s:select label="Categorie" list="categorieTypes" cssClass="form-control" listKey="categorieId" listValue="type"
-				           	name="projet.categorie" />
-					</div>
-				 -->	
+<!-- 					<div class="form-group"> -->
+<!-- 						<label for="projetCategorie">Catégorie</label>  -->
+<%-- 						<s:select label="Categorie" list="categorieTypes" cssClass="form-control" listKey="categorieId" listValue="type" --%>
+<%-- 				           	name="categorie" />   --%>
+<!-- 					</div> -->
+					
 					
 					
 					<p class="titre">2 - Ajouter des récompenses</p>

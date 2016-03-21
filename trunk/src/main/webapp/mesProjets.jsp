@@ -28,57 +28,27 @@
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box projetPopulaireTitre">
 				<div class="boxItems">
+				<s:iterator value="mesProjets" var="projet">
 					<div class="col-md-4 item">
 						<div class="image">
 							<a href="modifierProjet">
 								<div>
 									<div class="monImage"
-										style="background-image: url('image/image1.jpg')"></div>
+										style="background-image: url('<s:property value="#projet.image" />')"></div>
 									<div class="hover">
-										<p class="sub-title">Name Projet</p>
+										<p class="sub-title"><s:property value="#projet.nom" /></p>
 									</div>
 								</div>
 							</a>
 						</div>
 						<div class="detail">
+						
 							<a href="modifierProjet" class="modifierProjet">Modifier
 								projet</a>
 						</div>
 					</div>
-					<div class="col-md-4 item">
-						<div class="image">
-							<a href="modifierProjet">
-								<div>
-									<div class="monImage"
-										style="background-image: url('image/image2.jpg')"></div>
-									<div class="hover">
-										<p class="sub-title">Name Projet</p>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="detail">
-							<a href="modifierProjet?id=5" class="modifierProjet">Modifier
-								projet</a>
-						</div>
-					</div>
-					<div class="col-md-4 item">
-						<div class="image">
-							<a href="modifierProjet">
-								<div>
-									<div class="monImage"
-										style="background-image: url('image/image1.jpg')"></div>
-									<div class="hover">
-										<p class="sub-title">Name Projet</p>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="detail">
-							<a href="modifierProjet" class="modifierProjet">Modifier
-								projet</a>
-						</div>
-					</div>
+					</s:iterator>
+					
 				</div>
 			</div>
 		</div>

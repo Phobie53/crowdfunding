@@ -3,12 +3,15 @@ package action;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.io.File;  
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -26,7 +29,7 @@ import service.ProjetService;
 import service.UtilisateurService;
 
 @Controller
-public class ProjetAction extends ActionSupport {
+public class ProjetAction extends ActionSupport implements ServletRequestAware{
 
 	private static final long serialVersionUID = 123025772L;
 
@@ -37,10 +40,18 @@ public class ProjetAction extends ActionSupport {
 
 	private Projet projet;
 	private List<Categorie> categorieTypes = new ArrayList<Categorie>();
+	private List<Projet> mesProjets = new ArrayList<Projet>();
 	private int idProjet;
 	private int montant;
 	private String commentaire;
 	private String url;
+	private Categorie categorie;
+	
+	 private File image;  
+	 private String imageFileName;  
+	 private String imageContentType; 
+	 private String filePath;
+	 private HttpServletRequest servletRequest;
 
 	@Autowired
 	private CategorieService categorieService;
@@ -81,12 +92,14 @@ public class ProjetAction extends ActionSupport {
 
 	public String mesProjets() {
 		logger.info("CHARGEMENT PAGE MES PROJETS");
+		mesProjets = projetService.getMesProjets(1);
 		return SUCCESS;
 	}
 
 	public String afficherFormCreation() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE CREATION");
 		categorieTypes = categorieService.listeCategorie();
+		
 		projet = new Projet();
 		return SUCCESS;
 	}
@@ -105,11 +118,30 @@ public class ProjetAction extends ActionSupport {
 	}
 
 	public String saveProjet() {
-
+		String filePath = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
+		logger.info("eeeeeeeeeeeiiiiiiiii" + filePath);
+		
 		if (projet != null) {
+			//logger.info(">>>>>>>>>>>>>>" + categorie);
+			logger.info(">>>>>>>>>>>>>>" + projet.getCategorie());
 			projet.setUtilisateur(utilisateurService.findById(1));
+			//projet.setCategorie(categorieService.findById(1));
+			try{
+
+				File file = new File(filePath, imageFileName);// Create file name  same as original
+		        FileUtils.copyFile(image, file); // Just copy temp file content tos this file		
+		        projet.setImage(filePath+imageFileName);
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+		            addActionError(e.getMessage());
+		            return INPUT;
+		 
+				}
 			projetService.saveProjet(projet);
+			
 		}
+				//logger.info(">>>>>>eeeeeeeeeee>>>>>>>>" );
 
 		return SUCCESS;
 	}
@@ -208,4 +240,66 @@ public class ProjetAction extends ActionSupport {
 	public String getUrl() {
 		return url;
 	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public List<Projet> getMesProjets() {
+		return mesProjets;
+	}
+
+	public void setMesProjets(List<Projet> mesProjets) {
+		this.mesProjets = mesProjets;
+	}
+
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
+	public String getImageContentType() {
+		return imageContentType;
+	}
+
+	public void setImageContentType(String imageContentType) {
+		this.imageContentType = imageContentType;
+	}
+
+	public HttpServletRequest getServletRequest() {
+		return servletRequest;
+	}
+
+	public void setServletRequest(HttpServletRequest servletRequest) {
+		this.servletRequest = servletRequest;
+	}
+	
+	
+	
+	
+	
+	
 }

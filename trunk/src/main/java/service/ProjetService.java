@@ -21,6 +21,8 @@ public interface ProjetService {
 	 */
 	public List<Projet> getDerniereProjet(int nombre);
 	
+	public List<Projet> getMesProjets(int utilisateurId);
+	
 	/**
 	 * Cette methode realise une recherche sur les différents projets de la BDD
 	 * @param recherche

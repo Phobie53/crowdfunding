@@ -131,7 +131,7 @@
             </div>
         </div>
         <div class="carte">
-            <a href="#" class="buttonCreationProjet">Créer son projet</a>
+            <a href="creationProjet" class="buttonCreationProjet">Créer son projet</a>
         </div>
         <div class="video">
             <video poster="image/video.png" onclick="this.play();" muted="muted">

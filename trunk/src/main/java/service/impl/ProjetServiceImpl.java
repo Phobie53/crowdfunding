@@ -39,6 +39,10 @@ public class ProjetServiceImpl implements ProjetService {
 		return projetDAO.getDerniereProjet(nombre);
 	}
 	
+	public List<Projet> getMesProjets(int utilisateurId){
+		return projetDAO.getMesProjets(utilisateurId);
+	}
+	
 	public List<Projet> recherche(String recherche, int categorie){
 		Categorie cat = categorieDAO.find((long) categorie);
 		return projetDAO.recherche(recherche, cat);
