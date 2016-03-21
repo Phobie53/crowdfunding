@@ -27,36 +27,32 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box account-form">
-				<form class="">
+	            <s:form theme="simple" action="modifierUtilisateur" cssClass="ng-pristine ng-valid" id="formConnexion" method="post">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Nom</label> <input type="text"
-							class="form-control" id="exampleInputEmail1" placeholder="Nom"
-							value="CaSS">
+						<label for="exampleInputEmail1">Nom</label> 
+						<s:textfield name="utilisateur.nom" label="Nom" placeholder="Nom" cssClass="form-control" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Prenom</label> <input type="text"
-							class="form-control" id="exampleInputEmail1" placeholder="Prenom"
-							value="Adrien">
+						<label for="exampleInputEmail1">Prenom</label>
+						<s:textfield name="utilisateur.prenom" label="Prenom" placeholder="Prénom" cssClass="form-control" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Email</label> <input type="text"
-							disabled="disabled" class="form-control" id="exampleInputEmail1"
-							placeholder="Email" value="girly49@hotmail.com">
+						<label for="exampleInputEmail1">Email</label>
+						<s:textfield name="utilisateur.email" label="Email" placeholder="Email" cssClass="form-control" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Changer mot de passe</label> <input
-							type="password" class="form-control" id="exampleInputEmail1"
-							placeholder="Password">
+						<label for="exampleInputEmail1">Changer mot de passe</label>
+						<s:textfield type="password" name="utilisateur.password" label="Password" placeholder="Mot de passe" cssClass="form-control" />
 					</div>
 
 					<div class="form-group">
 						<label for="exampleInputEmail1">Image</label>
 						<!-- GESTION EN JAVASCRIPT DE CETTE INPUT -->
-						<input type="hidden" class="form-control" id="inputImage"
-							placeholder="image">
+						<s:textfield type="hidden" id="inputImage" name="utilisateur.image" label="Image" cssClass="form-control" />
+
 						<ul class="listeImage">
 							<li class="selected"><img src="image/avatar/avatar1.png" /></li>
 							<li><img src="image/avatar/avatar2.png" /></li>
@@ -71,7 +67,7 @@
 						<input type="submit" value="Modifier" class="connexionButton">
 					</div>
 
-				</form>
+				</s:form>
 			</div>
 		</div>
 	</div>

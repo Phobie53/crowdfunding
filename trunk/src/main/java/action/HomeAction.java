@@ -18,20 +18,7 @@ import model.Utilisateur;
 import service.ProjetService;
 
 @Controller
-public class HomeAction extends ActionSupport implements RequestAware, SessionAware {
-	
-	protected Map session;
-	protected Map request;
-
-	@Override
-	public void setSession(Map<String, Object> arg0) {
-		this.session = session;
-	}
-
-	@Override
-	public void setRequest(Map<String, Object> arg0) {
-		this.request = request;
-	}
+public class HomeAction extends ActionSupport {
 
 	private static final String SUCCESS = "success";
 
@@ -46,8 +33,9 @@ public class HomeAction extends ActionSupport implements RequestAware, SessionAw
 	public String afficher() {
 		logger.info("CHARGEMENT PAGE HOME");
 
-		Map<String, Object> outMap = ActionContext.getContext().getSession();
-		logger.info(outMap.containsKey("user"));
+        Map session = ActionContext.getContext().getSession();
+        logger.info("SESSION HOME : " + session);
+		
 		lesProjets = projetService.getDerniereProjet(3);
 		
 		return SUCCESS;

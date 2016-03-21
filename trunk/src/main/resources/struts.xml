@@ -9,12 +9,25 @@
 	
 	<package name="default" namespace="/" extends="struts-default">
 
+    	<interceptors>	
+			<interceptor name="MyInterceptor" class="action.MyInterceptor"></interceptor>
+	        <interceptor-stack name="newStack">
+		     	<interceptor-ref name="MyInterceptor"/>
+				<interceptor-ref name="defaultStack" />
+	         </interceptor-stack>
+	    </interceptors>
+	    
 		<action name="home" class="homeAction" method="afficher">
+			<interceptor-ref name="newStack"/>
 			<result name="success">home.jsp</result>
 		</action>
 		
 		<action name="connexion" class="utilisateurAction" method="connexion">
 			<result name="success">connexion.jsp</result>
+		</action>
+		<action name="validerConnexion" class="utilisateurAction" method="validerConnexion">
+			<result name="success" type="redirect">home</result>
+			<result name="error">connexion.jsp</result>
 		</action>
 		
 		<action name="deconnexion" class="utilisateurAction" method="deconnexion">
@@ -25,12 +38,15 @@
 			<result name="success">inscription.jsp</result>
 		</action>
 		<action name="validerInscription" class="utilisateurAction" method="validerInscription">
-			<result name="success">home.jsp</result>
+			<result name="success" type="redirect">home</result>
 			<result name="error">inscription.jsp</result>
 		</action>
 		
 		<action name="monCompte" class="utilisateurAction" method="monCompte">
 			<result name="success">monCompte.jsp</result>
+		</action>
+		<action name="modifierUtilisateur" class="utilisateurAction" method="modifierUtilisateur">
+			<result name="success" type="redirect">monCompte</result>
 		</action>
 		
 		<action name="apropos" class="pageAction" method="apropos">

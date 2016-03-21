@@ -24,13 +24,14 @@ import model.Utilisateur;
 import service.UtilisateurService;
 
 @Controller
-public class UtilisateurAction extends ActionSupport implements RequestAware, SessionAware {
-	
-	private Utilisateur utilisateur;
-	
-	protected Map session;
-	protected Map request;
+public class UtilisateurAction extends ActionSupport implements SessionAware {
 
+	Map<String, Object> session;
+	private Utilisateur utilisateur;
+
+	private String mailConnexion;
+	private String passwordConnexion;
+	
 	@Autowired
 	private UtilisateurService utilisateurService;
 
@@ -55,21 +56,24 @@ public class UtilisateurAction extends ActionSupport implements RequestAware, Se
 		return SUCCESS;
 	}
 	
+	public String validerConnexion() {
+		Utilisateur user = utilisateurService.Connexion(mailConnexion, passwordConnexion);
+		if (user == null) {
+			return ERROR;
+		} else {
+			session.put("user", user);
+			return SUCCESS;
+		}
+	}
+	
 	public String validerInscription() {
 		logger.info("VALIDATION INSCRIPTION");
 		boolean isInscriptionReussie = false;
 		
 		if (verificationFormulaire() == null) {
 			isInscriptionReussie = utilisateurService.sauvegarderUtilisateur(utilisateur);
-			
-			//On ajoute en session l'objet utilisateur
-			Map<String, Object> inMap = new HashMap<String, Object>();
-			inMap.put("user", utilisateur);
-			inMap.put("username", utilisateur.getNom());
-			ActionContext.getContext().setSession(inMap);
-			//Pour récupérer l'objet en session
-			//Map<String, Object> outMap = ActionContext.getContext().getSession();
-			//logger.info(((Utilisateur) outMap.get("user")).getNom());
+			// Ajouter utilisateur Ã  la session
+			session.put("user", utilisateur);
 		} else {
 			if (verificationFormulaire() == "nom") {
 				logger.info("Nom incorrect");
@@ -100,17 +104,17 @@ public class UtilisateurAction extends ActionSupport implements RequestAware, Se
 		if (utilisateur.getNom().length() < 3) return "nom";
 		if (utilisateur.getNom().length() > 15) return "nom";
 		Matcher m = pNom.matcher(utilisateur.getNom());
-		if (m.find()) return "nom"; // Il y a un caractère spécial
+		if (m.find()) return "nom"; // Il y a un caractï¿½re spï¿½cial
 		
 		// ---------------------- PRENOM ---------------------- //
 		if (utilisateur.getPrenom().length() < 3) return "prenom";
 		if (utilisateur.getPrenom().length() > 15) return "prenom";
 		m = pNom.matcher(utilisateur.getPrenom());
-		if (m.find()) return "prenom"; // Il y a un caractère spécial
+		if (m.find()) return "prenom"; // Il y a un caractï¿½re spï¿½cial
 		
 		// ---------------------- MAIL ---------------------- //
 		m = pMail.matcher(utilisateur.getEmail());
-		if (!m.find()) return "mail"; // Il y a un caractère spécial
+		if (!m.find()) return "mail"; // Il y a un caractï¿½re spï¿½cial
 		
 		// ---------------------- PASSWORD ---------------------- //
 		if (utilisateur.getPassword().length() < 8) return "password";
@@ -121,6 +125,13 @@ public class UtilisateurAction extends ActionSupport implements RequestAware, Se
 	
 	public String monCompte() {
 		logger.info("CHARGEMENT PAGE MON COMPTE");
+		utilisateur = (Utilisateur) session.get("user");
+		return SUCCESS;
+	}
+	
+	public String modifierUtilisateur() {
+		logger.info("MODIFIER UTILISATEUR");
+		utilisateurService.sauvegarderUtilisateur(utilisateur);
 		return SUCCESS;
 	}
 	
@@ -139,14 +150,24 @@ public class UtilisateurAction extends ActionSupport implements RequestAware, Se
 	public void setCustomerService(final UtilisateurService utilisateurService) {
 		this.utilisateurService = utilisateurService;
 	}
-
-	@Override
-	public void setSession(Map<String, Object> arg0) {
-		this.session = session;
+	public String getMailConnexion() {
+		return mailConnexion;
 	}
 
+	public void setMailConnexion(String mailConnexion) {
+		this.mailConnexion = mailConnexion;
+	}
+
+	public String getPasswordConnexion() {
+		return passwordConnexion;
+	}
+
+	public void setPasswordConnexion(String passwordConnexion) {
+		this.passwordConnexion = passwordConnexion;
+	}
+	
 	@Override
-	public void setRequest(Map<String, Object> arg0) {
-		this.request = request;
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 }

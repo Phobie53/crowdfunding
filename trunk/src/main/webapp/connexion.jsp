@@ -23,20 +23,24 @@
                                 <h3>Connexion</h3>
                             </div>
                             <div class="account-form">
-                                <form class="ng-pristine ng-valid" id="formConnexion">
+                            
+                            
+	                            <s:form theme="simple" action="validerConnexion" cssClass="ng-pristine ng-valid" id="formConnexion" method="post">
                                     <div class="row">
                                         <div class="feild col-md-12">
-                                            <input type="text" placeholder="Mail" class="nameConnexion">
+											<s:textfield name="mailConnexion" label="mailConnexion" placeholder="Mail" cssClass="nameConnexion" />
                                         </div>
                                         <div class="feild col-md-12">
-                                            <input type="password" placeholder="Mot de passe">
+											<s:textfield type="password" name="passwordConnexion" label="passwordConnexion" placeholder="Password" cssClass="nameConnexion" />
                                         </div>
                                         <div class="feild col-md-12">
-                                            <input type="submit" value="Se Connecter" class="connexionButton">
+											<s:submit value="Se Connecter" cssClass="connexionButton" />
                                             <a href="inscription">Pas encore inscrit ?</a>
                                         </div>
                                     </div>
-                                </form>
+								</s:form>
+                                
+                                
                             </div>
                         </div>				
                     </div>
