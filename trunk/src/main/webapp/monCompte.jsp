@@ -54,12 +54,12 @@
 						<s:textfield type="hidden" id="inputImage" name="utilisateur.image" label="Image" cssClass="form-control" />
 
 						<ul class="listeImage">
-							<li class="selected"><img src="image/avatar/avatar1.png" /></li>
-							<li><img src="image/avatar/avatar2.png" /></li>
-							<li><img src="image/avatar/avatar3.png" /></li>
-							<li><img src="image/avatar/avatar4.png" /></li>
-							<li><img src="image/avatar/avatar5.png" /></li>
-							<li><img src="image/avatar/avatar6.png" /></li>
+							<li id="image/avatar/avatar1.png"><img src="image/avatar/avatar1.png" /></li>
+							<li id="image/avatar/avatar2.png"><img src="image/avatar/avatar2.png" /></li>
+							<li id="image/avatar/avatar3.png"><img src="image/avatar/avatar3.png" /></li>
+							<li id="image/avatar/avatar4.png"><img src="image/avatar/avatar4.png" /></li>
+							<li id="image/avatar/avatar5.png"><img src="image/avatar/avatar5.png" /></li>
+							<li id="image/avatar/avatar6.png"><img src="image/avatar/avatar6.png" /></li>
 						</ul>
 					</div>
 
@@ -75,6 +75,8 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script>
 		$(function() {
+			var id_li_to_check = $('#inputImage').val();
+			document.getElementById(id_li_to_check).className += " selected";
 
 			$('.listeImage li').click(function() {
 				$('.listeImage li').removeClass('selected');

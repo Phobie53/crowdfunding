@@ -47,6 +47,7 @@
 		</action>
 		<action name="modifierUtilisateur" class="utilisateurAction" method="modifierUtilisateur">
 			<result name="success" type="redirect">monCompte</result>
+			<result name="error" type="redirect">monCompte</result>
 		</action>
 		
 		<action name="apropos" class="pageAction" method="apropos">

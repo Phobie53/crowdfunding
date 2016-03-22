@@ -48,6 +48,8 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	
 	public String deconnexion() {
 		logger.info("CHARGEMENT PAGE DECONNEXION");
+		if (session.get("user") != null) 
+			session.remove("user");
 		return SUCCESS;
 	}
 	
@@ -126,13 +128,20 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	public String monCompte() {
 		logger.info("CHARGEMENT PAGE MON COMPTE");
 		utilisateur = (Utilisateur) session.get("user");
+		utilisateur.setPassword("");
 		return SUCCESS;
 	}
 	
 	public String modifierUtilisateur() {
 		logger.info("MODIFIER UTILISATEUR");
-		utilisateurService.sauvegarderUtilisateur(utilisateur);
-		return SUCCESS;
+		if (utilisateur.getPassword() != null && utilisateur.getPassword().length() > 3) {
+			utilisateurService.sauvegarderUtilisateur(utilisateur);
+			logger.info("MODIFIER UTILISATEUR SUCCESS");
+			return SUCCESS;
+		} else {
+			logger.info("MODIFIER UTILISATEUR ERROR");
+			return ERROR;
+		}
 	}
 	
 	public Utilisateur getUtilisateur() {

@@ -45,7 +45,7 @@
 										  <ul class="dropdown-menu">
 											<li><a href="monCompte"><i class="icon-settings"></i>Mon Compte</a></li>
 											<li><a href="#"><i class="icon-bag"></i>Mes Projets</a></li>
-											<li><a href="#"><i class="icon-logout"></i>Deconnexion</a></li>
+											<li><a href="deconnexion"><i class="icon-logout"></i>Deconnexion</a></li>
 										  </ul>
 										</div>
 									 </li>
