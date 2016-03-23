@@ -15,6 +15,10 @@ public interface ProjetDAO extends GenericDAO<Projet, Long> {
 	
 	public int nbElement();
 	
+	
+	public int getNbObjectifAtteint();
+	
+	
 	public List<Projet> recherche(String recherche, Categorie categorie);
 	
 	public List<Projet> getMesProjets(int utilisateurId);

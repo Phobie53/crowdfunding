@@ -23,25 +23,13 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="widget-title">
-							<h3>A Propos</h3>
+							<h3>Vous êtes sur la première plateforme de financement participatif dédiée aux associations</h3>
 						</div>
-						<div class="account-form">Et eodem impetu Domitianum
-							praecipitem per scalas itidem funibus constrinxerunt, eosque
-							coniunctos per ampla spatia civitatis acri raptavere discursu.
-							iamque artuum et membrorum divulsa conpage superscandentes
-							corpora mortuorum ad ultimam truncata deformitatem velut
-							exsaturati mox abiecerunt in flumen. Alii summum decus in
-							carruchis solito altioribus et ambitioso vestium cultu ponentes
-							sudant sub ponderibus lacernarum, quas in collis insertas
-							cingulis ipsis adnectunt nimia subtegminum tenuitate perflabiles,
-							expandentes eas crebris agitationibus <br><br>maximeque sinistra, ut
-							longiores fimbriae tunicaeque perspicue luceant varietate
-							liciorum effigiatae in species animalium multiformes. Nec vox
-							accusatoris ulla licet subditicii in his malorum quaerebatur
-							acervis ut saltem specie tenus crimina praescriptis legum
-							committerentur, quod aliquotiens <br><br>fecere principes saevi: sed
-							quicquid Caesaris implacabilitati sedisset, id velut fas iusque
-							perpensum confestim urgebatur impleri.</div>
+						<div class="account-form">
+							<p>Notre mission est d’offrir aux associations une solution de collecte accessible et adaptée. Notre plateforme est ouverte à toutes les associations déclarées en France.
+
+Nous mettons à disposition des associations une palette d’outils de financement pour les aider à faire du numérique un levier pour mobiliser leurs publics et développer leurs projets. </p>
+						</div>
 					</div>
 				</div>
 			</div>

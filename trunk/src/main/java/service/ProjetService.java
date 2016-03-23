@@ -13,7 +13,14 @@ public interface ProjetService {
 	 * @param projet 
 	 */
 	public void saveProjet(Projet projet);
+	
+	/**
+	 * Sauvegarde d'un projet modifier
+	 * @param projet
+	 */
 	public void modifieProjet (Projet projet);
+	
+	
 	/**
 	 * Cette methode retourne la liste des dernieres projets
 	 * @param nombre => nombre de projet à retourner
@@ -21,6 +28,11 @@ public interface ProjetService {
 	 */
 	public List<Projet> getDerniereProjet(int nombre);
 	
+	/**
+	 * Retourne la liste des projets d'un utilisateur
+	 * @param utilisateurId
+	 * @return
+	 */
 	public List<Projet> getMesProjets(int utilisateurId);
 	
 	/**
@@ -43,4 +55,10 @@ public interface ProjetService {
 	 * @return int 
 	 */
 	public int getNbElement();
+	
+	/**
+	 * Retourne nombre de projet avec l'objectif atteint
+	 * @return int
+	 */
+	public int getNbObjectifAtteint();
 }

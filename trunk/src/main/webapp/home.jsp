@@ -119,7 +119,6 @@
 														Objectif: <strong><s:property value="#projet.objectif" /> €</strong>
 													</span>
 												</div>
-												<p class="descriptioProjet"><s:property value="#projet.presentation.substring(0,150)" /> ...</p>
 											</div>
 										</div>
 									</s:iterator>

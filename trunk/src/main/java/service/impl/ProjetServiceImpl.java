@@ -59,4 +59,8 @@ public class ProjetServiceImpl implements ProjetService {
 	public int getNbElement(){
 		return projetDAO.nbElement();
 	}
+	
+	public int getNbObjectifAtteint(){
+		return projetDAO.getNbObjectifAtteint();
+	}
 }

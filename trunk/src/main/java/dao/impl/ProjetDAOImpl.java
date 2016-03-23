@@ -78,8 +78,14 @@ public class ProjetDAOImpl extends GenericDAOImpl<Projet, Long> implements Proje
 			}
 		}
 		listeProjet = (List<Projet>) query.list();
-
+		
 		return listeProjet;
+	}
+	
+	public int getNbObjectifAtteint(){
+		int nb = ((Long)this.getSession().createQuery("select count(*) from Projet p WHERE p.objectif <= (select SUM(d.montant) from Don d WHERE d.projet.projetId = p.projetId)")
+				.uniqueResult()).intValue();
+		return nb;
 	}
 
 	@Autowired

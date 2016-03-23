@@ -82,9 +82,9 @@
 			<div class="container">
 				<div class="col-md-8 col-sm-8 col-xs-12 description">
 					<img src="<s:property value="projet.image" />" />
-					<p>
-						<s:property value="projet.presentation" />
-					</p>
+					<div>
+						<s:property value="projet.presentation" escape="false" />
+					</div>
 					<div class="tabs">
 						<ul>
 							<li role="presentation" data-value="commentaire" class="active"><a

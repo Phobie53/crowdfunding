@@ -113,8 +113,8 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
 			return ERROR_SESSION;
 		}
-		
-		mesProjets = projetService.getMesProjets(1);
+		Utilisateur user = (Utilisateur) session.get("user");
+		mesProjets = projetService.getMesProjets(user.getUtilisateurId().intValue());
 		return SUCCESS;
 	}
 
@@ -183,7 +183,8 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		}
 		
 		//Save projet
-		
+
+		logger.info("*****************" + projet.getPresentation());
 		
 		projetService.saveProjet(projet);
 
@@ -223,6 +224,10 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	}
 
 	public String saveDon() {
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
+		Utilisateur user = (Utilisateur) session.get("user");
 		logger.info("CHARGEMENT PAGE SAVE DON");
 		if (idProjet != 0 && montant > 0) {
 			Projet projet = projetService.findById(idProjet);
@@ -231,7 +236,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 				newDon.setDate(new Date());
 				newDon.setMontant(montant);
 				newDon.setProjet(projet);
-				newDon.setUtilisateur(utilisateurService.findById(1));
+				newDon.setUtilisateur(user);
 				donService.saveDon(newDon);
 				url = "projet?id="+projet.getProjetId();
 				return SUCCESS;
@@ -241,6 +246,11 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	}
 
 	public String saveCommentaire() {
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
+		Utilisateur user = (Utilisateur) session.get("user");
+		
 		logger.info("CHARGEMENT PAGE SAVE COMMENTAIRE");
 		if (idProjet != 0 && commentaire != null) {
 			Projet projet = projetService.findById(idProjet);
@@ -249,7 +259,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 				newCommentaire.setDate(new Date());
 				newCommentaire.setDescription(commentaire);
 				newCommentaire.setProjet(projet);
-				newCommentaire.setUtilisateur(utilisateurService.findById(1));
+				newCommentaire.setUtilisateur(user);
 				commentaireService.saveCommentaire(newCommentaire);
 				url = "projet?id="+projet.getProjetId();
 			}
@@ -281,7 +291,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 
 	public String getDateEcart() {
 		if (projet != null) {
-			long diffInMillies = (new Date()).getTime() - projet.getDateFinCampagne().getTime();
+			long diffInMillies = projet.getDateFinCampagne().getTime() - (new Date()).getTime();
 			int nb = (int) (diffInMillies / (1000 * 60 * 60 * 24)) + 1;
 			if (nb > 0) {
 				return String.valueOf(nb);

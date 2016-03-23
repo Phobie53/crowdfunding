@@ -43,7 +43,7 @@
 						</div>
 						<div class="detail">
 						
-							<a href=""modifierProjet?id=<s:property value="#projet.projetId" />"" class="modifierProjet">Modifier
+							<a href="modifierProjet?id=<s:property value="#projet.projetId" />" class="modifierProjet">Modifier
 								projet</a>
 						</div>
 					</div>
