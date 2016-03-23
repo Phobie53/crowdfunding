@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.io.File;  
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,11 +28,13 @@ import model.Categorie;
 import model.Commentaire;
 import model.Don;
 import model.Projet;
+import model.Recompense;
 import model.Utilisateur;
 import service.CategorieService;
 import service.CommentaireService;
 import service.DonService;
 import service.ProjetService;
+import service.RecompenseService;
 import service.UtilisateurService;
 
 @Controller
@@ -57,6 +63,9 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	 private String imageContentType; 
 	 private String filePath;
 	 private HttpServletRequest servletRequest;
+	 
+	 private int categorieId;
+	 private String dateField;
 
 	@Autowired
 	private CategorieService categorieService;
@@ -72,6 +81,9 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 
 	@Autowired
 	private DonService donService;
+	
+	@Autowired
+	private RecompenseService recompenseService;
 
 	public String detailProjet() {
 		logger.info("CHARGEMENT PAGE DETAIL PROJET");
@@ -114,6 +126,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		categorieTypes = categorieService.listeCategorie();
 		
 		projet = new Projet();
+		image = null;
 		return SUCCESS;
 	}
 
@@ -126,11 +139,13 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
 				.get(ServletActionContext.HTTP_REQUEST);
 
-		final String idProjetString = request.getParameter("idProjet");
+		final String idProjetString = request.getParameter("id");
 		if (idProjetString != null) {
+			projet = projetService.findById(Integer.parseInt(idProjetString));
 			logger.info("id : " + idProjetString);
+			return SUCCESS;
 		}
-		return SUCCESS;
+		return ERROR;
 	}
 
 	public String saveProjet() {
@@ -138,30 +153,64 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 			return ERROR_SESSION;
 		}
 		
-		String filePath = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
-		logger.info("eeeeeeeeeeeiiiiiiiii" + filePath);
+		projet.setUtilisateur(utilisateurService.findById(1));
+		projet.setCategorie(categorieService.findById(categorieId));
 		
-		if (projet != null) {
-			//logger.info(">>>>>>>>>>>>>>" + categorie);
-			logger.info(">>>>>>>>>>>>>>" + projet.getCategorie());
-			projet.setUtilisateur(utilisateurService.findById(1));
-			//projet.setCategorie(categorieService.findById(1));
-			try{
-
-				File file = new File(filePath, imageFileName);// Create file name  same as original
-		        FileUtils.copyFile(image, file); // Just copy temp file content tos this file		
-		        projet.setImage(filePath+imageFileName);
-				}catch(Exception e)
-				{
-					e.printStackTrace();
-		            addActionError(e.getMessage());
-		            return INPUT;
-		 
-				}
-			projetService.saveProjet(projet);
-			
+		//GEstion de l'image
+		if (image != null) {
+			try {
+				String filePath = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
+				File file = new File(filePath, imageFileName);
+				FileUtils.copyFile(image, file);
+				;
+				projet.setImage("/crowdfunding/upload/" + imageFileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+				addActionError(e.getMessage());
+				return INPUT;
+			}
 		}
-				//logger.info(">>>>>>eeeeeeeeeee>>>>>>>>" );
+		
+		//Gestion de la date
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			String dateInString = dateField;
+			Date date = formatter.parse(dateInString);
+			logger.info("*****************Date:" + date.toString());
+			projet.setDateFinCampagne(date);
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		//Save projet
+		
+		
+		projetService.saveProjet(projet);
+
+		
+		//Gestion recompense
+		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
+				.get(ServletActionContext.HTTP_REQUEST);
+		Map<String, String[]> params = request.getParameterMap();
+		// REGEX
+		String pattern = "(recompense_montant_)([0-9]+)";
+		Pattern r = Pattern.compile(pattern);
+		for (Map.Entry<String, String[]> entry : params.entrySet()) {
+			String key = entry.getKey();
+
+			// On test la key
+			Matcher m = r.matcher(key);
+			if (m.find()) {
+				if (request.getParameter("recompense_description_" + m.group(2)) != null) {
+					Recompense rr = new Recompense();
+					rr.setDescription(request.getParameter("recompense_description_" + m.group(2)));
+					rr.setMontant(Integer.parseInt(request.getParameter("recompense_montant_" + m.group(2))));
+					rr.setProjet(projet);
+					recompenseService.save(rr);
+				}
+			}
+		}
 
 		return SUCCESS;
 	}
@@ -209,6 +258,12 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		return SUCCESS;
 	}
 
+	public String modifieProjet() {
+		logger.info("MODIFIER PROJET");
+		projetService.saveProjet(projet);
+		return SUCCESS;
+	}
+	
 	public List<Categorie> getCategorieTypes() {
 		return categorieTypes;
 	}
@@ -323,5 +378,23 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public int getCategorieId() {
+		return categorieId;
+	}
+
+	public void setCategorieId(int categorieId) {
+		this.categorieId = categorieId;
+	}
+
+	public String getDateField() {
+		return dateField;
+	}
+
+	public void setDateField(String dateField) {
+		this.dateField = dateField;
 	}	
+	
+	
 }

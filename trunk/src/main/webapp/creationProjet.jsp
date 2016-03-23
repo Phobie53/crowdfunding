@@ -38,7 +38,7 @@
 
 					<div class="form-group">
 						<label for="inpuDateFinCompagne">Date fin de la campagne</label> 
-						<s:textfield name="projet.dateFinCompagne" cssClass="form-control" id="inpuDateFinCompagne" label="DateFinCompagne" />
+						<s:textfield name="dateField" cssClass="form-control" autocomplete="off" id="inpuDateFinCompagne" label="DateFinCompagne" />
 					</div>
 
 					<div class="form-group">
@@ -55,11 +55,13 @@
 						<label for="exampleInputEmail1">Image</label> 
 						<s:file name="image" label="Image"/>
 					</div>
-<!-- 					<div class="form-group"> -->
-<!-- 						<label for="projetCategorie">Catégorie</label>  -->
-<%-- 						<s:select label="Categorie" list="categorieTypes" cssClass="form-control" listKey="categorieId" listValue="type" --%>
-<%-- 				           	name="categorie" />   --%>
-<!-- 					</div> -->
+					
+					<div class="form-group">
+						<label for="projetCategorie">Catégorie</label> 
+							<s:select label="categorieId" list="categorieTypes" cssClass="form-control" listKey="categorieId" listValue="type"
+				           	name="categorieId" />
+
+ 					</div> 
 					
 					
 					
@@ -81,7 +83,7 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script>
 		$(function() {
-			$( "#datepicker" ).datepicker({
+			$( "#inpuDateFinCompagne" ).datepicker({
 					inline: true,
 					showOtherMonths: true,
 					dateFormat: 'dd/mm/yy',

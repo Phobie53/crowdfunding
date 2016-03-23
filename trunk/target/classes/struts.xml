@@ -86,12 +86,14 @@
 		<action name="modifierProjet" class="projetAction" method="afficherFormModification">
 			<interceptor-ref name="newStack"/>
 			<result name="success">modificationProjet.jsp</result>
+			<result name="error" type="redirect">error404.jsp</result>
 			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		
 		<action name="saveProjet" class="projetAction" method="saveProjet">
 			<interceptor-ref name="newStack"/>
 			<result name="success" type="redirect">mesProjets</result>
+			<result name="input">creationProjet.jsp</result>
 			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		

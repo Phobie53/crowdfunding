@@ -3,16 +3,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TODO supply a title</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-	<link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<link
-		href='https://fonts.googleapis.com/css?family=Raleway|Roboto|Source+Sans+Pro:200'
-		rel='stylesheet' type='text/css'>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link
+	href='https://fonts.googleapis.com/css?family=Raleway|Roboto|Source+Sans+Pro:200'
+	rel='stylesheet' type='text/css'>
 </head>
 <body class="imageBackground">
 	<s:include value="/menu.jsp"></s:include>
@@ -23,37 +23,40 @@
 				<ul>
 					<li><a href="monCompte">Mon Compte</a></li>
 					<li class="selected"><a href="mesProjets">Mes Projets</a></li>
-					<li><a href="creationProjet">Création
-							projet</a></li>
+					<li><a href="creationProjet">Creation projet</a></li>
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box  account-form">
-				<form class="">
+				<s:form method="post" action="modifieProjet" cssClass=""
+					theme="simple" enctype="multipart/form-data">
 					<p class="titre">1 - Information sur le projet</p>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Nom du projet</label> <input
-							type="text" class="form-control" id="exampleInputEmail1">
+						<label for="inputNom">Nom du projet</label>
+						<s:textfield name="projet.nom" cssClass="form-control"
+							id="inputNom" label="Nom" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Date fin de la campagne</label> <input
-							type="text" class="form-control"
-							id="datepicker">
+						<label for="inpuDateFinCompagne">Date fin de la campagne</label>
+						<s:textfield name="projet.dateFinCompagne" cssClass="form-control"
+							id="inpuDateFinCompagne" label="DateFinCompagne" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Objectif (en euro)</label> <input
-							type="text" class="form-control datepicker"
-							id="exampleInputEmail1">
+						<label for="exampleObjectif">Objectif (en euro)</label>
+						<s:textfield name="projet.objectif"
+							cssClass="form-control datepicker" id="inpuObjectif"
+							label="Objectif" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Description</label>
-						<textarea></textarea>
+						<label for="parojetPresentation">Description</label>
+						<s:textarea name="projet.presentation" label="Presentation" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Image</label> <input type="file">
+						<label for="exampleInputEmail1">Image</label>
+						<s:file name="image" label="Image" />
 					</div>
 
 					<p class="titre">2 - Ajouter des récompenses</p>
@@ -61,11 +64,26 @@
 						<i class="icon-plus"></i> Ajouter une récompenses
 					</p>
 					<ul class="listeRecompense">
+					<s:set name="i" value="0" />
+						<s:iterator var="recompense" value="projet.recompenses">
+							<li><i class="icon-close"></i>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Montant (si montant
+										inférieur à la somme)</label> <input type="text" class="form-control"
+										value="<s:property value="%{#recompense.montant}"/>" name="recompense_montant_<s:property value="%{#i}"/>">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Description</label> <input
+										type="text" class="form-control"
+										value="<s:property value="%{#recompense.description}"/>" name="recompense_description_<s:property value="%{#i}"/>">
+								</div></li>
+								<s:set name="i" value="%{#i++}"/>
+						</s:iterator>
 					</ul>
 					<div class="feild center">
-						<input type="submit" value="Créer projet" class="connexionButton">
+						<s:submit value="Modifier le projet" cssClass="connexionButton" />
 					</div>
-				</form>
+				</s:form>
 			</div>
 		</div>
 	</div>
@@ -73,25 +91,31 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script>
 		$(function() {
-			$( "#datepicker" ).datepicker({
-				inline: true,
-				showOtherMonths: true,
-				dateFormat: 'dd/mm/yy',
-				altField: "#datepicker",
-			    closeText: 'Fermer',
-			    prevText: 'Précédent',
-			    nextText: 'Suivant',
-			    currentText: 'Aujourd\'hui',
-			    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-			    monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-			    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-			    dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-			    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-			    weekHeader: 'Sem.'
-			}).datepicker('widget').wrap('<div class="ll-skin-melon"/>');
-		
-		
-			
+			$("#inpuDateFinCompagne").datepicker(
+					{
+						inline : true,
+						showOtherMonths : true,
+						dateFormat : 'dd/mm/yy',
+						altField : "#datepicker",
+						closeText : 'Fermer',
+						prevText : 'Précédent',
+						nextText : 'Suivant',
+						currentText : 'Aujourd\'hui',
+						monthNames : [ 'Janvier', 'Février', 'Mars', 'Avril',
+								'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
+								'Octobre', 'Novembre', 'Décembre' ],
+						monthNamesShort : [ 'Janv.', 'Févr.', 'Mars', 'Avril',
+								'Mai', 'Juin', 'Juil.', 'Août', 'Sept.',
+								'Oct.', 'Nov.', 'Déc.' ],
+						dayNames : [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi',
+								'Jeudi', 'Vendredi', 'Samedi' ],
+						dayNamesShort : [ 'Dim.', 'Lun.', 'Mar.', 'Mer.',
+								'Jeu.', 'Ven.', 'Sam.' ],
+						dayNamesMin : [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+						weekHeader : 'Sem.'
+					}).datepicker('widget')
+					.wrap('<div class="ll-skin-melon"/>');
+
 			var nbElement = $('.listeRecompense li').length;
 			$('.addRecompense')
 					.click(

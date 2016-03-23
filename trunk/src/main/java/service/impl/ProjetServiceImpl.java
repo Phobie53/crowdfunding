@@ -35,6 +35,10 @@ public class ProjetServiceImpl implements ProjetService {
 		}
 	}
 	
+	public void modifieProjet (Projet projet){
+		projetDAO.save(projet);
+	}
+	
 	public List<Projet> getDerniereProjet(int nombre){
 		return projetDAO.getDerniereProjet(nombre);
 	}

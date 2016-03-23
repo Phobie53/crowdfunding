@@ -31,7 +31,7 @@
 				<s:iterator value="mesProjets" var="projet">
 					<div class="col-md-4 item">
 						<div class="image">
-							<a href="modifierProjet">
+							<a href="modifierProjet?id=<s:property value="#projet.projetId" />">
 								<div>
 									<div class="monImage"
 										style="background-image: url('<s:property value="#projet.image" />')"></div>
@@ -43,7 +43,7 @@
 						</div>
 						<div class="detail">
 						
-							<a href="modifierProjet" class="modifierProjet">Modifier
+							<a href=""modifierProjet?id=<s:property value="#projet.projetId" />"" class="modifierProjet">Modifier
 								projet</a>
 						</div>
 					</div>

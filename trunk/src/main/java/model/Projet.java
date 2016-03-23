@@ -34,7 +34,7 @@ public class Projet implements Serializable{
 	@Column(name = "nom")
 	private String nom;
 	
-	@Column(name = "image")
+	@Column(name="image", columnDefinition="TEXT")
 	private String image;
 	
 	@Column(name = "presentation")

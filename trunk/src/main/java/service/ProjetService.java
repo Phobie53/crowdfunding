@@ -13,7 +13,7 @@ public interface ProjetService {
 	 * @param projet 
 	 */
 	public void saveProjet(Projet projet);
-	
+	public void modifieProjet (Projet projet);
 	/**
 	 * Cette methode retourne la liste des dernieres projets
 	 * @param nombre => nombre de projet à retourner
