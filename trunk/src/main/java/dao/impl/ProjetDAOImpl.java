@@ -50,6 +50,11 @@ public class ProjetDAOImpl extends GenericDAOImpl<Projet, Long> implements Proje
 		return mesProjet;
 	}
 
+	public int nbElement(){
+		int nb = ((Long)this.getSession().createQuery("select count(*) from Projet").uniqueResult()).intValue();
+		return nb;
+	}
+
 	public List<Projet> recherche(String recherche, Categorie categorie) {
 		List<Projet> listeProjet = null;
 		String sql = "from Projet p where ";

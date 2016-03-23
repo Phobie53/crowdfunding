@@ -7,4 +7,9 @@ import model.Don;
 
 public interface DonDAO extends GenericDAO<Don, Long> {
 
+
+	public int getCount();
+
+	public int getMontantTotal();
+	
 }

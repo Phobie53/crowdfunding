@@ -1205,6 +1205,14 @@ body {
 	color: #EE161F;
 }
 
+.logoHome{
+	background: url('../image/mycause_white_green_logo.png') no-repeat;
+	background-size: 100%;
+	width: 200px;
+	height: 75px;
+	display:block;
+}
+
 @media ( max-width :992px) {
 	.projetBody .header .navbar .menu-default {
 		margin-top: 15px;

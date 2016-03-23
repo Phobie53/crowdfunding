@@ -8,7 +8,7 @@
 			<div class="row">
 				<div class="col-md-2">
 					<h1 class="logo">
-						<a href="home"> LOGO </a>
+						<a href="home" class="logoHome"></a>
 					</h1>
 				</div>
 				<div class="col-md-10 col-xs-12">

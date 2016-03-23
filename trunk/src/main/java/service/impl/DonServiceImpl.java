@@ -33,5 +33,13 @@ public class DonServiceImpl implements DonService {
 		
 		return res;
 	}
-
+	
+	
+	public int getCount() {
+		return donDAO.getCount();
+	}
+	
+	public int getMontantTotal() {
+		return donDAO.getMontantTotal();
+	}
 }

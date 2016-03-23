@@ -37,4 +37,10 @@ public interface ProjetService {
 	 * @return Projet (objet)
 	 */
 	public Projet findById(int id);
+	
+	/**
+	 * Retourne nombre d'element dans le projet
+	 * @return int 
+	 */
+	public int getNbElement();
 }

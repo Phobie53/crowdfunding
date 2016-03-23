@@ -10,4 +10,8 @@ import model.Utilisateur;
 public interface DonService {
 
 	public boolean saveDon(Don don);
+	
+	public int getCount();
+	
+	public int getMontantTotal();
 }

@@ -23,7 +23,7 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 item">
                             <div style="bottom:19px" class="element">
                                 <div class="info">
-                                    <div class="title">100 156 €</div>
+                                    <div class="title"><s:property value="montantDonTotal" /> €</div>
                                     <div class="desc">Don total</div>
                                 </div>
                                 <div class="dotted-line"></div>
@@ -35,7 +35,7 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 item">
                             <div style="bottom:18px" class="element">
                                 <div class="info">
-                                    <div class="title">432</div>
+                                    <div class="title"><s:property value="nbProjet" /></div>
                                     <div class="desc">Nombre de projet</div>
                                 </div>
                                 <div class="dotted-line"></div>
@@ -47,7 +47,7 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 item">
                             <div style="bottom:72px" class="element">
                                 <div class="info">
-                                    <div class="title">5 600</div>
+                                    <div class="title"><s:property value="nombreDon" /></div>
                                     <div class="desc">Contributeurs</div>
                                 </div>
                                 <div class="dotted-line"></div>
@@ -59,7 +59,7 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 item">
                             <div style="bottom:1px" class="element">
                                 <div class="info">
-                                    <div class="title">192</div>
+                                    <div class="title"><s:property value="objectifAtteint" /></div>
                                     <div class="desc">Nombre d'objectif atteint</div>
                                 </div>
                                 <div class="dotted-line"></div>
@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="container">
                     <div class="col-md-12 text">
-                        COCO est le premier site de collecte de fonds dédié aux associations. Simple et sécurisé, COCO permet à toutes les associations françaises de gérer leurs adhésions, leurs dons et leurs événements. Entièrement gratuite, notre plateforme reverse 100% des montants collectés aux associations.
+                        MY-CAUSE est le premier site de collecte de fonds dédié aux associations. Simple et sécurisé, MY-CAUSE permet à toutes les associations françaises de gérer leurs adhésions, leurs dons et leurs événements. Entièrement gratuite, notre plateforme reverse 100% des montants collectés aux associations.
                     </div>
                     <div class="projetPopulaireTitre">
                         <div class="col-md-12">

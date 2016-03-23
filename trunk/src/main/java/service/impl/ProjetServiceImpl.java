@@ -56,4 +56,7 @@ public class ProjetServiceImpl implements ProjetService {
 		return projetDAO.findById(id);
 	}
 
+	public int getNbElement(){
+		return projetDAO.nbElement();
+	}
 }
