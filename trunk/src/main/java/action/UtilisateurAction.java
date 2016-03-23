@@ -1,6 +1,8 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +22,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import dao.UtilisateurDAO;
+import model.Don;
+import model.Projet;
 import model.Utilisateur;
+import service.DonService;
+import service.ProjetService;
 import service.UtilisateurService;
 
 @Controller
@@ -31,9 +37,14 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 
 	private String mailConnexion;
 	private String passwordConnexion;
+	private Don don;
+	private List<Don> mesDons = new ArrayList<Don>();
 	
 	@Autowired
 	private UtilisateurService utilisateurService;
+
+	@Autowired
+	private DonService donService;
 
 	private static final long serialVersionUID = 123025772L;
 
@@ -64,6 +75,18 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		return SUCCESS;
 	}
 	
+	public String mesDons() {
+		logger.info("CHARGEMENT PAGE MES DONS");
+
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
+			return ERROR_SESSION;
+		} else {
+			utilisateur = (Utilisateur) session.get("user");
+			mesDons = donService.getMesDons(utilisateur.getUtilisateurId().intValue());
+			return SUCCESS;
+		}
+	}
+	
 	public String validerConnexion() {
 		Utilisateur user = utilisateurService.Connexion(mailConnexion, passwordConnexion);
 		if (user == null) {
@@ -74,17 +97,6 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		}
 	}
 	
-//	public void validateInscription() {
-//		logger.info("VALIDATE()");
-//		utilisateur = (Utilisateur) session.get("user");
-//        if (utilisateur.getNom().isEmpty()) {
-//                addFieldError("utilisateur.nom", "Username can't be blank");
-//        }
-//        if (utilisateur.getPrenom().isEmpty()) {
-//                addFieldError("utilisateur.prenom", "Prenom Can't be blank");
-//        }
-//	}
-	
 	public String validerInscription() {
 		logger.info("VALIDATION INSCRIPTION");
 		boolean isInscriptionReussie = false;
@@ -92,8 +104,9 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		if (verificationFormulaire() == true) {
 			utilisateur.setImage("image/avatar/avatar1.png");
 			isInscriptionReussie = utilisateurService.sauvegarderUtilisateur(utilisateur);
-			session.put("user", utilisateur); // Ajouter utilisateur à la session
+			session.put("user", utilisateur); // Ajouter utilisateur a la session
 		} else {
+			logger.info("--- INSCRIPTION => RETURN INPUT");
 			return INPUT;
 		}
 		
@@ -141,7 +154,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		}
 		if (prenom == true) {
 			logger.info("prenom incorrect");
-			addFieldError("utilisateur.nom", "Prénom obligatoire.");
+			addFieldError("utilisateur.nom", "PrÃ©nom obligatoire.");
 		} 
 		if (mail == true) {
 			logger.info("mail incorrect");
@@ -163,7 +176,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	public String monCompte() {
 		logger.info("CHARGEMENT PAGE MON COMPTE");
 
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connectÃ©
 			return ERROR_SESSION;
 		}
 		
@@ -219,5 +232,21 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public Don getDon() {
+		return don;
+	}
+
+	public void setDon(Don don) {
+		this.don = don;
+	}
+
+	public List<Don> getMesDons() {
+		return mesDons;
+	}
+
+	public void setMesDons(List<Don> mesDons) {
+		this.mesDons = mesDons;
 	}
 }

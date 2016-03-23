@@ -2,6 +2,7 @@ package service.impl;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import dao.DonDAO;
 import dao.UtilisateurDAO;
 import model.Don;
+import model.Projet;
 import model.Utilisateur;
 import service.DonService;
 
@@ -32,6 +34,10 @@ public class DonServiceImpl implements DonService {
 		}
 		
 		return res;
+	}
+	
+	public List<Don> getMesDons(int utilisateurId){
+		return donDAO.getMesDons(utilisateurId);
 	}
 	
 	
