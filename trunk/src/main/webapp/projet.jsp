@@ -89,7 +89,7 @@
 						<ul>
 							<li role="presentation" data-value="commentaire" class="active"><a
 								href="javascript:void(0);">Commentaire</a></li>
-								
+
 							<li role="presentation" data-value="contributeurs"><a
 								href="javascript:void(0);">Contributeurs</a></li>
 							<s:if test="getDateEcart() != 'Fini'">
@@ -150,8 +150,18 @@
 							<button class="ajouterCommentaire">Ajouter un
 								commentaire</button>
 						</div>
-						<div class="contributeurs" >
-						toto
+						<div class="contributeurs" style="display: none;">
+							<div>
+								<ul>
+									<s:iterator var="don" value="projet.dons">
+										<li>
+											<img src="<s:property value="#don.utilisateur.image" />" />
+											<span class="contri"><s:property value="#don.utilisateur.nom" /></span> 
+											<span class="contri"><s:property value="#don.montant" /> €</span>
+										</li>
+									</s:iterator>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -182,7 +192,6 @@
 							<s:iterator var="recompense" value="projet.recompenses">
 								<li class="color1">
 									<p class="euro">
-										<
 										<s:property value="#recompense.montant" />
 										€
 									</p>
@@ -208,13 +217,16 @@
 				<s:form theme="simple" action="saveCommentaire"
 					cssClass="form-horizontal" method="post">
 					<div class="modal-body">
-						<s:textarea label="Commentaire" name="commentaire" id="textareaCommentaire" />
+						<s:textarea label="Commentaire" name="commentaire"
+							id="textareaCommentaire" />
 					</div>
 					<div class="modal-footer">
 						<s:hidden name="idProjet" value="%{projet.projetId}" />
-						<button data-dismiss="modal" class="btn dark btn-outline" type="button">Fermer</button>
-						<s:submit value="Ajouter" cssClass="btn green"  id="ajouterCommentaire" />
-						
+						<button data-dismiss="modal" class="btn dark btn-outline"
+							type="button">Fermer</button>
+						<s:submit value="Ajouter" cssClass="btn green"
+							id="ajouterCommentaire" />
+
 					</div>
 				</s:form>
 
@@ -227,7 +239,7 @@
 	<script type="text/javascript" src="js/rangeSlider.js"></script>
 	<script>
 		$(function() {
-			$('.tabs ul li').click(function() {
+			$('.tabs > ul li').click(function() {
 				if (!$(this).hasClass('active')) {
 					$('.tabs > div').hide();
 					$('.tabs > div.' + $(this).attr('data-value')).show();

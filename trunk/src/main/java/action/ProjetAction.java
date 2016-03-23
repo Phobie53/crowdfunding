@@ -153,16 +153,15 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 			return ERROR_SESSION;
 		}
 		
-		projet.setUtilisateur(utilisateurService.findById(1));
+		projet.setUtilisateur((Utilisateur) session.get("user"));
 		projet.setCategorie(categorieService.findById(categorieId));
-		
+		projet.setStatut(1);
 		//GEstion de l'image
 		if (image != null) {
 			try {
 				String filePath = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
 				File file = new File(filePath, imageFileName);
 				FileUtils.copyFile(image, file);
-				;
 				projet.setImage("/crowdfunding/upload/" + imageFileName);
 			} catch (Exception e) {
 				e.printStackTrace();

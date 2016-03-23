@@ -909,6 +909,26 @@ body {
 	border: 0;
 }
 
+.contributeurs, .tabs .contributeurs ul{
+	background: #FFF;
+}
+.contributeurs li img{
+	width: 80px;
+	border: 4px solid #ececec;
+    border-radius: 50% !important;
+}
+.tabs .contributeurs ul li{
+	width: 100%;
+	border-bottom: 2px solid #DADADA;
+}
+.tabs .contributeurs ul li:hover{
+    color: #777;
+    cursor: normal;
+}
+.contributeurs li span{
+	margin-left: 30px;
+}
+
 .font-blue-madison {
 	color: #578ebe !important;
 }

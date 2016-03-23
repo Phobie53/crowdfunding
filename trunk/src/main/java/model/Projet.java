@@ -47,7 +47,7 @@ public class Projet implements Serializable{
 	private Integer objectif;
 	
 	@Column(name = "statut")
-	private String statut;
+	private int statut;
 	
 	@Column(name = "dateCreation")
 	private Date dateCreation;
@@ -158,11 +158,11 @@ public class Projet implements Serializable{
 		this.objectif = objectif;
 	}
 
-	public String getStatut() {
+	public int getStatut() {
 		return statut;
 	}
 
-	public void setStatut(String statut) {
+	public void setStatut(int statut) {
 		this.statut = statut;
 	}
 
@@ -185,5 +185,6 @@ public class Projet implements Serializable{
 	public void setRecompenses(List<Recompense> recompenses) {
 		this.recompenses = recompenses;
 	}
+
 
 }
