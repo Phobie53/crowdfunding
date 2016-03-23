@@ -45,6 +45,12 @@
 			<result name="input" type="redirect">inscription</result>
 		</action>
 		
+		
+		<action name="mesDons" class="utilisateurAction" method="mesDons">
+			<result name="success">mesDons.jsp</result>
+			<result name="error_session" type="redirect">home</result>
+		</action>
+		
 		<action name="monCompte" class="utilisateurAction" method="monCompte">
 			<result name="success">monCompte.jsp</result>
 			<result name="error_session" type="redirect">connexion</result>

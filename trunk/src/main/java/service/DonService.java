@@ -10,4 +10,6 @@ import model.Utilisateur;
 public interface DonService {
 
 	public boolean saveDon(Don don);
+	
+	public List<Don> getMesDons(int utilisateurId);
 }

@@ -23,6 +23,7 @@
 				<ul>
 					<li class="selected"><a href="monCompte">Mon Compte</a></li>
 					<li><a href="mesProjets">Mes Projets</a></li>
+					<li><a href="mesDons">Mes Dons</a></li>
 					<li><a href="creationProjet">Création projet</a></li>
 				</ul>
 			</div>

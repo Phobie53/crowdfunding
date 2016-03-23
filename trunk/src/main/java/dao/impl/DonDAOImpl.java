@@ -1,9 +1,12 @@
 package dao.impl;
 
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import model.Don;
+import model.Projet;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -25,4 +28,14 @@ public class DonDAOImpl extends GenericDAOImpl<Don, Long> implements DonDAO {
      public void setSessionFactory(SessionFactory sessionFactory) {
              super.setSessionFactory(sessionFactory);
      }
+		
+	@SuppressWarnings("unchecked")
+	public List<Don> getMesDons(int utilisateurId){
+			
+		List<Don> mesDons = null;
+		Query query = this.getSession().createQuery("from Don d where d.utilisateur.utilisateurId=:id")
+				.setLong("id", utilisateurId);
+		mesDons = (List<Don>) query.list();
+		return mesDons;
+	}
 }

@@ -26,6 +26,7 @@
 	                            <s:fielderror fieldName="utilisateur.nom"/>
 	                            <s:fielderror fieldName="utilisateur.prenom"/>
 	                            <s:fielderror fieldName="utilisateur.email"/>
+	                            <s:fielderror fieldName="utilisateur.password"/>
 	                            <s:form theme="simple" action="validerInscription" cssClass="ng-pristine ng-valid" id="formConnexion" method="post">
                                     <div class="row">
                                         <div class="feild col-md-12 col-xs-12 col-sm-12">
