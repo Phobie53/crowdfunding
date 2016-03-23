@@ -27,7 +27,7 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box  account-form">
-				<s:form method="post" action="modifieProjet" cssClass=""
+				<s:form method="post" action="modifierProjet" cssClass=""
 					theme="simple" enctype="multipart/form-data">
 					<p class="titre">1 - Information sur le projet</p>
 					<div class="form-group">

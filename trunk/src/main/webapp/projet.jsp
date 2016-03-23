@@ -89,6 +89,9 @@
 						<ul>
 							<li role="presentation" data-value="commentaire" class="active"><a
 								href="javascript:void(0);">Commentaire</a></li>
+								
+							<li role="presentation" data-value="contributeurs"><a
+								href="javascript:void(0);">Contributeurs</a></li>
 							<s:if test="getDateEcart() != 'Fini'">
 								<li role="presentation" data-value="faireDon"><a
 									href="javascript:void(0);">Faire un don</a></li>
@@ -146,6 +149,9 @@
 							</div>
 							<button class="ajouterCommentaire">Ajouter un
 								commentaire</button>
+						</div>
+						<div class="contributeurs" >
+						toto
 						</div>
 					</div>
 				</div>
