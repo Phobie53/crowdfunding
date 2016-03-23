@@ -97,6 +97,12 @@
 			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		
+		<action name="modifieProjet" class="projetAction" method="modifieProjet">
+			<interceptor-ref name="newStack"/>
+			<result name="success" type="redirect">mesProjets</result>
+			<result name="error_session" type="redirect">connexion</result>
+		</action>
+		
 		<action name="faireDon" class="projetAction" method="faireDon">
 			<interceptor-ref name="newStack"/>
 			<result name="success">faireDon.jsp</result>
