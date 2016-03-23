@@ -98,17 +98,17 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	public String mesProjets() {
 		logger.info("CHARGEMENT PAGE MES PROJETS");
 
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
+		} else {
+			mesProjets = projetService.getMesProjets(((Utilisateur) session.get("user")).getUtilisateurId().intValue());
+			return SUCCESS;
 		}
-		
-		mesProjets = projetService.getMesProjets(1);
-		return SUCCESS;
 	}
 
 	public String afficherFormCreation() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE CREATION");
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		categorieTypes = categorieService.listeCategorie();
@@ -119,7 +119,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 
 	public String afficherFormModification() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE MODIFICATION");
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 

@@ -29,27 +29,20 @@
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box projetPopulaireTitre">
 				<div class="boxItems">
-				<s:iterator value="mesDons" var="don">
-					<div class="col-md-4 item">
-						<div class="image">
-							<a href="modifierProjet">
-								<div>
-									<div class="monImage"
-										style="background-image: url('<s:property value="#projet.image" />')"></div>
-									<div class="hover">
-										<p class="sub-title"><s:property value="#projet.nom" /></p>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="detail">
-						
-							<a href="modifierProjet" class="modifierProjet">Modifier
-								projet</a>
-						</div>
+					<div class="row">
+						<div class="col-md-3"><strong>Nom</strong></div>
+						<div class="col-md-3"><strong>Montant</strong></div>
+						<div class="col-md-3"><strong>Date</strong></div>
 					</div>
+					<s:iterator value="mesDons" var="don">
+						<a href="projet?id=<s:property value="#don.projet.projetId" />">
+							<div class="row">
+								<div class="col-md-3"><s:property value="#don.projet.nom" /></div>
+								<div class="col-md-3"><s:property value="#don.montant" />€</div>
+								<div class="col-md-3"><s:property value="#don.date" /></div>
+							</div>
+						</a>
 					</s:iterator>
-					
 				</div>
 			</div>
 		</div>

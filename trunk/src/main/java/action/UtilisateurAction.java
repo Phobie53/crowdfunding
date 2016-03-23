@@ -37,6 +37,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 
 	private String mailConnexion;
 	private String passwordConnexion;
+	private Don don;
 	private List<Don> mesDons = new ArrayList<Don>();
 	
 	@Autowired
@@ -76,16 +77,14 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	
 	public String mesDons() {
 		logger.info("CHARGEMENT PAGE MES DONS");
-		Utilisateur utilisateur = null;
 
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		} else {
 			utilisateur = (Utilisateur) session.get("user");
+			mesDons = donService.getMesDons(utilisateur.getUtilisateurId().intValue());
+			return SUCCESS;
 		}
-		
-		mesDons = donService.getMesDons(utilisateur.getUtilisateurId().intValue());
-		return SUCCESS;
 	}
 	
 	public String validerConnexion() {
@@ -233,5 +232,21 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public Don getDon() {
+		return don;
+	}
+
+	public void setDon(Don don) {
+		this.don = don;
+	}
+
+	public List<Don> getMesDons() {
+		return mesDons;
+	}
+
+	public void setMesDons(List<Don> mesDons) {
+		this.mesDons = mesDons;
 	}
 }
