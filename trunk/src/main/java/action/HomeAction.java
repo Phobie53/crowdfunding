@@ -56,6 +56,7 @@ public class HomeAction extends ActionSupport {
         nombreDon = donService.getCount();
         
         //nombre d'objectif atteint
+        objectifAtteint = projetService.getNbObjectifAtteint();
         
 		
 		lesProjets = projetService.getDerniereProjet(3);

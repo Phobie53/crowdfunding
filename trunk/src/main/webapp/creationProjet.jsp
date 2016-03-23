@@ -10,6 +10,22 @@
 	<link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
 	<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
 	<link rel="stylesheet" href="css/datepicker.css" type="text/css" />
+	<link rel="stylesheet" href="css/froala_editor.css">
+	<link rel="stylesheet" href="css/froala_style.css">
+	<link rel="stylesheet" href="css/plugins/code_view.css">
+	<link rel="stylesheet" href="css/plugins/colors.css">
+	<link rel="stylesheet" href="css/plugins/emoticons.css">
+	<link rel="stylesheet" href="css/plugins/image_manager.css">
+	<link rel="stylesheet" href="css/plugins/image.css">
+	<link rel="stylesheet" href="css/plugins/line_breaker.css">
+	<link rel="stylesheet" href="css/plugins/quick_insert.css">
+	<link rel="stylesheet" href="css/plugins/table.css">
+	<link rel="stylesheet" href="css/plugins/file.css">
+	<link rel="stylesheet" href="css/plugins/char_counter.css">
+	<link rel="stylesheet" href="css/plugins/video.css">
+	<link rel="stylesheet" href="css/plugins/emoticons.css">
+	<link rel="stylesheet" href="css/plugins/fullscreen.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	<link
 		href='https://fonts.googleapis.com/css?family=Raleway|Roboto|Source+Sans+Pro:200'
@@ -48,7 +64,7 @@
 
 					<div class="form-group">
 						<label for="parojetPresentation">Description</label>
-						<s:textarea name="projet.presentation" label="Presentation" />
+						<s:textarea cssClass="boxEditionDescription" name="projet.presentation" label="Presentation" />
 					</div>
 				
 					<div class="form-group">
@@ -62,8 +78,6 @@
 				           	name="categorieId" />
 
  					</div> 
-					
-					
 					
 					<p class="titre">2 - Ajouter des récompenses</p>
 					<p class="addRecompense">
@@ -81,6 +95,34 @@
 	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.datepicker.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/froala_editor.min.js"></script>
+	<script type="text/javascript" src="js/plugins/align.min.js"></script>
+	<script type="text/javascript" src="js/plugins/code_beautifier.min.js"></script>
+	<script type="text/javascript" src="js/plugins/code_view.min.js"></script>
+	<script type="text/javascript" src="js/plugins/colors.min.js"></script>
+	<script type="text/javascript" src="js/plugins/emoticons.min.js"></script>
+	<script type="text/javascript" src="js/plugins/draggable.min.js"></script>
+	<script type="text/javascript" src="js/plugins/font_size.min.js"></script>
+	<script type="text/javascript" src="js/plugins/font_family.min.js"></script>
+	<script type="text/javascript" src="js/plugins/image.min.js"></script>
+	<script type="text/javascript" src="js/plugins/image_manager.min.js"></script>
+	<script type="text/javascript" src="js/plugins/line_breaker.min.js"></script>
+	<script type="text/javascript" src="js/plugins/quick_insert.min.js"></script>
+	<script type="text/javascript" src="js/plugins/link.min.js"></script>
+	<script type="text/javascript" src="js/plugins/lists.min.js"></script>
+	<script type="text/javascript" src="js/plugins/paragraph_format.min.js"></script>
+	<script type="text/javascript" src="js/plugins/paragraph_style.min.js"></script>
+	<script type="text/javascript" src="js/plugins/video.min.js"></script>
+	<script type="text/javascript" src="js/plugins/table.min.js"></script>
+	<script type="text/javascript" src="js/plugins/url.min.js"></script>
+	<script type="text/javascript" src="js/plugins/emoticons.min.js"></script>
+	<script type="text/javascript" src="js/plugins/file.min.js"></script>
+	<script type="text/javascript" src="js/plugins/entities.min.js"></script>
+	<script type="text/javascript" src="js/plugins/char_counter.min.js"></script>
+	<script type="text/javascript" src="js/plugins/inline_style.min.js"></script>
+	<script type="text/javascript" src="js/plugins/save.min.js"></script>
+	<script type="text/javascript" src="js/plugins/fullscreen.min.js"></script>
+	<script type="text/javascript" src="js/languages/fr.js"></script>
 	<script>
 		$(function() {
 			$( "#inpuDateFinCompagne" ).datepicker({
@@ -121,7 +163,12 @@
 			$('.listeRecompense').on('click', '.icon-close', function() {
 				$(this).parent().remove();
 			});
-
+	
+			$('.boxEditionDescription').froalaEditor({
+		        toolbarInline: true,
+		        language: 'fr',
+		        toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', 'emoticons', '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
+		     });
 		});
 	</script>
 </body>
