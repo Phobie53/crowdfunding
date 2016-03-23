@@ -3,6 +3,7 @@ package action;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.io.File;  
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -22,6 +24,7 @@ import model.Categorie;
 import model.Commentaire;
 import model.Don;
 import model.Projet;
+import model.Utilisateur;
 import service.CategorieService;
 import service.CommentaireService;
 import service.DonService;
@@ -29,15 +32,17 @@ import service.ProjetService;
 import service.UtilisateurService;
 
 @Controller
-public class ProjetAction extends ActionSupport implements ServletRequestAware{
+public class ProjetAction extends ActionSupport implements ServletRequestAware, SessionAware {
 
 	private static final long serialVersionUID = 123025772L;
 
 	private static final String SUCCESS = "success";
 	private static final String ERROR = "error";
+	private static final String ERROR_SESSION = "error_session";
 
 	private static final Logger logger = Logger.getLogger(ProjetAction.class);
 
+	private Map<String, Object> session;
 	private Projet projet;
 	private List<Categorie> categorieTypes = new ArrayList<Categorie>();
 	private List<Projet> mesProjets = new ArrayList<Projet>();
@@ -92,12 +97,20 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware{
 
 	public String mesProjets() {
 		logger.info("CHARGEMENT PAGE MES PROJETS");
+
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
+		
 		mesProjets = projetService.getMesProjets(1);
 		return SUCCESS;
 	}
 
 	public String afficherFormCreation() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE CREATION");
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
 		categorieTypes = categorieService.listeCategorie();
 		
 		projet = new Projet();
@@ -106,6 +119,9 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware{
 
 	public String afficherFormModification() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE MODIFICATION");
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
 
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
 				.get(ServletActionContext.HTTP_REQUEST);
@@ -118,6 +134,10 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware{
 	}
 
 	public String saveProjet() {
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
+		
 		String filePath = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
 		logger.info("eeeeeeeeeeeiiiiiiiii" + filePath);
 		
@@ -148,6 +168,9 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware{
 
 	public String faireDon() {
 		logger.info("CHARGEMENT PAGE FAIRE DON");
+		if (session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
 		return SUCCESS;
 	}
 
@@ -296,10 +319,9 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware{
 	public void setServletRequest(HttpServletRequest servletRequest) {
 		this.servletRequest = servletRequest;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}	
 }

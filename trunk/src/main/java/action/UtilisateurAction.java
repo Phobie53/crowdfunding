@@ -26,7 +26,7 @@ import service.UtilisateurService;
 @Controller
 public class UtilisateurAction extends ActionSupport implements SessionAware {
 
-	Map<String, Object> session;
+	private Map<String, Object> session;
 	private Utilisateur utilisateur;
 
 	private String mailConnexion;
@@ -38,6 +38,8 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 123025772L;
 
 	private static final String SUCCESS = "success";
+	private static final String ERROR_SESSION = "error_session";
+	private static final String INPUT = "input";
 
 	private static final Logger logger = Logger.getLogger(UtilisateurAction.class);
 	
@@ -55,6 +57,10 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	
 	public String inscription() {
 		logger.info("CHARGEMENT PAGE INSCRIPTION");
+		if ((Utilisateur) session.get("user") != null) { // Si l'utilisateur est connecte
+			return ERROR_SESSION;
+		}
+		
 		return SUCCESS;
 	}
 	
@@ -68,24 +74,27 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		}
 	}
 	
+//	public void validateInscription() {
+//		logger.info("VALIDATE()");
+//		utilisateur = (Utilisateur) session.get("user");
+//        if (utilisateur.getNom().isEmpty()) {
+//                addFieldError("utilisateur.nom", "Username can't be blank");
+//        }
+//        if (utilisateur.getPrenom().isEmpty()) {
+//                addFieldError("utilisateur.prenom", "Prenom Can't be blank");
+//        }
+//	}
+	
 	public String validerInscription() {
 		logger.info("VALIDATION INSCRIPTION");
 		boolean isInscriptionReussie = false;
 		
-		if (verificationFormulaire() == null) {
+		if (verificationFormulaire() == true) {
+			utilisateur.setImage("image/avatar/avatar1.png");
 			isInscriptionReussie = utilisateurService.sauvegarderUtilisateur(utilisateur);
-			// Ajouter utilisateur à la session
-			session.put("user", utilisateur);
+			session.put("user", utilisateur); // Ajouter utilisateur à la session
 		} else {
-			if (verificationFormulaire() == "nom") {
-				logger.info("Nom incorrect");
-			} else if (verificationFormulaire() == "prenom") {
-				logger.info("prenom incorrect");
-			} else if (verificationFormulaire() == "mail") {
-				logger.info("mail incorrect");
-			} else if (verificationFormulaire() == "password") {
-				logger.info("password incorrect");
-			}
+			return INPUT;
 		}
 		
 		if (isInscriptionReussie) {
@@ -97,36 +106,67 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		}
 	}
 	
-	public String verificationFormulaire() {		
+	public boolean verificationFormulaire() {		
 		logger.info("VERIFICATION FORMULAIRE");
 		Pattern pNom = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
 		Pattern pMail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+		boolean nom 	 = false;
+		boolean prenom 	 = false;
+		boolean mail 	 = false;
+		boolean password = false;
 		
 		// ---------------------- NOM ---------------------- //
-		if (utilisateur.getNom().length() < 3) return "nom";
-		if (utilisateur.getNom().length() > 15) return "nom";
+		if (utilisateur.getNom().length() < 3) nom = true;
+		if (utilisateur.getNom().length() > 15) nom = true;
 		Matcher m = pNom.matcher(utilisateur.getNom());
-		if (m.find()) return "nom"; // Il y a un caract�re sp�cial
+		if (m.find()) nom = true; // Il y a un caractere special
 		
 		// ---------------------- PRENOM ---------------------- //
-		if (utilisateur.getPrenom().length() < 3) return "prenom";
-		if (utilisateur.getPrenom().length() > 15) return "prenom";
+		if (utilisateur.getPrenom().length() < 3) prenom = true;
+		if (utilisateur.getPrenom().length() > 15) prenom = true;
 		m = pNom.matcher(utilisateur.getPrenom());
-		if (m.find()) return "prenom"; // Il y a un caract�re sp�cial
+		if (m.find()) prenom = true; // Il y a un caractere special
 		
 		// ---------------------- MAIL ---------------------- //
 		m = pMail.matcher(utilisateur.getEmail());
-		if (!m.find()) return "mail"; // Il y a un caract�re sp�cial
+		if (!m.find()) mail = true; // Il y a un caractere special
 		
 		// ---------------------- PASSWORD ---------------------- //
-		if (utilisateur.getPassword().length() < 8) return "password";
-		if (utilisateur.getPassword().length() > 20) return "password";
+		if (utilisateur.getPassword().length() < 8) password = true;
+		if (utilisateur.getPassword().length() > 20) password = true;
 		
-		return null;
+		if (nom == true) {
+			logger.info("Nom incorrect");
+			addFieldError("utilisateur.nom", "Nom obligatoire.");
+		}
+		if (prenom == true) {
+			logger.info("prenom incorrect");
+			addFieldError("utilisateur.nom", "Prénom obligatoire.");
+		} 
+		if (mail == true) {
+			logger.info("mail incorrect");
+			addFieldError("utilisateur.nom", "Email obligatoire.");
+		}
+		if (password == true) {
+			logger.info("password incorrect");
+			addFieldError("utilisateur.nom", "Mot de passe obligatoire.");
+		}
+		
+		if(nom || prenom || mail || password ){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 	
 	public String monCompte() {
 		logger.info("CHARGEMENT PAGE MON COMPTE");
+
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
+		
 		utilisateur = (Utilisateur) session.get("user");
 		utilisateur.setPassword("");
 		return SUCCESS;
@@ -159,6 +199,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	public void setCustomerService(final UtilisateurService utilisateurService) {
 		this.utilisateurService = utilisateurService;
 	}
+	
 	public String getMailConnexion() {
 		return mailConnexion;
 	}

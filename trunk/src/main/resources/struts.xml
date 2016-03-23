@@ -36,14 +36,18 @@
 		
 		<action name="inscription" class="utilisateurAction" method="inscription">
 			<result name="success">inscription.jsp</result>
+			<result name="error_session" type="redirect">home</result>
+			<result name="input">inscription.jsp</result>
 		</action>
 		<action name="validerInscription" class="utilisateurAction" method="validerInscription">
 			<result name="success" type="redirect">home</result>
-			<result name="error">inscription.jsp</result>
+			<result name="error" type="redirect">inscription</result>
+			<result name="input" type="redirect">inscription</result>
 		</action>
 		
 		<action name="monCompte" class="utilisateurAction" method="monCompte">
 			<result name="success">monCompte.jsp</result>
+			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		<action name="modifierUtilisateur" class="utilisateurAction" method="modifierUtilisateur">
 			<result name="success" type="redirect">monCompte</result>
@@ -68,23 +72,33 @@
 		</action>
 		
 		<action name="mesProjets" class="projetAction" method="mesProjets">
+			<interceptor-ref name="newStack"/>
 			<result name="success">mesProjets.jsp</result>
+			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		
 		<action name="creationProjet" class="projetAction" method="afficherFormCreation">
+			<interceptor-ref name="newStack"/>
 			<result name="success">creationProjet.jsp</result>
+			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		
 		<action name="modifierProjet" class="projetAction" method="afficherFormModification">
+			<interceptor-ref name="newStack"/>
 			<result name="success">modificationProjet.jsp</result>
+			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		
 		<action name="saveProjet" class="projetAction" method="saveProjet">
+			<interceptor-ref name="newStack"/>
 			<result name="success" type="redirect">mesProjets</result>
+			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		
 		<action name="faireDon" class="projetAction" method="faireDon">
+			<interceptor-ref name="newStack"/>
 			<result name="success">faireDon.jsp</result>
+			<result name="error_session" type="redirect">connexion</result>
 		</action>
 		
 		<action name="saveDon" class="projetAction" method="saveDon">

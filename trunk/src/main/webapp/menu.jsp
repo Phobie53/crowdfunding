@@ -31,10 +31,6 @@
 								<s:if test="%{#pageCurrent == 'apropos'}"><li class="selected"></s:if><s:else><li></s:else>
 								<a href="apropos"><strong>A propos</strong></a></li>
 								
-								<s:if test="%{#pageCurrent == 'contact'}"><li class="selected"></s:if><s:else><li></s:else>
-								<a href="contact"><strong>Contact</strong></a></li>
-								
-								
 	
 								<s:if test="%{#session.user != null}">
 									<li>
