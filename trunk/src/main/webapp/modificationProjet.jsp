@@ -46,7 +46,7 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box  account-form">
-				<s:form method="post" action="modifierProjet" cssClass=""
+				<s:form method="post" action="saveProjet" cssClass=""
 					theme="simple" enctype="multipart/form-data">
 					<p class="titre">1 - Information sur le projet</p>
 					<div class="form-group">
@@ -57,8 +57,9 @@
 
 					<div class="form-group">
 						<label for="inpuDateFinCompagne">Date fin de la campagne<span class="obligatoireText">*</span></label>
-						<s:textfield name="projet.dateFinCompagne" cssClass="form-control"
-							id="inpuDateFinCompagne" label="DateFinCompagne" />
+						
+						<s:textfield name="dateField" cssClass="form-control"
+							id="inpuDateFinCompagne" label="DateFinCompagne" value="%{dateField}" autocomplete="off" />
 					</div>
 
 					<div class="form-group">
@@ -95,17 +96,18 @@
 								<div class="form-group">
 									<label for="exampleInputEmail1">Montant (si montant
 										inférieur à la somme)</label> <input type="text" class="form-control"
-										value="<s:property value="%{#recompense.montant}"/>" name="recompense_montant_<s:property value="%{#i}"/>">
+										value="<s:property value="%{#recompense.montant}"/>" name="recompense_montant_<s:property value="#i"/>">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputEmail1">Description</label> <input
 										type="text" class="form-control"
-										value="<s:property value="%{#recompense.description}"/>" name="recompense_description_<s:property value="%{#i}"/>">
+										value="<s:property value="%{#recompense.description}"/>" name="recompense_description_<s:property value="#i"/>">
 								</div></li>
-								<s:set name="i" value="%{#i++}"/>
+								<s:set name="i" value="%{#i + 1}"/>
 						</s:iterator>
 					</ul>
 					<div class="feild center">
+						<s:hidden name="idProjet" value="%{projet.projetId}" />
 						<s:submit value="Modifier le projet" cssClass="connexionButton" />
 					</div>
 				</s:form>

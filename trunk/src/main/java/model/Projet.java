@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 
 @Entity
 @Table(name = "Projet")
@@ -63,7 +65,13 @@ public class Projet implements Serializable{
 	@OneToMany(mappedBy = "projet", cascade = CascadeType.ALL , orphanRemoval = true, fetch = FetchType.EAGER)  
     private List<Commentaire> commentaires;
 	
-	@OneToMany(mappedBy = "projet", cascade = CascadeType.ALL , orphanRemoval = true, fetch = FetchType.EAGER) 
+	@OneToMany(mappedBy = "projet", cascade = {CascadeType.ALL} , orphanRemoval = true, fetch = FetchType.EAGER) 
+	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+		org.hibernate.annotations.CascadeType.DELETE,
+		org.hibernate.annotations.CascadeType.MERGE,
+		org.hibernate.annotations.CascadeType.PERSIST,
+		org.hibernate.annotations.CascadeType.DELETE_ORPHAN
+		})
 	private List<Recompense> recompenses;
 
 	@OneToMany(mappedBy = "projet", cascade = CascadeType.ALL , orphanRemoval = true, fetch = FetchType.EAGER) 
@@ -127,6 +135,9 @@ public class Projet implements Serializable{
 	}
 
 	public String getImage() {
+		if(image==null){
+			return "image/mycause.png";
+		}
 		return image;
 	}
 

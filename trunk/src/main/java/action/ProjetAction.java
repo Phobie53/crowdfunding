@@ -75,7 +75,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 
 	@Autowired
 	private ProjetService projetService;
-
+	
 	@Autowired
 	private UtilisateurService utilisateurService;
 
@@ -135,7 +135,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
 			return ERROR_SESSION;
 		}
-
+		
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
 				.get(ServletActionContext.HTTP_REQUEST);
 
@@ -143,6 +143,11 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		if (idProjetString != null) {
 			projet = projetService.findById(Integer.parseInt(idProjetString));
 			logger.info("id : " + idProjetString);
+			categorieTypes = categorieService.listeCategorie();
+			
+			//Gestion de la date
+
+			
 			return SUCCESS;
 		}
 		return ERROR;
@@ -152,13 +157,32 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
 			return ERROR_SESSION;
 		}
+		
+		if(idProjet > 0){
+			logger.info("ID : projet => " + idProjet);
+			projet = projetService.findById(idProjet);
+		}
+		
+		//Gestion de la date
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = formatter.parse(dateField);
+			logger.info("*****************Date:" + date.toString());
+			projet.setDateFinCampagne(date);
+
+		} catch (ParseException e) {
+			logger.info("ERROR");
+		}
+				
+		//Verifier le formulaire		
 		if (verificationFormulaire() == false) {
 			return INPUT;
 		}
 		projet.setUtilisateur((Utilisateur) session.get("user"));
 		projet.setCategorie(categorieService.findById(categorieId));
 		projet.setStatut(1);
-		//GEstion de l'image
+		
+		//Gestion de l'image
 		if (image != null) {
 			try {
 				String filePath = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
@@ -172,30 +196,20 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 			}
 		}
 		
-		//Gestion de la date
-		try {
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-			String dateInString = dateField;
-			Date date = formatter.parse(dateInString);
-			logger.info("*****************Date:" + date.toString());
-			projet.setDateFinCampagne(date);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		//Save projet
-
-		logger.info("*****************" + projet.getPresentation());
-		
-		projetService.saveProjet(projet);
-
-		
 		//Gestion recompense
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
 				.get(ServletActionContext.HTTP_REQUEST);
 		Map<String, String[]> params = request.getParameterMap();
-		// REGEX
+		
+	
+		
+		//Save projet
+		projetService.saveProjet(projet);
+
+		//Suppression des recompenses pour gerer le plus facilement les comflits
+		recompenseService.deleteByProjet(projet);
+		
+		//NEW RECOMPENSE
 		String pattern = "(recompense_montant_)([0-9]+)";
 		Pattern r = Pattern.compile(pattern);
 		for (Map.Entry<String, String[]> entry : params.entrySet()) {
@@ -213,6 +227,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 				}
 			}
 		}
+		
 
 		return SUCCESS;
 	}
@@ -223,10 +238,10 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		boolean nom 	 = false;
 		boolean date	 = false;
 		boolean objectif = false;
-	
+		
 		if (projet.getNom().equals("")) nom = true;
-		if (projet.getDateFinCampagne().equals("")) date = true;
-		if (projet.getObjectif()== null) objectif = true;
+		if (projet.getDateFinCampagne() == null) date = true;
+		if (projet.getObjectif() == null) objectif = true;
 			
 		if (nom == true) {
 			logger.info("Nom vide");
@@ -296,18 +311,6 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 				url = "projet?id="+projet.getProjetId();
 			}
 		}
-		return SUCCESS;
-	}
-
-	public String modifieProjet() {	
-		logger.info("MODIFIER PROJET");
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
-			return ERROR_SESSION;
-		}
-		if (verificationFormulaire() == false) {
-			return INPUT;
-		}
-		projetService.saveProjet(projet);
 		return SUCCESS;
 	}
 	
