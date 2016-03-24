@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TODO supply a title</title>
+	<title>My-Cause | Création projet</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -40,6 +40,7 @@
 				<ul>
 					<li><a href="monCompte">Mon Compte</a></li>
 					<li><a href="mesProjets">Mes Projets</a></li>
+					<li><a href="mesDons">Mes Dons</a></li>
 					<li class="selected"><a href="creationProjet">Création
 							projet</a></li>
 				</ul>
@@ -48,17 +49,17 @@
 				<s:form method="post" action="saveProjet" cssClass="" theme="simple" enctype="multipart/form-data">
 					<p class="titre">1 - Information sur le projet</p>
 					<div class="form-group">
-						<label for="inputNom">Nom du projet</label> 
+						<label for="inputNom">Nom du projet<span class="obligatoireText">*</span></label> 
 						<s:textfield name="projet.nom" cssClass="form-control" id="inputNom" label="Nom"/>
 					</div>
 
 					<div class="form-group">
-						<label for="inpuDateFinCompagne">Date fin de la campagne</label> 
+						<label for="inpuDateFinCompagne">Date fin de la campagne<span class="obligatoireText">*</span></label> 
 						<s:textfield name="dateField" cssClass="form-control" autocomplete="off" id="inpuDateFinCompagne" label="DateFinCompagne" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleObjectif">Objectif (en euro)</label> 
+						<label for="exampleObjectif">Objectif (en euro)<span class="obligatoireText">*</span></label> 
 						<s:textfield name="projet.objectif" cssClass="form-control datepicker" id="inpuObjectif" label="Objectif" />
 					</div>
 
@@ -73,10 +74,9 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="projetCategorie">Catégorie</label> 
+						<label for="projetCategorie">Catégorie<span class="obligatoireText">*</span></label> 
 							<s:select label="categorieId" list="categorieTypes" cssClass="form-control" listKey="categorieId" listValue="type"
 				           	name="categorieId" />
-
  					</div> 
 					
 					<p class="titre">2 - Ajouter des récompenses</p>
@@ -169,6 +169,38 @@
 		        language: 'fr',
 		        toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', 'emoticons', '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
 		     });
+			
+			$('#saveProjet').submit(function(){
+            	var nbError = 0;            	
+            	if($('#inputNom').val() == ''){
+            		$('#inputNom').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#inputNom').removeClass('obligatoire');
+            	}
+            	
+            	if($('#inpuDateFinCompagne').val() == ''){
+            		$('#inpuDateFinCompagne').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#inpuDateFinCompagne').removeClass('obligatoire');
+            	}
+            	
+            	if($('#inpuObjectif').val() == '' || (isNaN(parseFloat($('#inpuObjectif').val())) && !isFinite($('#inpuObjectif').val()))){
+            		$('#inpuObjectif').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#inpuObjectif').removeClass('obligatoire');
+            	}
+            	
+            	if(nbError > 0){ 
+            		$('html, body').animate({
+            			scrollTop: 0
+            		}, 'slow');
+            		return false;
+            	}
+            	
+            });
 		});
 	</script>
 </body>

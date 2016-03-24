@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>My-Cause | Connexion</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -59,6 +59,26 @@
                     $('.slide-header').css('height', heigth);
                 });
                 $(window).trigger('resize');
+                
+                $('#formConnexion').submit(function(){
+                	var nbError = 0;
+                	if($('#formConnexion_mailConnexion').val() == ''){
+                		$('#formConnexion_mailConnexion').addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$('#formConnexion_mailConnexion').removeClass('obligatoire');
+                	}
+                	
+                	if($('#formConnexion_passwordConnexion').val() == ''){
+                		$('#formConnexion_passwordConnexion').addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$('#formConnexion_passwordConnexion').removeClass('obligatoire');
+                	}
+                	
+                	if(nbError > 0){ return false; }
+                	
+                });
             });
         </script>
     </body>

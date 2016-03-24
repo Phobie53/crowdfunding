@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TODO supply a title</title>
+	<title>My-Cause | Mes Projets</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -23,11 +23,15 @@
 				<ul>
 					<li><a href="monCompte">Mon Compte</a></li>
 					<li class="selected"><a href="mesProjets">Mes Projets</a></li>
+					<li><a href="mesDons">Mes Dons</a></li>
 					<li><a href="creationProjet">Création projet</a></li>
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box projetPopulaireTitre">
 				<div class="boxItems">
+				<s:if test="mesProjets.isEmpty()">
+					<p class="center padding50">Vous n'avez aucun projet</p>
+				</s:if>
 				<s:iterator value="mesProjets" var="projet">
 					<div class="col-md-4 item">
 						<div class="image">

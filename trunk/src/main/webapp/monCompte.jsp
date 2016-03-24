@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>TODO supply a title</title>
+<title>My-Cause | Projet</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -23,23 +23,24 @@
 				<ul>
 					<li class="selected"><a href="monCompte">Mon Compte</a></li>
 					<li><a href="mesProjets">Mes Projets</a></li>
+					<li><a href="mesDons">Mes Dons</a></li>
 					<li><a href="creationProjet">Création projet</a></li>
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box account-form">
 	            <s:form theme="simple" action="modifierUtilisateur" cssClass="ng-pristine ng-valid" id="formConnexion" method="post">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Nom</label> 
+						<label for="exampleInputEmail1">Nom<span class="obligatoireText">*</span></label> 
 						<s:textfield name="utilisateur.nom" label="Nom" placeholder="Nom" cssClass="form-control" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Prenom</label>
+						<label for="exampleInputEmail1">Prenom<span class="obligatoireText">*</span></label>
 						<s:textfield name="utilisateur.prenom" label="Prenom" placeholder="Prénom" cssClass="form-control" />
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Email</label>
+						<label for="exampleInputEmail1">Email<span class="obligatoireText">*</span></label>
 						<s:textfield name="utilisateur.email" label="Email" placeholder="Email" cssClass="form-control" />
 					</div>
 
@@ -49,7 +50,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Image</label>
+						<label for="exampleInputEmail1">Image<span class="obligatoireText">*</span></label>
 						<!-- GESTION EN JAVASCRIPT DE CETTE INPUT -->
 						<s:textfield type="hidden" id="inputImage" name="utilisateur.image" label="Image" cssClass="form-control" />
 
@@ -83,6 +84,38 @@
 				$(this).addClass('selected');
 				$('#inputImage').val($(this).find('img').attr('src'));
 			});
+			
+			$('#formConnexion').submit(function(){
+            	var nbError = 0;            	
+            	if($('#formConnexion_utilisateur_email').val() == ''){
+            		$('#formConnexion_utilisateur_email').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#formConnexion_utilisateur_email').removeClass('obligatoire');
+            	}
+            	
+            	if($('#formConnexion_utilisateur_prenom').val() == ''){
+            		$('#formConnexion_utilisateur_prenom').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#formConnexion_utilisateur_prenom').removeClass('obligatoire');
+            	}
+            	
+            	if($('#formConnexion_utilisateur_nom').val() == ''){
+            		$('#formConnexion_utilisateur_nom').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#formConnexion_utilisateur_nom').removeClass('obligatoire');
+            	}
+            	
+            	if(nbError > 0){ 
+            		$('html, body').animate({
+            			scrollTop: 0
+            		}, 'slow');
+            		return false;
+            	}
+            	
+            });
 		});
 	</script>
 </body>

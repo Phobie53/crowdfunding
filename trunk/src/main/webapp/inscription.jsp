@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>My-Cause | Inscription</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -66,6 +66,41 @@
                     $('.slide-header').css('height', heigth);
                 });
                 $(window).trigger('resize');
+                
+                $('#formConnexion').submit(function(){
+                	var nbError = 0;
+                	if($('#formConnexion_utilisateur_password').val() == ''){
+                		$('#formConnexion_utilisateur_password').addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$('#formConnexion_utilisateur_password').removeClass('obligatoire');
+                	}
+                	
+                	if($('#formConnexion_utilisateur_email').val() == ''){
+                		$('#formConnexion_utilisateur_email').addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$('#formConnexion_utilisateur_email').removeClass('obligatoire');
+                	}
+                	
+                	if($('#formConnexion_utilisateur_prenom').val() == ''){
+                		$('#formConnexion_utilisateur_prenom').addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$('#formConnexion_utilisateur_prenom').removeClass('obligatoire');
+                	}
+                	
+                	if($('#formConnexion_utilisateur_nom').val() == ''){
+                		$('#formConnexion_utilisateur_nom').addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$('#formConnexion_utilisateur_nom').removeClass('obligatoire');
+                	}
+                	
+                	if(nbError > 0){ return false; }
+                	
+                });
+                
             });
         </script>
     </body>

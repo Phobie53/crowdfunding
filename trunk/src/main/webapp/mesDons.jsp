@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TODO supply a title</title>
+	<title>My-Cause | Mes Dons</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -29,13 +29,17 @@
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box projetPopulaireTitre">
 				<div class="boxItems">
-					<div class="row">
-						<div class="col-md-3"><strong>Nom</strong></div>
-						<div class="col-md-3"><strong>Montant</strong></div>
-						<div class="col-md-3"><strong>Date</strong></div>
-					</div>
-					<s:iterator value="mesDons" var="don">
-						<a href="projet?id=<s:property value="#don.projet.projetId" />">
+					<s:if test="mesDons.isEmpty()">
+						<p class="center padding50">Vous n'avez fait aucun don</p>
+					</s:if>
+					<s:else>
+						<div class="row">
+							<div class="col-md-3"><strong>Nom</strong></div>
+							<div class="col-md-3"><strong>Montant</strong></div>
+							<div class="col-md-3"><strong>Date</strong></div>
+						</div>
+						<s:iterator value="mesDons" var="don">
+							<a href="projet?id=<s:property value="#don.projet.projetId" />">
 							<div class="row">
 								<div class="col-md-3"><s:property value="#don.projet.nom" /></div>
 								<div class="col-md-3"><s:property value="#don.montant" />€</div>
@@ -43,6 +47,7 @@
 							</div>
 						</a>
 					</s:iterator>
+					</s:else>
 				</div>
 			</div>
 		</div>
