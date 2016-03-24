@@ -152,7 +152,9 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
 			return ERROR_SESSION;
 		}
-		
+		if (verificationFormulaire() == false) {
+			return INPUT;
+		}
 		projet.setUtilisateur((Utilisateur) session.get("user"));
 		projet.setCategorie(categorieService.findById(categorieId));
 		projet.setStatut(1);
@@ -215,6 +217,36 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		return SUCCESS;
 	}
 
+	public boolean verificationFormulaire() {		
+		logger.info("VERIFICATION FORMULAIRE PROJET");
+	
+		boolean nom 	 = false;
+		boolean date	 = false;
+		boolean objectif = false;
+	
+		if (projet.getNom().equals("")) nom = true;
+		if (projet.getDateFinCampagne().equals("")) date = true;
+		if (projet.getObjectif()== null) objectif = true;
+			
+		if (nom == true) {
+			logger.info("Nom vide");
+			addFieldError("projet.nom", "Nom obligatoire.");
+		}
+		if (date == true) {
+			logger.info("date vide");
+			addFieldError("projet.dateFinCampagne", "date obligatoire.");
+		} 
+		if (objectif == true) {
+			logger.info("pas de valeur objectif");
+			addFieldError("projet.objectif", "Objectif obligatoire.");
+		}
+		if(nom || date || objectif){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
 	public String faireDon() {
 		logger.info("CHARGEMENT PAGE FAIRE DON");
 		if (session.get("user") == null) { // Si l'utilisateur n'est pas connecté
@@ -267,8 +299,14 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		return SUCCESS;
 	}
 
-	public String modifieProjet() {
+	public String modifieProjet() {	
 		logger.info("MODIFIER PROJET");
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+			return ERROR_SESSION;
+		}
+		if (verificationFormulaire() == false) {
+			return INPUT;
+		}
 		projetService.saveProjet(projet);
 		return SUCCESS;
 	}

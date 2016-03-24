@@ -1279,6 +1279,28 @@ hidden
 	display: block;
 }
 
+.utilisateur{
+	margin-top: 150px;
+	background: #FFF;
+	border-radius: 5px;
+}
+.utilisateur .bleu{
+	border-radius: 5px 5px 0 0;
+	height: 150px;
+	background: #3AB7A9;
+	width: 100%;
+	text-align: center;
+}
+.utilisateur .content{
+	padding: 25px;
+}
+.utilisateur .content p{
+	font-size: 17px;
+}
+.utilisateur .bleu img{
+	margin-top: 45px;
+}
+
 @media ( max-width :992px) {
 	.projetBody .header .navbar .menu-default {
 		margin-top: 15px;
@@ -1380,4 +1402,6 @@ hidden
 		border-bottom: 1px solid #FFF;
 		padding: 10px 0;
 	}
+	
+	
 }

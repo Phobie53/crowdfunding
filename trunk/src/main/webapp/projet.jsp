@@ -121,9 +121,8 @@
 									<s:iterator var="commentaire" value="projet.commentaires">
 										<div class="timeline-item">
 											<div class="timeline-badge">
-												<img
-													src="<s:property value="#commentaire.utilisateur.image" />"
-													class="timeline-badge-userpic">
+												<a href="profil?id=<s:property value="#commentaire.utilisateur.utilisateurId" />"><img src="<s:property value="#commentaire.utilisateur.image" />"
+													class="timeline-badge-userpic"></a>
 											</div>
 											<div class="timeline-body">
 												<div class="timeline-body-arrow"></div>
@@ -155,7 +154,7 @@
 								<ul>
 									<s:iterator var="don" value="projet.dons">
 										<li>
-											<img src="<s:property value="#don.utilisateur.image" />" />
+											<a href="profil?id=<s:property value="#don.utilisateur.utilisateurId" />"><img src="<s:property value="#don.utilisateur.image" />" /></a>
 											<span class="contri"><s:property value="#don.utilisateur.nom" /></span> 
 											<span class="contri"><s:property value="#don.montant" /> €</span>
 										</li>

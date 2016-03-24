@@ -1,6 +1,8 @@
 package service.impl;
 
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import dao.CommentaireDAO;
 import model.Commentaire;
+import model.Don;
 import service.CommentaireService;
 
 
@@ -28,6 +31,10 @@ public class CommentaireServiceImpl implements CommentaireService {
 		}
 		
 		return res;
+	}
+	
+	public List<Commentaire> getMesCommentaires(int utilisateurId){
+		return commentaireDAO.getMesCommentaires(utilisateurId);
 	}
 
 }

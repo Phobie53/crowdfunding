@@ -51,6 +51,16 @@
 			<result name="error_session" type="redirect">home</result>
 		</action>
 		
+		<action name="mesCommentaires" class="utilisateurAction" method="mesCommentaires">
+			<result name="success">mesCommentaires.jsp</result>
+			<result name="error_session" type="redirect">home</result>
+		</action>
+		
+		<action name="profil" class="utilisateurAction" method="afficherProfil">
+			<result name="success">profil.jsp</result>
+			<result name="error">error404.jsp</result>
+		</action>
+		
 		<action name="monCompte" class="utilisateurAction" method="monCompte">
 			<result name="success">monCompte.jsp</result>
 			<result name="error_session" type="redirect">connexion</result>

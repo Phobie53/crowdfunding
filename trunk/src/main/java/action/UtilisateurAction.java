@@ -22,9 +22,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import dao.UtilisateurDAO;
+import model.Commentaire;
 import model.Don;
 import model.Projet;
 import model.Utilisateur;
+import service.CommentaireService;
 import service.DonService;
 import service.ProjetService;
 import service.UtilisateurService;
@@ -39,12 +41,15 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	private String passwordConnexion;
 	private Don don;
 	private List<Don> mesDons = new ArrayList<Don>();
-	
+	private List<Commentaire> mesCommentaires = new ArrayList<Commentaire>();
 	@Autowired
 	private UtilisateurService utilisateurService;
 
 	@Autowired
 	private DonService donService;
+	
+	@Autowired
+	private CommentaireService commentaireService;
 
 	private static final long serialVersionUID = 123025772L;
 
@@ -86,6 +91,17 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 			return SUCCESS;
 		}
 	}
+	public String mesCommentaires() {
+		logger.info("CHARGEMENT PAGE MES COMMENTAIRES");
+
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
+			return ERROR_SESSION;
+		} else {
+			utilisateur = (Utilisateur) session.get("user");
+			mesCommentaires = commentaireService.getMesCommentaires(utilisateur.getUtilisateurId().intValue());
+			return SUCCESS;
+		}
+	}
 	
 	public String validerConnexion() {
 		Utilisateur user = utilisateurService.Connexion(mailConnexion, passwordConnexion);
@@ -93,6 +109,25 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 			return ERROR;
 		} else {
 			session.put("user", user);
+			return SUCCESS;
+		}
+	}
+	
+	public String afficherProfil() {
+		logger.info("CHARGEMENT PAGE MON PROFIL");
+		// Objet request
+		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
+				.get(ServletActionContext.HTTP_REQUEST);
+
+		// On recupere les valeurs GET
+		String id = request.getParameter("id");
+		if (id != null) {
+			utilisateur = utilisateurService.findById(Integer.parseInt(id));
+		}
+
+		if (utilisateur == null) {
+			return ERROR;
+		} else {
 			return SUCCESS;
 		}
 	}
@@ -249,4 +284,14 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	public void setMesDons(List<Don> mesDons) {
 		this.mesDons = mesDons;
 	}
+
+	public List<Commentaire> getMesCommentaires() {
+		return mesCommentaires;
+	}
+
+	public void setMesCommentaires(List<Commentaire> mesCommentaires) {
+		this.mesCommentaires = mesCommentaires;
+	}
+	
+	
 }
