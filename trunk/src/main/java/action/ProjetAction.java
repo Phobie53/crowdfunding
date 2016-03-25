@@ -8,7 +8,6 @@ import java.io.File;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +35,6 @@ import service.CommentaireService;
 import service.DonService;
 import service.ProjetService;
 import service.RecompenseService;
-import service.UtilisateurService;
 
 @Controller
 public class ProjetAction extends ActionSupport implements ServletRequestAware, SessionAware {
@@ -76,9 +74,6 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 
 	@Autowired
 	private ProjetService projetService;
-	
-	@Autowired
-	private UtilisateurService utilisateurService;
 
 	@Autowired
 	private DonService donService;
@@ -177,11 +172,12 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 			projet.setDateFinCampagne(date);
 
 		} catch (ParseException e) {
+			logger.error("ERROR", e);
 			logger.info("ERROR");
 		}
 				
 		//Verifier le formulaire		
-		if (verificationFormulaire() == false) {
+		if (!verificationFormulaire()) {
 			return INPUT;
 		}
 		projet.setUtilisateur((Utilisateur) session.get("user"));
@@ -191,13 +187,12 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		//Gestion de l'image
 		if (image != null) {
 			try {
-				String filePath = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
-				File file = new File(filePath, imageFileName);
+				String fileURL = servletRequest.getSession().getServletContext().getRealPath("/").concat("upload/");
+				File file = new File(fileURL, imageFileName);
 				FileUtils.copyFile(image, file);
 				projet.setImage("/crowdfunding/upload/" + imageFileName);
 			} catch (Exception e) {
-				e.printStackTrace();
-				addActionError(e.getMessage());
+				logger.error("ERROR", e);
 				return INPUT;
 			}
 		}
@@ -245,19 +240,19 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		boolean date	 = false;
 		boolean objectif = false;
 		
-		if (projet.getNom().equals("")) nom = true;
+		if (projet.getNom() == null) nom = true;
 		if (projet.getDateFinCampagne() == null) date = true;
 		if (projet.getObjectif() == null) objectif = true;
 			
-		if (nom == true) {
+		if (nom) {
 			logger.info("Nom vide");
 			addFieldError("projet.nom", "Nom obligatoire.");
 		}
-		if (date == true) {
+		if (date) {
 			logger.info("date vide");
 			addFieldError("projet.dateFinCampagne", "date obligatoire.");
 		} 
-		if (objectif == true) {
+		if (objectif) {
 			logger.info("pas de valeur objectif");
 			addFieldError("projet.objectif", "Objectif obligatoire.");
 		}
@@ -283,12 +278,12 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		Utilisateur user = (Utilisateur) session.get("user");
 		logger.info("CHARGEMENT PAGE SAVE DON");
 		if (idProjet != 0 && montant > 0) {
-			Projet projet = projetService.findById(idProjet);
-			if (projet != null) {
+			Projet leProjet = projetService.findById(idProjet);
+			if (leProjet != null) {
 				Don newDon = new Don();
 				newDon.setDate(new Date());
 				newDon.setMontant(montant);
-				newDon.setProjet(projet);
+				newDon.setProjet(leProjet);
 				newDon.setUtilisateur(user);
 				donService.saveDon(newDon);
 				url = "projet?id="+projet.getProjetId();
@@ -306,12 +301,12 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		
 		logger.info("CHARGEMENT PAGE SAVE COMMENTAIRE");
 		if (idProjet != 0 && commentaire != null) {
-			Projet projet = projetService.findById(idProjet);
-			if (projet != null) {
+			Projet leProjet = projetService.findById(idProjet);
+			if (leProjet != null) {
 				Commentaire newCommentaire = new Commentaire();
 				newCommentaire.setDate(new Date());
 				newCommentaire.setDescription(commentaire);
-				newCommentaire.setProjet(projet);
+				newCommentaire.setProjet(leProjet);
 				newCommentaire.setUtilisateur(user);
 				commentaireService.saveCommentaire(newCommentaire);
 				url = "projet?id="+projet.getProjetId();

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import model.Don;
-import model.Projet;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;

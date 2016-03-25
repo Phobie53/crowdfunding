@@ -4,7 +4,6 @@ package dao.impl;
 import javax.transaction.Transactional;
 
 import model.Categorie;
-import model.Projet;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;

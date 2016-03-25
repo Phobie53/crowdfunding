@@ -7,10 +7,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import action.ProjetAction;
 import dao.CategorieDAO;
 import dao.ProjetDAO;
-import dao.impl.ProjetDAOImpl;
 import model.Categorie;
 import model.Projet;
 import java.util.List;

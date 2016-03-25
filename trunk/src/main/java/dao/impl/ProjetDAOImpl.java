@@ -14,7 +14,6 @@ import java.util.List;
 
 import com.googlecode.genericdao.dao.hibernate.GenericDAOImpl;
 
-import action.HomeAction;
 import dao.ProjetDAO;
 
 @Repository
@@ -51,8 +50,7 @@ public class ProjetDAOImpl extends GenericDAOImpl<Projet, Long> implements Proje
 	}
 
 	public int nbElement(){
-		int nb = ((Long)this.getSession().createQuery("select count(*) from Projet").uniqueResult()).intValue();
-		return nb;
+		return ((Long)this.getSession().createQuery("select count(*) from Projet").uniqueResult()).intValue();
 	}
 
 	public List<Projet> recherche(String recherche, Categorie categorie) {
@@ -83,9 +81,8 @@ public class ProjetDAOImpl extends GenericDAOImpl<Projet, Long> implements Proje
 	}
 	
 	public int getNbObjectifAtteint(){
-		int nb = ((Long)this.getSession().createQuery("select count(*) from Projet p WHERE p.objectif <= (select SUM(d.montant) from Don d WHERE d.projet.projetId = p.projetId)")
+		return ((Long)this.getSession().createQuery("select count(*) from Projet p WHERE p.objectif <= (select SUM(d.montant) from Don d WHERE d.projet.projetId = p.projetId)")
 				.uniqueResult()).intValue();
-		return nb;
 	}
 
 	@Autowired

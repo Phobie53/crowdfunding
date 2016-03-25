@@ -13,9 +13,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-import model.Categorie;
 import model.Projet;
-import service.CategorieService;
 import service.ProjetService;
 
 

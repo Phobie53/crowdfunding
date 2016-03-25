@@ -1,34 +1,25 @@
 package action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.components.Form;
-import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.serviceloader.ServiceFactoryBean;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-import dao.UtilisateurDAO;
 import model.Commentaire;
 import model.Don;
-import model.Projet;
 import model.Utilisateur;
 import service.CommentaireService;
 import service.DonService;
-import service.ProjetService;
 import service.UtilisateurService;
 
 @Controller
@@ -137,7 +128,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		logger.info("VALIDATION INSCRIPTION");
 		boolean isInscriptionReussie = false;
 		
-		if (verificationFormulaire() == true) {
+		if (verificationFormulaire()) {
 			utilisateur.setImage("image/avatar/avatar1.png");
 			isInscriptionReussie = utilisateurService.sauvegarderUtilisateur(utilisateur);
 			session.put("user", utilisateur); // Ajouter utilisateur a la session
@@ -167,19 +158,19 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		if (utilisateur.getEmail() == null) checkMail = true;
 		if (utilisateur.getPassword() == null) checkPassword = true;
 		
-		if (checkNom == true) {
+		if (checkNom) {
 			logger.info("Nom incorrect");
 			addFieldError("utilisateur.nom", "Nom obligatoire.");
 		}
-		if (checkPenom == true) {
+		if (checkPenom) {
 			logger.info("prenom incorrect");
 			addFieldError("utilisateur.nom", "Prenom obligatoire.");
 		} 
-		if (checkMail == true) {
+		if (checkMail) {
 			logger.info("mail incorrect");
 			addFieldError("utilisateur.nom", "Email obligatoire.");
 		}
-		if (checkPassword == true) {
+		if (checkPassword) {
 			logger.info("password incorrect");
 			addFieldError("utilisateur.nom", "Mot de passe obligatoire.");
 		}

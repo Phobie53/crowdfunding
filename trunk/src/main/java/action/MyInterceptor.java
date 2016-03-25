@@ -2,37 +2,38 @@ package action;
 
 import java.util.Map;
 
-import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionContext;
+import org.apache.log4j.Logger;
+
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
-import model.Utilisateur;
  
 public class MyInterceptor implements Interceptor{
 
+	private static final Logger logger = Logger.getLogger(MyInterceptor.class);
+	
         //called during interceptor destruction
 	public void destroy() {
-		System.out.println("CustomInterceptor destroy() is called...");
+		logger.info("CustomInterceptor destroy() is called...");
 	}
 
 	//called during interceptor initialization
 	public void init() {
-		System.out.println("CustomInterceptor init() is called...");
+		logger.info("CustomInterceptor init() is called...");
 	}
 
 	//put interceptor code here
 	public String intercept(ActionInvocation invocation) throws Exception {
 		
-		System.out.println("inside auth interceptor");
+		logger.info("inside auth interceptor");
         
         Map session = invocation.getInvocationContext().getSession();
         
-        System.out.println(session);
+        logger.info(session);
 		
 		String result = invocation.invoke();
 		
-		System.out.println("CustomInterceptor, after invocation.invoke()...");
+		logger.info("CustomInterceptor, after invocation.invoke()...");
 		
 		return result;
 	}
