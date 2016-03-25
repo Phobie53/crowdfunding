@@ -153,11 +153,11 @@
 												'<li><i class="icon-close"></i>'
 														+ '<div class="form-group">'
 														+ '<label for="exampleInputEmail1">Montant (si montant inférieur à la somme)</label>'
-														+ '<input type="text" class="form-control" name="recompense_montant_'+nbElement+'" >'
+														+ '<input type="text" class="form-control isNumeric" name="recompense_montant_'+nbElement+'" >'
 														+ '</div>'
 														+ '<div class="form-group">'
 														+ '<label for="exampleInputEmail1">Description</label>'
-														+ '<input type="text" class="form-control isNumeric" name="recompense_description_'+nbElement+'" >'
+														+ '<input type="text" class="form-control" name="recompense_description_'+nbElement+'" >'
 														+ '</div></li>');
 							});
 

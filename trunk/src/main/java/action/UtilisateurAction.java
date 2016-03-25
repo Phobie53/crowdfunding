@@ -76,7 +76,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		if ((Utilisateur) session.get("user") != null) { // Si l'utilisateur est connecte
 			return ERROR_SESSION;
 		}
-		
+		utilisateur = null;
 		return SUCCESS;
 	}
 	
@@ -157,51 +157,34 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	
 	public boolean verificationFormulaire() {		
 		logger.info("VERIFICATION FORMULAIRE");
-		Pattern pNom = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-		Pattern pMail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-		boolean nom 	 = false;
-		boolean prenom 	 = false;
-		boolean mail 	 = false;
-		boolean password = false;
+		boolean checkNom 		= false;
+		boolean checkPenom 		= false;
+		boolean checkMail 	 	= false;
+		boolean checkPassword 	= false;
 		
-		// ---------------------- NOM ---------------------- //
-		if (utilisateur.getNom().length() < 3) nom = true;
-		if (utilisateur.getNom().length() > 15) nom = true;
-		Matcher m = pNom.matcher(utilisateur.getNom());
-		if (m.find()) nom = true; // Il y a un caractere special
+		if (utilisateur.getNom() == null) checkNom = true;
+		if (utilisateur.getPrenom() == null) checkPenom = true;
+		if (utilisateur.getEmail() == null) checkMail = true;
+		if (utilisateur.getPassword() == null) checkPassword = true;
 		
-		// ---------------------- PRENOM ---------------------- //
-		if (utilisateur.getPrenom().length() < 3) prenom = true;
-		if (utilisateur.getPrenom().length() > 15) prenom = true;
-		m = pNom.matcher(utilisateur.getPrenom());
-		if (m.find()) prenom = true; // Il y a un caractere special
-		
-		// ---------------------- MAIL ---------------------- //
-		m = pMail.matcher(utilisateur.getEmail());
-		if (!m.find()) mail = true; // Il y a un caractere special
-		
-		// ---------------------- PASSWORD ---------------------- //
-		if (utilisateur.getPassword().length() < 8) password = true;
-		if (utilisateur.getPassword().length() > 20) password = true;
-		
-		if (nom == true) {
+		if (checkNom == true) {
 			logger.info("Nom incorrect");
 			addFieldError("utilisateur.nom", "Nom obligatoire.");
 		}
-		if (prenom == true) {
+		if (checkPenom == true) {
 			logger.info("prenom incorrect");
 			addFieldError("utilisateur.nom", "Prenom obligatoire.");
 		} 
-		if (mail == true) {
+		if (checkMail == true) {
 			logger.info("mail incorrect");
 			addFieldError("utilisateur.nom", "Email obligatoire.");
 		}
-		if (password == true) {
+		if (checkPassword == true) {
 			logger.info("password incorrect");
 			addFieldError("utilisateur.nom", "Mot de passe obligatoire.");
 		}
 		
-		if(nom || prenom || mail || password ){
+		if(checkNom || checkPenom || checkMail || checkPassword ){
 			return false;
 		}
 		else{

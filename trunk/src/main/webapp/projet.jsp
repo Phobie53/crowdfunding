@@ -49,7 +49,9 @@
 							</span>
 						</div>
 					</div>
-					<button class="buttonFaireDonLien">Faire un don</button>
+					<s:if test="getDateEcart() != 'Fini'">
+						<button class="buttonFaireDonLien">Faire un don</button>
+					</s:if>
 				</div>
 			</div>
 		</div>
@@ -81,7 +83,9 @@
 		<div class="row">
 			<div class="container">
 				<div class="col-md-8 col-sm-8 col-xs-12 description">
-					<img src="<s:property value="projet.image" />" />
+					<s:if test="%{projet.image} != 'image/mycause.png'">
+						<img src="<s:property value="projet.image" />" />
+					</s:if>
 					<div>
 						<s:property value="projet.presentation" escape="false" />
 					</div>
@@ -115,13 +119,16 @@
 							</div>
 						</s:if>
 						<div class="commentaire">
-							<div class="timeline">
-								<s:if
-									test="projet.commentaires != null && projet.commentaires.size() > 0">
+							<s:if
+								test="projet.commentaires != null && projet.commentaires.size() > 0">
+
+								<div class="timeline">
 									<s:iterator var="commentaire" value="projet.commentaires">
 										<div class="timeline-item">
 											<div class="timeline-badge">
-												<a href="profil?id=<s:property value="#commentaire.utilisateur.utilisateurId" />"><img src="<s:property value="#commentaire.utilisateur.image" />"
+												<a
+													href="profil?id=<s:property value="#commentaire.utilisateur.utilisateurId" />"><img
+													src="<s:property value="#commentaire.utilisateur.image" />"
 													class="timeline-badge-userpic"></a>
 											</div>
 											<div class="timeline-body">
@@ -144,8 +151,11 @@
 											</div>
 										</div>
 									</s:iterator>
-								</s:if>
-							</div>
+								</div>
+							</s:if>
+							<s:else>
+								<p class="padding10">Il n'y a pas de commentaire</p>
+							</s:else>
 							<button class="ajouterCommentaire">Ajouter un
 								commentaire</button>
 						</div>
@@ -153,13 +163,17 @@
 							<div>
 								<ul>
 									<s:iterator var="don" value="projet.dons">
-										<li>
-											<a href="profil?id=<s:property value="#don.utilisateur.utilisateurId" />"><img src="<s:property value="#don.utilisateur.image" />" /></a>
-											<span class="contri"><s:property value="#don.utilisateur.nom" /></span> 
-											<span class="contri"><s:property value="#don.montant" /> €</span>
-										</li>
+										<li><a
+											href="profil?id=<s:property value="#don.utilisateur.utilisateurId" />"><img
+												src="<s:property value="#don.utilisateur.image" />" /> <span
+											class="contri"><s:property
+													value="#don.utilisateur.nom" /></span> <span class="contri"><s:property
+													value="#don.montant" /> €</span></a></li>
 									</s:iterator>
 								</ul>
+								<s:if test="projet.dons.size() == 0">
+									<p class="padding10">Il n'y a pas de commentaire</p>
+								</s:if>
 							</div>
 						</div>
 					</div>
@@ -188,6 +202,7 @@
 					<ul class="recompense">
 						<s:if
 							test="projet.recompenses != null && projet.recompenses.size() > 0">
+							
 							<s:iterator var="recompense" value="projet.recompenses">
 								<li class="color1">
 									<p class="euro">
@@ -256,6 +271,15 @@
 
 			$('.ajouterCommentaire').click(function() {
 				$('#modalAddCommentaire').modal('show');
+			});
+			
+			$('#saveCommentaire').submit(function(){
+				if($("#textareaCommentaire").val() == ""){
+					$("#textareaCommentaire").addClass("obligatoire");
+					return false;
+				}else{
+					$("#textareaCommentaire").removeClass("obligatoire");
+				}
 			});
 
 			var selector = '[data-rangeSlider]';

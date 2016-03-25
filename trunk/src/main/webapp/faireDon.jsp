@@ -34,15 +34,15 @@
 
 								<div class="form-group">
 									<label for="inputNom">N° de la carte</label> <input type="text"
-										class="form-control" />
+										class="form-control" id="nCarte"/>
 								</div>
 								<div class="form-group">
 									<label for="inputNom">Expire fin :</label> <input type="text"
-										class="form-control" placeholder="mm/yy" />
+										class="form-control" placeholder="mm/yy" id="expireFin"/>
 								</div>
 								<div class="form-group">
 									<label for="inputNom">Cryptogramme visuel :</label> <input
-										type="text" class="form-control" />
+										type="text" class="form-control" id="crypto" />
 								</div>
 								<s:hidden name="idProjet" value="%{idProjet}" />
 								<s:hidden name="montant" value="%{montant}" />
@@ -57,5 +57,41 @@
 	</div>
 	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			
+			$('#formDon').submit(function(){
+            	var nbError = 0;            	
+            	if($('#crypto').val() == ''){
+            		$('#crypto').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#crypto').removeClass('obligatoire');
+            	}
+            	
+            	if($('#expireFin').val() == ''){
+            		$('#expireFin').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#expireFin').removeClass('obligatoire');
+            	}
+            	
+            	if($('#nCarte').val() == ''){
+            		$('#nCarte').addClass('obligatoire');
+            		nbError++;
+            	}else{
+            		$('#nCarte').removeClass('obligatoire');
+            	}
+            	
+            	if(nbError > 0){ 
+            		$('html, body').animate({
+            			scrollTop: 0
+            		}, 'slow');
+            		return false;
+            	}
+            	
+            });
+		});
+	</script>
 </body>
 </html>

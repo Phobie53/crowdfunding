@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -72,6 +74,12 @@ private static final long serialVersionUID = 16065999461991L;
 
 	public Date getDate() {
 		return date;
+	}
+	
+	public String getDateFr() {
+		Format formatter = new SimpleDateFormat("dd/MM/yy");
+		String dateFr = formatter.format(date);
+		return dateFr;
 	}
 
 	public void setDate(Date date) {

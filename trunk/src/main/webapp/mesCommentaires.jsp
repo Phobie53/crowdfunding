@@ -34,37 +34,35 @@
 					<s:if test="mesCommentaires.isEmpty()">
 						<p class="center padding50">Vous n'avez aucun commentaires</p>
 					</s:if>
-					<s:iterator value="mesCommentaires" var="commentaire">
-						<div class="commentaire">
-							<div class="timeline">
-								<s:if
-									test="mesCommentaires != null && mesCommentaires.size() > 0">
-									<s:iterator var="commentaire" value="mesCommentaires">
-										<div class="timeline-item">
-											<div class="timeline-body">
-												<div class="timeline-body-arrow"></div>
-												<div class="timeline-body-head">
-													<div class="timeline-body-head-caption">
-														<span class="timeline-body-title font-blue-madison">
-															<s:property value="#commentaire.utilisateur.prenom" /> <s:property
-																value="#commentaire.utilisateur.nom" />
-														</span> <span class="timeline-body-time font-grey-cascade">
-															<s:property value="#commentaire.date" />
-														</span>
-													</div>
+					<div class="commentaire">
+						<div class="timeline">
+							<s:if
+								test="mesCommentaires != null && mesCommentaires.size() > 0">
+								<s:iterator var="commentaire" value="mesCommentaires">
+									<div class="timeline-item">
+										<div class="timeline-body">
+											<div class="timeline-body-arrow"></div>
+											<div class="timeline-body-head">
+												<div class="timeline-body-head-caption">
+													<span class="timeline-body-title font-blue-madison">
+														<s:property value="#commentaire.utilisateur.prenom" /> <s:property
+															value="#commentaire.utilisateur.nom" />
+													</span> <span class="timeline-body-time font-grey-cascade">
+														<s:property value="#commentaire.dateFr" />
+													</span>
+												</div>
 
-												</div>
-												<div class="timeline-body-content">
-													<span class="font-grey-cascade"><s:property
-															value="#commentaire.description" /></span>
-												</div>
+											</div>
+											<div class="timeline-body-content">
+												<span class="font-grey-cascade"><s:property
+														value="#commentaire.description" /></span>
 											</div>
 										</div>
-									</s:iterator>
-								</s:if>
-							</div>
+									</div>
+								</s:iterator>
+							</s:if>
 						</div>
-					</s:iterator>
+					</div>
 
 				</div>
 			</div>

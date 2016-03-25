@@ -53,7 +53,9 @@ body {
 	border: 2px solid #DADADA;
 	padding: 15px;
 }
-
+.padding10{
+	padding: 10px;
+}
 .button_donate {
 	float: right;
 	margin-left: 20px;
@@ -136,13 +138,22 @@ body {
 	display: block;
 }
 
+table.tableauDon tbody tr td{
+	cursor:pointer;
+}
+.tabs .contributeurs ul li a{
+	color: #777;
+	font-family: "Source Sans Pro";
+	font-size: 15px;
+}
+
 .header .menu-default .menu-container ul {
 	list-style: outside none none;
 	margin: 0;
 	padding: 0;
 }
 .padding50{
-	padding: 100px 50px;
+	padding: 120px 50px;
 }
 .header .menu-default .menu-container>ul>li {
 	float: left;

@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -78,6 +80,12 @@ public class Commentaire implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public String getDateFr() {
+		Format formatter = new SimpleDateFormat("dd/MM/yy");
+		String dateFr = formatter.format(date);
+		return dateFr;
 	}
 
 }
