@@ -37,6 +37,9 @@ public class RechercheAction extends ActionSupport {
 	
 	public String recherche() {
 		logger.info("CHARGEMENT PAGE DETAIL PROJET");
+		categorie = 0;
+		recherche = "";
+		
 		//Objet request
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		

@@ -29,6 +29,7 @@ public class ProjetServiceImpl implements ProjetService {
 	
 	public void saveProjet(Projet projet) {
 		if (projet != null) {
+			logger.info("-----------save projet");
 			projetDAO.save(projet);
 		}
 	}

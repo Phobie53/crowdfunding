@@ -46,13 +46,11 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12 box  account-form">
-				<s:form method="post" action="saveProjet" cssClass=""
-					theme="simple" enctype="multipart/form-data">
+				<s:form method="post" action="saveProjet" cssClass="" theme="simple" enctype="multipart/form-data">
 					<p class="titre">1 - Information sur le projet</p>
 					<div class="form-group">
 						<label for="inputNom">Nom du projet<span class="obligatoireText">*</span></label>
-						<s:textfield name="projet.nom" cssClass="form-control"
-							id="inputNom" label="Nom" />
+						<s:textfield name="projet.nom" cssClass="form-control"	id="inputNom" label="Nom" />
 					</div>
 
 					<div class="form-group">

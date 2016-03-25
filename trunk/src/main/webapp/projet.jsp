@@ -83,7 +83,7 @@
 		<div class="row">
 			<div class="container">
 				<div class="col-md-8 col-sm-8 col-xs-12 description">
-					<s:if test="%{projet.image} != 'image/mycause.png'">
+					<s:if test="projet.image != 'image/mycause.png'">
 						<img src="<s:property value="projet.image" />" />
 					</s:if>
 					<div>
@@ -202,18 +202,17 @@
 					<ul class="recompense">
 						<s:if
 							test="projet.recompenses != null && projet.recompenses.size() > 0">
-							
-							<s:iterator var="recompense" value="projet.recompenses">
-								<li class="color1">
-									<p class="euro">
-										<s:property value="#recompense.montant" />
-										€
-									</p>
-									<p class="description">
-										<s:property value="#recompense.description" />
-									</p>
-								</li>
-							</s:iterator>
+								<s:iterator var="recompense" value="projet.recompenses">
+									<li class="color1">
+										<p class="euro">
+											<s:property value="#recompense.montant" />
+											€
+										</p>
+										<p class="description">
+											<s:property value="#recompense.description" />
+										</p>
+									</li>
+								</s:iterator>
 						</s:if>
 					</ul>
 				</div>

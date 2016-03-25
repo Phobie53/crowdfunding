@@ -47,7 +47,7 @@
 
 					<div class="form-group">
 						<label for="exampleInputEmail1">Changer mot de passe</label>
-						<s:textfield type="password" name="utilisateur.password" label="Password" placeholder="Mot de passe" cssClass="form-control" />
+						<s:textfield type="password" name="passwordConnexion" placeholder="Mot de passe" cssClass="form-control" />
 					</div>
 
 					<div class="form-group">

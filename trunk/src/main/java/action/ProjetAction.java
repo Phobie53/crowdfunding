@@ -147,7 +147,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 				//Gestion de la date
 				Format formatter = new SimpleDateFormat("dd/MM/yy");
 				dateField 		 = formatter.format(projet.getDateFinCampagne());
-				
+				image			 = null;
 				return SUCCESS;
 			}
 		}
@@ -161,7 +161,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		
 		if(idProjet > 0){
 			logger.info("ID : projet => " + idProjet);
-			projet = projetService.findById(idProjet);
+			projet.setProjetId((long) idProjet);
 		}
 		
 		//Gestion de la date
@@ -180,6 +180,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		if (!verificationFormulaire()) {
 			return INPUT;
 		}
+		
 		projet.setUtilisateur((Utilisateur) session.get("user"));
 		projet.setCategorie(categorieService.findById(categorieId));
 		projet.setStatut(1);

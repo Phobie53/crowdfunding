@@ -26,7 +26,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 		if (utilisateur != null) {
 			utilisateur.setDatecreation(new Date());
-			utilisateur.setPassword(DigestUtils.sha1Hex(utilisateur.getPassword()));
+			utilisateur.setPassword(utilisateur.getPassword());
 			res = utilisateurDAO.save(utilisateur);
 		}
 		

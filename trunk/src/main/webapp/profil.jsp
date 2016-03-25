@@ -22,7 +22,7 @@
 			<div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
 				<div class="utilisateur">
 					<div class="bleu">
-						<img src="image/avatar/avatar5.png" />
+						<img src="<s:property value="utilisateur.image" />" />
 					</div>
 					<div class="content">
 						<p><strong>Nom : </strong> <s:property value="utilisateur.nom" /></p>

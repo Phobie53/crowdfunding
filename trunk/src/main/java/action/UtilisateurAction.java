@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -115,6 +116,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		String id = request.getParameter("id");
 		if (id != null) {
 			utilisateur = utilisateurService.findById(Integer.parseInt(id));
+			passwordConnexion = "";
 		}
 
 		if (utilisateur == null) {
@@ -130,6 +132,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		
 		if (verificationFormulaire()) {
 			utilisateur.setImage("image/avatar/avatar1.png");
+			utilisateur.setPassword(DigestUtils.sha1Hex(utilisateur.getPassword()));
 			isInscriptionReussie = utilisateurService.sauvegarderUtilisateur(utilisateur);
 			session.put("user", utilisateur); // Ajouter utilisateur a la session
 		} else {
@@ -191,20 +194,21 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		}
 		
 		utilisateur = (Utilisateur) session.get("user");
-		utilisateur.setPassword("");
+		passwordConnexion = "";
 		return SUCCESS;
 	}
 	
 	public String modifierUtilisateur() {
 		logger.info("MODIFIER UTILISATEUR");
-		if (utilisateur.getPassword() != null && utilisateur.getPassword().length() > 3) {
-			utilisateurService.sauvegarderUtilisateur(utilisateur);
-			logger.info("MODIFIER UTILISATEUR SUCCESS");
-			return SUCCESS;
-		} else {
-			logger.info("MODIFIER UTILISATEUR ERROR");
-			return ERROR;
+		logger.info("PASSSS"+ passwordConnexion +"ee");
+		logger.info("PASSSS"+ utilisateur.getUtilisateurId() +"ee");
+		if (passwordConnexion != "") {
+			utilisateur.setPassword(DigestUtils.sha1Hex(passwordConnexion));
 		}
+		utilisateurService.sauvegarderUtilisateur(utilisateur);
+		session.put("user", utilisateur);
+		logger.info("MODIFIER UTILISATEUR SUCCESS");
+		return SUCCESS;
 	}
 	
 	public Utilisateur getUtilisateur() {
