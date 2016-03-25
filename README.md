@@ -3,23 +3,23 @@ Site de crowdfunding en J2E
 
 ***configuration pour le fonctionnement du site:***
 
-serveur d'application : tomcat7
+Serveur d'application : tomcat7
 SGBD: MySql
 
 ***installation de la base de données:***
-	-> créer une base de données (avec fichier bdd.sql)
+	-> Créer une base de données (avec fichier bdd.sql)
 	 (hibernate se charge de la création des tables) 
-	-> remplir la base de données (les inserts) avec le fichier projet.sql
-	-> si erreur de connexion à cause del'utilisateur root :  
-						ouvrir le war (en archive) puis modifier le fichier database.properties						Voici le chemin: crowdfunding\trunk\src\main\resources\config\database\properties\database.properties
+	-> Remplir la base de données (les inserts) avec le fichier projet.sql
+	-> Si erreur de connexion à cause de l'utilisateur root :  
+					Ouvrir le war (en archive) puis modifier le fichier database.properties						Voici le chemin: \WEB-INF\classes\config\database\properties\database.properties
 	
-***se connecter sur le site :***
-nous avons créé deux utilisateurs
-		-> mail : zalarhe.sara@hotmail.fr 
-		   mot de passe : 123456789
+***Se connecter sur le site :***
+Nous avons créé deux utilisateurs
+		-> Mail : zalarhe.sara@hotmail.fr 
+		   Mot de passe : 123456789
 		   
-		-> mail : adrien.caselles@gmail.com
-		   mot de passe : 123456789
+		-> Mail : adrien.caselles@gmail.com
+		   Mot de passe : 123456789
 		   
 		   
 		   
