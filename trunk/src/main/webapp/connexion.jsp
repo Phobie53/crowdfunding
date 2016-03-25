@@ -27,6 +27,7 @@
                             
 	                            <s:form theme="simple" action="validerConnexion" cssClass="ng-pristine ng-valid" id="formConnexion" method="post">
                                     <div class="row">
+                                    	<s:actionerror/>
                                         <div class="feild col-md-12">
 											<s:textfield name="mailConnexion" label="mailConnexion" placeholder="Mail" cssClass="nameConnexion" />
                                         </div>

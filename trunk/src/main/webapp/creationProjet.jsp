@@ -157,7 +157,7 @@
 														+ '</div>'
 														+ '<div class="form-group">'
 														+ '<label for="exampleInputEmail1">Description</label>'
-														+ '<input type="text" class="form-control" name="recompense_description_'+nbElement+'" >'
+														+ '<input type="text" class="form-control isNumeric" name="recompense_description_'+nbElement+'" >'
 														+ '</div></li>');
 							});
 
@@ -193,6 +193,15 @@
             	}else{
             		$('#inpuObjectif').removeClass('obligatoire');
             	}
+            	
+            	$(".isNumeric").each(function(){
+            		if($(this).val() == '' ||  (isNaN(parseFloat($(this).val())) && !isFinite($(this).val()))){
+                		$(this).addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$(this).removeClass('obligatoire');
+                	}
+            	});
             	
             	if(nbError > 0){ 
             		$('html, body').animate({

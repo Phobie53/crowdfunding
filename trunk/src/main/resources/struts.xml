@@ -5,8 +5,6 @@
 
 <struts>
 	<constant name="struts.devMode" value="false" />
-	<constant name="struts.multipart.saveDir" value="/upload" />
-	
 	<package name="default" namespace="/" extends="struts-default">
 
     	<interceptors>	
@@ -27,6 +25,7 @@
 		</action>
 		<action name="validerConnexion" class="utilisateurAction" method="validerConnexion">
 			<result name="success" type="redirect">home</result>
+   			 <result name="input">connexion.jsp</result>
 			<result name="error">connexion.jsp</result>
 		</action>
 		

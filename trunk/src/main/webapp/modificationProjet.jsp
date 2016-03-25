@@ -95,7 +95,7 @@
 							<li><i class="icon-close"></i>
 								<div class="form-group">
 									<label for="exampleInputEmail1">Montant (si montant
-										inférieur à la somme)</label> <input type="text" class="form-control"
+										inférieur à la somme)</label> <input type="text" class="form-control isNumeric"
 										value="<s:property value="%{#recompense.montant}"/>" name="recompense_montant_<s:property value="#i"/>">
 								</div>
 								<div class="form-group">
@@ -182,7 +182,7 @@
 												'<li><i class="icon-close"></i>'
 														+ '<div class="form-group">'
 														+ '<label for="exampleInputEmail1">Montant (si montant inférieur à la somme)</label>'
-														+ '<input type="text" class="form-control" name="recompense_montant_'+nbElement+'" >'
+														+ '<input type="text" class="form-control isNumeric" name="recompense_montant_'+nbElement+'" >'
 														+ '</div>'
 														+ '<div class="form-group">'
 														+ '<label for="exampleInputEmail1">Description</label>'
@@ -222,6 +222,16 @@
             	}else{
             		$('#inpuObjectif').removeClass('obligatoire');
             	}
+            	
+            	$(".isNumeric").each(function(){
+            		if($(this).val() == '' ||  (isNaN(parseFloat($(this).val())) && !isFinite($(this).val()))){
+                		$(this).addClass('obligatoire');
+                		nbError++;
+                	}else{
+                		$(this).removeClass('obligatoire');
+                	}
+            	});
+            	
             	
             	if(nbError > 0){ 
             		$('html, body').animate({

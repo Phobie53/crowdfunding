@@ -39,7 +39,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 	
 
-	public Utilisateur Connexion(String email, String password) {
+	public Utilisateur connexion(String email, String password) {
 		password = DigestUtils.sha1Hex(password);
 		return utilisateurDAO.findByEmailPassword(email, password);
 	}

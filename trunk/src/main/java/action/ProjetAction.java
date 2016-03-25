@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.io.File;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
@@ -110,7 +111,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	public String mesProjets() {
 		logger.info("CHARGEMENT PAGE MES PROJETS");
 
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		Utilisateur user = (Utilisateur) session.get("user");
@@ -120,19 +121,20 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 
 	public String afficherFormCreation() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE CREATION");
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		categorieTypes = categorieService.listeCategorie();
 		
-		projet = new Projet();
-		image = null;
+		projet 		= new Projet();
+		image 		= null;
+		dateField 	= null;
 		return SUCCESS;
 	}
 
 	public String afficherFormModification() {
 		logger.info("CHARGEMENT PAGE FORMULAIRE MODIFICATION");
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		
@@ -143,18 +145,22 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 		if (idProjetString != null) {
 			projet = projetService.findById(Integer.parseInt(idProjetString));
 			logger.info("id : " + idProjetString);
-			categorieTypes = categorieService.listeCategorie();
 			
-			//Gestion de la date
 
-			
-			return SUCCESS;
+			if(projet != null){
+				categorieTypes = categorieService.listeCategorie();
+				//Gestion de la date
+				Format formatter = new SimpleDateFormat("dd/MM/yy");
+				dateField 		 = formatter.format(projet.getDateFinCampagne());
+				
+				return SUCCESS;
+			}
 		}
 		return ERROR;
 	}
 
 	public String saveProjet() {
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		
@@ -264,14 +270,14 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	}
 	public String faireDon() {
 		logger.info("CHARGEMENT PAGE FAIRE DON");
-		if (session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if (session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		return SUCCESS;
 	}
 
 	public String saveDon() {
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		Utilisateur user = (Utilisateur) session.get("user");
@@ -293,7 +299,7 @@ public class ProjetAction extends ActionSupport implements ServletRequestAware, 
 	}
 
 	public String saveCommentaire() {
-		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecté
+		if ((Utilisateur) session.get("user") == null) { // Si l'utilisateur n'est pas connecte
 			return ERROR_SESSION;
 		}
 		Utilisateur user = (Utilisateur) session.get("user");

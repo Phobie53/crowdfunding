@@ -104,8 +104,9 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 	}
 	
 	public String validerConnexion() {
-		Utilisateur user = utilisateurService.Connexion(mailConnexion, passwordConnexion);
+		Utilisateur user = utilisateurService.connexion(mailConnexion, passwordConnexion);
 		if (user == null) {
+			logger.info("ERROR");
 			return ERROR;
 		} else {
 			session.put("user", user);
@@ -189,7 +190,7 @@ public class UtilisateurAction extends ActionSupport implements SessionAware {
 		}
 		if (prenom == true) {
 			logger.info("prenom incorrect");
-			addFieldError("utilisateur.nom", "PrÃ©nom obligatoire.");
+			addFieldError("utilisateur.nom", "Prenom obligatoire.");
 		} 
 		if (mail == true) {
 			logger.info("mail incorrect");

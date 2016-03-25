@@ -86,6 +86,7 @@ body {
 	content: attr(data-hover);
 	display: inline-block;
 	font-weight: 700;
+	font-size: 13px;
 	position: absolute;
 	top: 100%;
 	transform: translate3d(0px, 0px, 0px);
