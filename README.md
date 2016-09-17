@@ -12,7 +12,7 @@ SGBD: MySql
 	-> Remplir la base de données (les inserts) avec le fichier projet.sql
 	-> Si erreur de connexion à cause de l'utilisateur root :  
 					Ouvrir le war (en archive) puis modifier le fichier database.properties						Voici le chemin: \WEB-INF\classes\config\database\properties\database.properties
-	
+	aa
 ***Se connecter sur le site :***
 Nous avons créé deux utilisateurs
 		-> Mail : zalarhe.sara@hotmail.fr 
